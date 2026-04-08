@@ -1,0 +1,23 @@
+Mock para fieldEvent
+
+{
+  "field_id": "cmlicj9rm00007wueiba9ybv3",
+  "start_at": "2026-02-12T10:00:00.000Z",
+  "end_at": "2026-02-12T12:00:00.000Z",
+  "responsible_user_id": 1,
+  "application_name": "Herbicida pós-emergente",
+  "work_rate_value": 5,
+  "work_rate_unit": "ha/h",
+  "preferred_period": "morning",
+  "wind_min_kmh": 0,
+  "wind_max_kmh": 10,
+  "items": [
+    {
+      "product_id": 1,
+      "dose_per_ha": 1.5,
+      "dose_unit": "L/ha",
+      "total_planned": 18.75,
+      "total_unit": "L"
+    }
+  ]
+}

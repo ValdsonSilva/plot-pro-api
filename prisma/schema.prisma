@@ -1,0 +1,206 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/client"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// status do evento da operação realizada no talhão
+enum EventStatus {
+  PLANNED
+  IN_PROGRESS
+  DONE
+  CANCELED
+}
+
+// tipo de evento (operações realizdas no talhão)
+enum EventType {
+  SOIL_PLOWING
+  SOIL_HARROWING
+  SOIL_SUBSOILING
+  LIMING // calagem - aplicação de calcário
+  GYPSUM_APPLICATION // aplicação de gesso
+  PLANTING
+  FERTILIZATION
+  PESTICIDE_APPLICATION
+  IRRIGATION
+  HARVEST
+  MONITORING
+}
+
+enum AuditAction {
+  CREATE
+  UPDATE
+  DELETE
+}
+
+enum ProductCategory {
+  DEFENSIVO_AGRICOLA
+  FERTILIZANTE
+  SEMENTE
+  ADJUVANTE
+  BIOLOGICO
+  OUTRO
+}
+
+enum ProductClassification {
+  HERBICIDA
+  INSETICIDA
+  FUNGICIDA
+  NEMATICIDA
+  ACARICIDA
+  BACTERICIDA
+  REGULADOR_CRESCIMENTO
+  FERTILIZANTE_SOLO
+  FERTILIZANTE_FOLIAR
+  BIOESTIMULANTE
+  INSETICIDA_BIOLOGICO
+  FUNGICIDA_BIOLOGICO
+  NEMATICIDA_BIOLOGICO
+}
+
+model Farm {
+  id        String  @id @default(cuid())
+  name      String
+  location  String?
+  is_active Boolean @default(true)
+
+  fields Field[]
+  users  User[]
+}
+
+model Field {
+  id           String  @id @default(cuid())
+  farm_id      String
+  code         String
+  name         String
+  area_ha      Decimal @db.Decimal(10, 2)
+  geo_boundary Json?
+  is_active    Boolean @default(true)
+
+  farm         Farm         @relation(fields: [farm_id], references: [id])
+  field_events FieldEvent[]
+
+  @@unique([farm_id, code])
+}
+
+model User {
+  id            String  @id @default(cuid())
+  farm_id       String
+  name          String
+  email         String? @unique
+  password_hash String
+  role          String?
+  is_active     Boolean @default(true)
+
+  responsible_events FieldEvent[] @relation("ResponsibleUser")
+  audit_logs         AuditLog[]
+  farms              Farm         @relation(fields: [farm_id], references: [id])
+
+  @@index([farm_id])
+}
+
+model Document {
+  id           String   @id @default(cuid())
+  file_name    String
+  mime_type    String
+  storage_path String
+  uploaded_at  DateTime @default(now())
+
+  field_events FieldEvent[]
+}
+
+model FieldEvent {
+  id                  String      @id @default(cuid())
+  field_id            String
+  event_type          EventType
+  status              EventStatus
+  start_at            DateTime
+  end_at              DateTime
+  responsible_user_id String
+  notes               String?
+  source_document_id  String?
+
+  field            Field     @relation(fields: [field_id], references: [id])
+  responsible_user User      @relation("ResponsibleUser", fields: [responsible_user_id], references: [id])
+  source_document  Document? @relation(fields: [source_document_id], references: [id])
+
+  application       Application? // um evento de talhão pode ter uma ou nenhuma aplicação
+  application_items ApplicationItem[] // um evento de talhão pode ter muitos itens vinculados a ele
+
+  @@index([field_id])
+  @@index([responsible_user_id])
+}
+
+model Application {
+  event_id              String   @id
+  application_name      String
+  work_rate_value       Decimal  @db.Decimal(10, 2)
+  work_rate_unit        String
+  spray_volume_total_l  Decimal? @db.Decimal(10, 2) // volume da calda total em litros
+  spray_volume_l_per_ha Decimal? @db.Decimal(10, 2)
+  tank_count_planned    Int?
+  tank_count_actual     Int?
+  preferred_period      String
+  wind_min_kmh          Int
+  wind_max_kmh          Int
+
+  field_event FieldEvent @relation(fields: [event_id], references: [id])
+}
+
+model Product {
+  id           String          @id @default(cuid())
+  name         String
+  category     ProductCategory // (fertilizante, defensivo agricola, semenete, etc)
+  default_unit String
+  manufacturer String?
+  notes        String?
+
+  application_items ApplicationItem[]
+}
+
+model ApplicationItem {
+  id                     String                 @id @default(cuid())
+  event_id               String
+  product_id             String
+  product_classification ProductClassification? // classificação do produto (ex: herbicida, inseticida, fungicida)
+  dose_per_ha            Decimal                @db.Decimal(10, 4)
+  dose_unit              String
+  total_planned          Decimal                @db.Decimal(12, 3)
+  total_unit             String
+  total_actual           Decimal?               @db.Decimal(12, 3)
+  total_actual_unit      String?
+  spray_solution_l       Decimal?               @db.Decimal(10, 2)
+  packaging_count        Int?
+  packaging_type         String?
+
+  field_event FieldEvent @relation(fields: [event_id], references: [id])
+  product     Product    @relation(fields: [product_id], references: [id])
+
+  @@index([event_id])
+  @@index([product_id])
+}
+
+model AuditLog {
+  id                 String      @id @default(cuid())
+  entity_type        String
+  entity_id          String
+  action             AuditAction
+  changed_by_user_id String
+  changed_at         DateTime    @default(now())
+  before_json        Json?
+  after_json         Json?
+
+  changed_by_user User @relation(fields: [changed_by_user_id], references: [id])
+
+  @@index([entity_type, entity_id])
+  @@index([changed_by_user_id])
+}
