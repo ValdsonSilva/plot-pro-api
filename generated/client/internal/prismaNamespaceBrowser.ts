@@ -151,7 +151,13 @@ export const ApplicationScalarFieldEnum = {
   tank_count_actual: 'tank_count_actual',
   preferred_period: 'preferred_period',
   wind_min_kmh: 'wind_min_kmh',
-  wind_max_kmh: 'wind_max_kmh'
+  wind_max_kmh: 'wind_max_kmh',
+  execution_method: 'execution_method',
+  application_medium: 'application_medium',
+  product_state: 'product_state',
+  temp_min_c: 'temp_min_c',
+  temp_max_c: 'temp_max_c',
+  humidity_min: 'humidity_min'
 } as const
 
 export type ApplicationScalarFieldEnum = (typeof ApplicationScalarFieldEnum)[keyof typeof ApplicationScalarFieldEnum]

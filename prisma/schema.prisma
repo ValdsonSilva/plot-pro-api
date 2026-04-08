@@ -67,6 +67,22 @@ enum ProductClassification {
   NEMATICIDA_BIOLOGICO
 }
 
+enum ExecutionMethod {
+  DISTRIBUTING
+  INCORPORATION
+}
+
+enum ApplicationMedium {
+  DRONE
+  AIRCRAFT
+  TERRESTRIAL
+}
+
+enum ProductState {
+  LIQUID
+  SOLID
+}
+
 model Farm {
   id        String  @id @default(cuid())
   name      String
@@ -152,6 +168,16 @@ model Application {
   preferred_period      String
   wind_min_kmh          Int
   wind_max_kmh          Int
+
+  // Metodologia e Meio
+  execution_method   ExecutionMethod? // Relevante para Calcário/Gesso
+  application_medium ApplicationMedium @default(TERRESTRIAL)
+  product_state      ProductState      @default(LIQUID)
+
+  // Pulverização (Opcionais se for Sólido)
+  temp_min_c   Int?
+  temp_max_c   Int?
+  humidity_min Int?
 
   field_event FieldEvent @relation(fields: [event_id], references: [id])
 }

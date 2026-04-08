@@ -34,6 +34,9 @@ export type ApplicationAvgAggregateOutputType = {
   tank_count_actual: number | null
   wind_min_kmh: number | null
   wind_max_kmh: number | null
+  temp_min_c: number | null
+  temp_max_c: number | null
+  humidity_min: number | null
 }
 
 export type ApplicationSumAggregateOutputType = {
@@ -44,6 +47,9 @@ export type ApplicationSumAggregateOutputType = {
   tank_count_actual: number | null
   wind_min_kmh: number | null
   wind_max_kmh: number | null
+  temp_min_c: number | null
+  temp_max_c: number | null
+  humidity_min: number | null
 }
 
 export type ApplicationMinAggregateOutputType = {
@@ -58,6 +64,12 @@ export type ApplicationMinAggregateOutputType = {
   preferred_period: string | null
   wind_min_kmh: number | null
   wind_max_kmh: number | null
+  execution_method: $Enums.ExecutionMethod | null
+  application_medium: $Enums.ApplicationMedium | null
+  product_state: $Enums.ProductState | null
+  temp_min_c: number | null
+  temp_max_c: number | null
+  humidity_min: number | null
 }
 
 export type ApplicationMaxAggregateOutputType = {
@@ -72,6 +84,12 @@ export type ApplicationMaxAggregateOutputType = {
   preferred_period: string | null
   wind_min_kmh: number | null
   wind_max_kmh: number | null
+  execution_method: $Enums.ExecutionMethod | null
+  application_medium: $Enums.ApplicationMedium | null
+  product_state: $Enums.ProductState | null
+  temp_min_c: number | null
+  temp_max_c: number | null
+  humidity_min: number | null
 }
 
 export type ApplicationCountAggregateOutputType = {
@@ -86,6 +104,12 @@ export type ApplicationCountAggregateOutputType = {
   preferred_period: number
   wind_min_kmh: number
   wind_max_kmh: number
+  execution_method: number
+  application_medium: number
+  product_state: number
+  temp_min_c: number
+  temp_max_c: number
+  humidity_min: number
   _all: number
 }
 
@@ -98,6 +122,9 @@ export type ApplicationAvgAggregateInputType = {
   tank_count_actual?: true
   wind_min_kmh?: true
   wind_max_kmh?: true
+  temp_min_c?: true
+  temp_max_c?: true
+  humidity_min?: true
 }
 
 export type ApplicationSumAggregateInputType = {
@@ -108,6 +135,9 @@ export type ApplicationSumAggregateInputType = {
   tank_count_actual?: true
   wind_min_kmh?: true
   wind_max_kmh?: true
+  temp_min_c?: true
+  temp_max_c?: true
+  humidity_min?: true
 }
 
 export type ApplicationMinAggregateInputType = {
@@ -122,6 +152,12 @@ export type ApplicationMinAggregateInputType = {
   preferred_period?: true
   wind_min_kmh?: true
   wind_max_kmh?: true
+  execution_method?: true
+  application_medium?: true
+  product_state?: true
+  temp_min_c?: true
+  temp_max_c?: true
+  humidity_min?: true
 }
 
 export type ApplicationMaxAggregateInputType = {
@@ -136,6 +172,12 @@ export type ApplicationMaxAggregateInputType = {
   preferred_period?: true
   wind_min_kmh?: true
   wind_max_kmh?: true
+  execution_method?: true
+  application_medium?: true
+  product_state?: true
+  temp_min_c?: true
+  temp_max_c?: true
+  humidity_min?: true
 }
 
 export type ApplicationCountAggregateInputType = {
@@ -150,6 +192,12 @@ export type ApplicationCountAggregateInputType = {
   preferred_period?: true
   wind_min_kmh?: true
   wind_max_kmh?: true
+  execution_method?: true
+  application_medium?: true
+  product_state?: true
+  temp_min_c?: true
+  temp_max_c?: true
+  humidity_min?: true
   _all?: true
 }
 
@@ -251,6 +299,12 @@ export type ApplicationGroupByOutputType = {
   preferred_period: string
   wind_min_kmh: number
   wind_max_kmh: number
+  execution_method: $Enums.ExecutionMethod | null
+  application_medium: $Enums.ApplicationMedium
+  product_state: $Enums.ProductState
+  temp_min_c: number | null
+  temp_max_c: number | null
+  humidity_min: number | null
   _count: ApplicationCountAggregateOutputType | null
   _avg: ApplicationAvgAggregateOutputType | null
   _sum: ApplicationSumAggregateOutputType | null
@@ -288,6 +342,12 @@ export type ApplicationWhereInput = {
   preferred_period?: Prisma.StringFilter<"Application"> | string
   wind_min_kmh?: Prisma.IntFilter<"Application"> | number
   wind_max_kmh?: Prisma.IntFilter<"Application"> | number
+  execution_method?: Prisma.EnumExecutionMethodNullableFilter<"Application"> | $Enums.ExecutionMethod | null
+  application_medium?: Prisma.EnumApplicationMediumFilter<"Application"> | $Enums.ApplicationMedium
+  product_state?: Prisma.EnumProductStateFilter<"Application"> | $Enums.ProductState
+  temp_min_c?: Prisma.IntNullableFilter<"Application"> | number | null
+  temp_max_c?: Prisma.IntNullableFilter<"Application"> | number | null
+  humidity_min?: Prisma.IntNullableFilter<"Application"> | number | null
   field_event?: Prisma.XOR<Prisma.FieldEventScalarRelationFilter, Prisma.FieldEventWhereInput>
 }
 
@@ -303,6 +363,12 @@ export type ApplicationOrderByWithRelationInput = {
   preferred_period?: Prisma.SortOrder
   wind_min_kmh?: Prisma.SortOrder
   wind_max_kmh?: Prisma.SortOrder
+  execution_method?: Prisma.SortOrderInput | Prisma.SortOrder
+  application_medium?: Prisma.SortOrder
+  product_state?: Prisma.SortOrder
+  temp_min_c?: Prisma.SortOrderInput | Prisma.SortOrder
+  temp_max_c?: Prisma.SortOrderInput | Prisma.SortOrder
+  humidity_min?: Prisma.SortOrderInput | Prisma.SortOrder
   field_event?: Prisma.FieldEventOrderByWithRelationInput
 }
 
@@ -321,6 +387,12 @@ export type ApplicationWhereUniqueInput = Prisma.AtLeast<{
   preferred_period?: Prisma.StringFilter<"Application"> | string
   wind_min_kmh?: Prisma.IntFilter<"Application"> | number
   wind_max_kmh?: Prisma.IntFilter<"Application"> | number
+  execution_method?: Prisma.EnumExecutionMethodNullableFilter<"Application"> | $Enums.ExecutionMethod | null
+  application_medium?: Prisma.EnumApplicationMediumFilter<"Application"> | $Enums.ApplicationMedium
+  product_state?: Prisma.EnumProductStateFilter<"Application"> | $Enums.ProductState
+  temp_min_c?: Prisma.IntNullableFilter<"Application"> | number | null
+  temp_max_c?: Prisma.IntNullableFilter<"Application"> | number | null
+  humidity_min?: Prisma.IntNullableFilter<"Application"> | number | null
   field_event?: Prisma.XOR<Prisma.FieldEventScalarRelationFilter, Prisma.FieldEventWhereInput>
 }, "event_id">
 
@@ -336,6 +408,12 @@ export type ApplicationOrderByWithAggregationInput = {
   preferred_period?: Prisma.SortOrder
   wind_min_kmh?: Prisma.SortOrder
   wind_max_kmh?: Prisma.SortOrder
+  execution_method?: Prisma.SortOrderInput | Prisma.SortOrder
+  application_medium?: Prisma.SortOrder
+  product_state?: Prisma.SortOrder
+  temp_min_c?: Prisma.SortOrderInput | Prisma.SortOrder
+  temp_max_c?: Prisma.SortOrderInput | Prisma.SortOrder
+  humidity_min?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.ApplicationCountOrderByAggregateInput
   _avg?: Prisma.ApplicationAvgOrderByAggregateInput
   _max?: Prisma.ApplicationMaxOrderByAggregateInput
@@ -358,6 +436,12 @@ export type ApplicationScalarWhereWithAggregatesInput = {
   preferred_period?: Prisma.StringWithAggregatesFilter<"Application"> | string
   wind_min_kmh?: Prisma.IntWithAggregatesFilter<"Application"> | number
   wind_max_kmh?: Prisma.IntWithAggregatesFilter<"Application"> | number
+  execution_method?: Prisma.EnumExecutionMethodNullableWithAggregatesFilter<"Application"> | $Enums.ExecutionMethod | null
+  application_medium?: Prisma.EnumApplicationMediumWithAggregatesFilter<"Application"> | $Enums.ApplicationMedium
+  product_state?: Prisma.EnumProductStateWithAggregatesFilter<"Application"> | $Enums.ProductState
+  temp_min_c?: Prisma.IntNullableWithAggregatesFilter<"Application"> | number | null
+  temp_max_c?: Prisma.IntNullableWithAggregatesFilter<"Application"> | number | null
+  humidity_min?: Prisma.IntNullableWithAggregatesFilter<"Application"> | number | null
 }
 
 export type ApplicationCreateInput = {
@@ -371,6 +455,12 @@ export type ApplicationCreateInput = {
   preferred_period: string
   wind_min_kmh: number
   wind_max_kmh: number
+  execution_method?: $Enums.ExecutionMethod | null
+  application_medium?: $Enums.ApplicationMedium
+  product_state?: $Enums.ProductState
+  temp_min_c?: number | null
+  temp_max_c?: number | null
+  humidity_min?: number | null
   field_event: Prisma.FieldEventCreateNestedOneWithoutApplicationInput
 }
 
@@ -386,6 +476,12 @@ export type ApplicationUncheckedCreateInput = {
   preferred_period: string
   wind_min_kmh: number
   wind_max_kmh: number
+  execution_method?: $Enums.ExecutionMethod | null
+  application_medium?: $Enums.ApplicationMedium
+  product_state?: $Enums.ProductState
+  temp_min_c?: number | null
+  temp_max_c?: number | null
+  humidity_min?: number | null
 }
 
 export type ApplicationUpdateInput = {
@@ -399,6 +495,12 @@ export type ApplicationUpdateInput = {
   preferred_period?: Prisma.StringFieldUpdateOperationsInput | string
   wind_min_kmh?: Prisma.IntFieldUpdateOperationsInput | number
   wind_max_kmh?: Prisma.IntFieldUpdateOperationsInput | number
+  execution_method?: Prisma.NullableEnumExecutionMethodFieldUpdateOperationsInput | $Enums.ExecutionMethod | null
+  application_medium?: Prisma.EnumApplicationMediumFieldUpdateOperationsInput | $Enums.ApplicationMedium
+  product_state?: Prisma.EnumProductStateFieldUpdateOperationsInput | $Enums.ProductState
+  temp_min_c?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  temp_max_c?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  humidity_min?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   field_event?: Prisma.FieldEventUpdateOneRequiredWithoutApplicationNestedInput
 }
 
@@ -414,6 +516,12 @@ export type ApplicationUncheckedUpdateInput = {
   preferred_period?: Prisma.StringFieldUpdateOperationsInput | string
   wind_min_kmh?: Prisma.IntFieldUpdateOperationsInput | number
   wind_max_kmh?: Prisma.IntFieldUpdateOperationsInput | number
+  execution_method?: Prisma.NullableEnumExecutionMethodFieldUpdateOperationsInput | $Enums.ExecutionMethod | null
+  application_medium?: Prisma.EnumApplicationMediumFieldUpdateOperationsInput | $Enums.ApplicationMedium
+  product_state?: Prisma.EnumProductStateFieldUpdateOperationsInput | $Enums.ProductState
+  temp_min_c?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  temp_max_c?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  humidity_min?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type ApplicationCreateManyInput = {
@@ -428,6 +536,12 @@ export type ApplicationCreateManyInput = {
   preferred_period: string
   wind_min_kmh: number
   wind_max_kmh: number
+  execution_method?: $Enums.ExecutionMethod | null
+  application_medium?: $Enums.ApplicationMedium
+  product_state?: $Enums.ProductState
+  temp_min_c?: number | null
+  temp_max_c?: number | null
+  humidity_min?: number | null
 }
 
 export type ApplicationUpdateManyMutationInput = {
@@ -441,6 +555,12 @@ export type ApplicationUpdateManyMutationInput = {
   preferred_period?: Prisma.StringFieldUpdateOperationsInput | string
   wind_min_kmh?: Prisma.IntFieldUpdateOperationsInput | number
   wind_max_kmh?: Prisma.IntFieldUpdateOperationsInput | number
+  execution_method?: Prisma.NullableEnumExecutionMethodFieldUpdateOperationsInput | $Enums.ExecutionMethod | null
+  application_medium?: Prisma.EnumApplicationMediumFieldUpdateOperationsInput | $Enums.ApplicationMedium
+  product_state?: Prisma.EnumProductStateFieldUpdateOperationsInput | $Enums.ProductState
+  temp_min_c?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  temp_max_c?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  humidity_min?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type ApplicationUncheckedUpdateManyInput = {
@@ -455,6 +575,12 @@ export type ApplicationUncheckedUpdateManyInput = {
   preferred_period?: Prisma.StringFieldUpdateOperationsInput | string
   wind_min_kmh?: Prisma.IntFieldUpdateOperationsInput | number
   wind_max_kmh?: Prisma.IntFieldUpdateOperationsInput | number
+  execution_method?: Prisma.NullableEnumExecutionMethodFieldUpdateOperationsInput | $Enums.ExecutionMethod | null
+  application_medium?: Prisma.EnumApplicationMediumFieldUpdateOperationsInput | $Enums.ApplicationMedium
+  product_state?: Prisma.EnumProductStateFieldUpdateOperationsInput | $Enums.ProductState
+  temp_min_c?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  temp_max_c?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  humidity_min?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type ApplicationNullableScalarRelationFilter = {
@@ -474,6 +600,12 @@ export type ApplicationCountOrderByAggregateInput = {
   preferred_period?: Prisma.SortOrder
   wind_min_kmh?: Prisma.SortOrder
   wind_max_kmh?: Prisma.SortOrder
+  execution_method?: Prisma.SortOrder
+  application_medium?: Prisma.SortOrder
+  product_state?: Prisma.SortOrder
+  temp_min_c?: Prisma.SortOrder
+  temp_max_c?: Prisma.SortOrder
+  humidity_min?: Prisma.SortOrder
 }
 
 export type ApplicationAvgOrderByAggregateInput = {
@@ -484,6 +616,9 @@ export type ApplicationAvgOrderByAggregateInput = {
   tank_count_actual?: Prisma.SortOrder
   wind_min_kmh?: Prisma.SortOrder
   wind_max_kmh?: Prisma.SortOrder
+  temp_min_c?: Prisma.SortOrder
+  temp_max_c?: Prisma.SortOrder
+  humidity_min?: Prisma.SortOrder
 }
 
 export type ApplicationMaxOrderByAggregateInput = {
@@ -498,6 +633,12 @@ export type ApplicationMaxOrderByAggregateInput = {
   preferred_period?: Prisma.SortOrder
   wind_min_kmh?: Prisma.SortOrder
   wind_max_kmh?: Prisma.SortOrder
+  execution_method?: Prisma.SortOrder
+  application_medium?: Prisma.SortOrder
+  product_state?: Prisma.SortOrder
+  temp_min_c?: Prisma.SortOrder
+  temp_max_c?: Prisma.SortOrder
+  humidity_min?: Prisma.SortOrder
 }
 
 export type ApplicationMinOrderByAggregateInput = {
@@ -512,6 +653,12 @@ export type ApplicationMinOrderByAggregateInput = {
   preferred_period?: Prisma.SortOrder
   wind_min_kmh?: Prisma.SortOrder
   wind_max_kmh?: Prisma.SortOrder
+  execution_method?: Prisma.SortOrder
+  application_medium?: Prisma.SortOrder
+  product_state?: Prisma.SortOrder
+  temp_min_c?: Prisma.SortOrder
+  temp_max_c?: Prisma.SortOrder
+  humidity_min?: Prisma.SortOrder
 }
 
 export type ApplicationSumOrderByAggregateInput = {
@@ -522,6 +669,9 @@ export type ApplicationSumOrderByAggregateInput = {
   tank_count_actual?: Prisma.SortOrder
   wind_min_kmh?: Prisma.SortOrder
   wind_max_kmh?: Prisma.SortOrder
+  temp_min_c?: Prisma.SortOrder
+  temp_max_c?: Prisma.SortOrder
+  humidity_min?: Prisma.SortOrder
 }
 
 export type ApplicationCreateNestedOneWithoutField_eventInput = {
@@ -580,6 +730,18 @@ export type IntFieldUpdateOperationsInput = {
   divide?: number
 }
 
+export type NullableEnumExecutionMethodFieldUpdateOperationsInput = {
+  set?: $Enums.ExecutionMethod | null
+}
+
+export type EnumApplicationMediumFieldUpdateOperationsInput = {
+  set?: $Enums.ApplicationMedium
+}
+
+export type EnumProductStateFieldUpdateOperationsInput = {
+  set?: $Enums.ProductState
+}
+
 export type ApplicationCreateWithoutField_eventInput = {
   application_name: string
   work_rate_value: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -591,6 +753,12 @@ export type ApplicationCreateWithoutField_eventInput = {
   preferred_period: string
   wind_min_kmh: number
   wind_max_kmh: number
+  execution_method?: $Enums.ExecutionMethod | null
+  application_medium?: $Enums.ApplicationMedium
+  product_state?: $Enums.ProductState
+  temp_min_c?: number | null
+  temp_max_c?: number | null
+  humidity_min?: number | null
 }
 
 export type ApplicationUncheckedCreateWithoutField_eventInput = {
@@ -604,6 +772,12 @@ export type ApplicationUncheckedCreateWithoutField_eventInput = {
   preferred_period: string
   wind_min_kmh: number
   wind_max_kmh: number
+  execution_method?: $Enums.ExecutionMethod | null
+  application_medium?: $Enums.ApplicationMedium
+  product_state?: $Enums.ProductState
+  temp_min_c?: number | null
+  temp_max_c?: number | null
+  humidity_min?: number | null
 }
 
 export type ApplicationCreateOrConnectWithoutField_eventInput = {
@@ -633,6 +807,12 @@ export type ApplicationUpdateWithoutField_eventInput = {
   preferred_period?: Prisma.StringFieldUpdateOperationsInput | string
   wind_min_kmh?: Prisma.IntFieldUpdateOperationsInput | number
   wind_max_kmh?: Prisma.IntFieldUpdateOperationsInput | number
+  execution_method?: Prisma.NullableEnumExecutionMethodFieldUpdateOperationsInput | $Enums.ExecutionMethod | null
+  application_medium?: Prisma.EnumApplicationMediumFieldUpdateOperationsInput | $Enums.ApplicationMedium
+  product_state?: Prisma.EnumProductStateFieldUpdateOperationsInput | $Enums.ProductState
+  temp_min_c?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  temp_max_c?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  humidity_min?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type ApplicationUncheckedUpdateWithoutField_eventInput = {
@@ -646,6 +826,12 @@ export type ApplicationUncheckedUpdateWithoutField_eventInput = {
   preferred_period?: Prisma.StringFieldUpdateOperationsInput | string
   wind_min_kmh?: Prisma.IntFieldUpdateOperationsInput | number
   wind_max_kmh?: Prisma.IntFieldUpdateOperationsInput | number
+  execution_method?: Prisma.NullableEnumExecutionMethodFieldUpdateOperationsInput | $Enums.ExecutionMethod | null
+  application_medium?: Prisma.EnumApplicationMediumFieldUpdateOperationsInput | $Enums.ApplicationMedium
+  product_state?: Prisma.EnumProductStateFieldUpdateOperationsInput | $Enums.ProductState
+  temp_min_c?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  temp_max_c?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  humidity_min?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 
@@ -662,6 +848,12 @@ export type ApplicationSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   preferred_period?: boolean
   wind_min_kmh?: boolean
   wind_max_kmh?: boolean
+  execution_method?: boolean
+  application_medium?: boolean
+  product_state?: boolean
+  temp_min_c?: boolean
+  temp_max_c?: boolean
+  humidity_min?: boolean
   field_event?: boolean | Prisma.FieldEventDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["application"]>
 
@@ -677,6 +869,12 @@ export type ApplicationSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   preferred_period?: boolean
   wind_min_kmh?: boolean
   wind_max_kmh?: boolean
+  execution_method?: boolean
+  application_medium?: boolean
+  product_state?: boolean
+  temp_min_c?: boolean
+  temp_max_c?: boolean
+  humidity_min?: boolean
   field_event?: boolean | Prisma.FieldEventDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["application"]>
 
@@ -692,6 +890,12 @@ export type ApplicationSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   preferred_period?: boolean
   wind_min_kmh?: boolean
   wind_max_kmh?: boolean
+  execution_method?: boolean
+  application_medium?: boolean
+  product_state?: boolean
+  temp_min_c?: boolean
+  temp_max_c?: boolean
+  humidity_min?: boolean
   field_event?: boolean | Prisma.FieldEventDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["application"]>
 
@@ -707,9 +911,15 @@ export type ApplicationSelectScalar = {
   preferred_period?: boolean
   wind_min_kmh?: boolean
   wind_max_kmh?: boolean
+  execution_method?: boolean
+  application_medium?: boolean
+  product_state?: boolean
+  temp_min_c?: boolean
+  temp_max_c?: boolean
+  humidity_min?: boolean
 }
 
-export type ApplicationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"event_id" | "application_name" | "work_rate_value" | "work_rate_unit" | "spray_volume_total_l" | "spray_volume_l_per_ha" | "tank_count_planned" | "tank_count_actual" | "preferred_period" | "wind_min_kmh" | "wind_max_kmh", ExtArgs["result"]["application"]>
+export type ApplicationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"event_id" | "application_name" | "work_rate_value" | "work_rate_unit" | "spray_volume_total_l" | "spray_volume_l_per_ha" | "tank_count_planned" | "tank_count_actual" | "preferred_period" | "wind_min_kmh" | "wind_max_kmh" | "execution_method" | "application_medium" | "product_state" | "temp_min_c" | "temp_max_c" | "humidity_min", ExtArgs["result"]["application"]>
 export type ApplicationInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   field_event?: boolean | Prisma.FieldEventDefaultArgs<ExtArgs>
 }
@@ -737,6 +947,12 @@ export type $ApplicationPayload<ExtArgs extends runtime.Types.Extensions.Interna
     preferred_period: string
     wind_min_kmh: number
     wind_max_kmh: number
+    execution_method: $Enums.ExecutionMethod | null
+    application_medium: $Enums.ApplicationMedium
+    product_state: $Enums.ProductState
+    temp_min_c: number | null
+    temp_max_c: number | null
+    humidity_min: number | null
   }, ExtArgs["result"]["application"]>
   composites: {}
 }
@@ -1172,6 +1388,12 @@ export interface ApplicationFieldRefs {
   readonly preferred_period: Prisma.FieldRef<"Application", 'String'>
   readonly wind_min_kmh: Prisma.FieldRef<"Application", 'Int'>
   readonly wind_max_kmh: Prisma.FieldRef<"Application", 'Int'>
+  readonly execution_method: Prisma.FieldRef<"Application", 'ExecutionMethod'>
+  readonly application_medium: Prisma.FieldRef<"Application", 'ApplicationMedium'>
+  readonly product_state: Prisma.FieldRef<"Application", 'ProductState'>
+  readonly temp_min_c: Prisma.FieldRef<"Application", 'Int'>
+  readonly temp_max_c: Prisma.FieldRef<"Application", 'Int'>
+  readonly humidity_min: Prisma.FieldRef<"Application", 'Int'>
 }
     
 

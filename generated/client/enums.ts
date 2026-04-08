@@ -74,3 +74,28 @@ export const ProductClassification = {
 } as const
 
 export type ProductClassification = (typeof ProductClassification)[keyof typeof ProductClassification]
+
+
+export const ExecutionMethod = {
+  DISTRIBUTING: 'DISTRIBUTING',
+  INCORPORATION: 'INCORPORATION'
+} as const
+
+export type ExecutionMethod = (typeof ExecutionMethod)[keyof typeof ExecutionMethod]
+
+
+export const ApplicationMedium = {
+  DRONE: 'DRONE',
+  AIRCRAFT: 'AIRCRAFT',
+  TERRESTRIAL: 'TERRESTRIAL'
+} as const
+
+export type ApplicationMedium = (typeof ApplicationMedium)[keyof typeof ApplicationMedium]
+
+
+export const ProductState = {
+  LIQUID: 'LIQUID',
+  SOLID: 'SOLID'
+} as const
+
+export type ProductState = (typeof ProductState)[keyof typeof ProductState]

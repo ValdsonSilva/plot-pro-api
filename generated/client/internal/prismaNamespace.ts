@@ -1190,7 +1190,13 @@ export const ApplicationScalarFieldEnum = {
   tank_count_actual: 'tank_count_actual',
   preferred_period: 'preferred_period',
   wind_min_kmh: 'wind_min_kmh',
-  wind_max_kmh: 'wind_max_kmh'
+  wind_max_kmh: 'wind_max_kmh',
+  execution_method: 'execution_method',
+  application_medium: 'application_medium',
+  product_state: 'product_state',
+  temp_min_c: 'temp_min_c',
+  temp_max_c: 'temp_max_c',
+  humidity_min: 'humidity_min'
 } as const
 
 export type ApplicationScalarFieldEnum = (typeof ApplicationScalarFieldEnum)[keyof typeof ApplicationScalarFieldEnum]
@@ -1390,6 +1396,48 @@ export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'In
  * Reference to a field of type 'Int[]'
  */
 export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+/**
+ * Reference to a field of type 'ExecutionMethod'
+ */
+export type EnumExecutionMethodFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ExecutionMethod'>
+    
+
+
+/**
+ * Reference to a field of type 'ExecutionMethod[]'
+ */
+export type ListEnumExecutionMethodFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ExecutionMethod[]'>
+    
+
+
+/**
+ * Reference to a field of type 'ApplicationMedium'
+ */
+export type EnumApplicationMediumFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ApplicationMedium'>
+    
+
+
+/**
+ * Reference to a field of type 'ApplicationMedium[]'
+ */
+export type ListEnumApplicationMediumFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ApplicationMedium[]'>
+    
+
+
+/**
+ * Reference to a field of type 'ProductState'
+ */
+export type EnumProductStateFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProductState'>
+    
+
+
+/**
+ * Reference to a field of type 'ProductState[]'
+ */
+export type ListEnumProductStateFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProductState[]'>
     
 
 
