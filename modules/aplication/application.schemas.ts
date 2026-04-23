@@ -46,7 +46,7 @@ export const createApplicationSchema = z.object({
             wind_max_kmh: z.coerce.number().int().min(0),
 
             // Novos campos de controle
-            product_state: z.enum(ProductState, undefined).optional(),
+            product_state: z.enum(ProductState).default("SOLID").optional(),
             application_medium: z.enum(ApplicationMedium).default("TERRESTRIAL"),
             execution_method: z.enum(ExecutionMethod).optional(), // Opcional, usado mais em sólidos
 
@@ -146,7 +146,7 @@ export const updateApplicationSchema = z.object({
             wind_min_kmh: z.coerce.number().int().min(0).optional(),
             wind_max_kmh: z.coerce.number().int().min(0).optional(),
 
-            product_state: z.enum(ProductState, undefined).optional(),
+            product_state: z.enum(ProductState, undefined).default("SOLID").optional(),
             application_medium: z.enum(ApplicationMedium).optional(),
             execution_method: z.enum(ExecutionMethod).optional(),
 
