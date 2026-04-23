@@ -38,7 +38,10 @@ export const createApplicationSchema = z.object({
             application_name: z.string().min(2),
             work_rate_value: z.coerce.number().positive(),
             work_rate_unit: z.string().min(1),
-            preferred_period: z.string().min(1),
+            preferred_period: z.string().min(1, "Horário de início é obrigatório")
+                .regex(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/, {
+                    message: "Formato inválido. Use HH:mm (ex: 08:30)",
+                }),
             wind_min_kmh: z.coerce.number().int().min(0),
             wind_max_kmh: z.coerce.number().int().min(0),
 
@@ -51,6 +54,9 @@ export const createApplicationSchema = z.object({
             temp_min_c: z.coerce.number().optional(),
             temp_max_c: z.coerce.number().optional(),
             humidity_min: z.coerce.number().min(0).max(100).optional(),
+
+            spray_volume_total_l: z.coerce.number().min(0, "Informe este campo (valor positivo)").optional(),
+            spray_volume_l_per_ha: z.coerce.number().min(0, "Informe este campo (valor positivo)").optional(),
 
             tank_count_planned: z.coerce.number().int().min(0).optional(),
             tank_count_actual: z.coerce.number().int().min(0).optional(),
@@ -118,7 +124,10 @@ export const updateApplicationSchema = z.object({
             application_name: z.string().min(2).optional(),
             work_rate_value: z.coerce.number().positive().optional(),
             work_rate_unit: z.string().min(1).optional(),
-            preferred_period: z.string().min(1).optional(),
+            preferred_period: z.string().min(1, "Horário de início é obrigatório")
+                .regex(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/, {
+                    message: "Formato inválido. Use HH:mm (ex: 08:30)",
+                }).optional(),
             wind_min_kmh: z.coerce.number().int().min(0).optional(),
             wind_max_kmh: z.coerce.number().int().min(0).optional(),
 
@@ -130,6 +139,8 @@ export const updateApplicationSchema = z.object({
             temp_max_c: z.coerce.number().optional(),
             humidity_min: z.coerce.number().optional(),
 
+            spray_volume_total_l: z.coerce.number().min(0, "Informe este campo (valor positivo)").optional(),
+            spray_volume_l_per_ha: z.coerce.number().min(0, "Informe este campo (valor positivo)").optional(),
             tank_count_planned: z.coerce.number().int().min(0).nullable().optional(),
             tank_count_actual: z.coerce.number().int().min(0).nullable().optional(),
 

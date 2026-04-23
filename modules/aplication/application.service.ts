@@ -84,6 +84,12 @@ export const applicationService = {
                         preferred_period: input.preferred_period,
                         wind_min_kmh: input.wind_min_kmh,
                         wind_max_kmh: input.wind_max_kmh,
+                        product_state: input.product_state,
+                        application_medium: input.application_medium,
+                        execution_method: input.execution_method,
+                        temp_min_c: input.temp_min_c,
+                        temp_max_c: input.temp_max_c,
+                        humidity_min: input.humidity_min,
                     },
                 });
 
@@ -230,6 +236,12 @@ export const applicationService = {
                         ...(patch.preferred_period !== undefined ? { preferred_period: patch.preferred_period } : {}),
                         ...(patch.wind_min_kmh !== undefined ? { wind_min_kmh: patch.wind_min_kmh } : {}),
                         ...(patch.wind_max_kmh !== undefined ? { wind_max_kmh: patch.wind_max_kmh } : {}),
+                        ...(patch.product_state !== undefined ? { product_state: patch.product_state } : {}),
+                        ...(patch.application_medium !== undefined ? { application_medium: patch.application_medium } : {}),
+                        ...(patch.execution_method !== undefined ? { execution_method: patch.execution_method } : {}),
+                        ...(patch.temp_min_c !== undefined ? { temp_min_c: patch.temp_min_c } : {}),
+                        ...(patch.temp_max_c !== undefined ? { temp_max_c: patch.temp_max_c } : {}),
+                        ...(patch.humidity_min !== undefined ? { humidity_min: patch.humidity_min } : {}),
                     },
                 });
 

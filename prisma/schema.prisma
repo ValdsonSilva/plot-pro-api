@@ -165,7 +165,7 @@ model Application {
   spray_volume_l_per_ha Decimal? @db.Decimal(10, 2)
   tank_count_planned    Int?
   tank_count_actual     Int?
-  preferred_period      String
+  preferred_period      String // tem que ser em horas
   wind_min_kmh          Int
   wind_max_kmh          Int
 
