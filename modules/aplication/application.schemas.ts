@@ -95,6 +95,10 @@ export const createApplicationSchema = z.object({
             if (["LIMING", "GYPSUM_APPLICATION"].includes(data.event_type) && !data.execution_method) {
                 ctx.addIssue({ code: "custom", message: "Método de execução é obrigatório para este evento", path: ["execution_method"] });
             }
+
+            if (["LIMING", "GYPSUM_APPLICATION"].includes(data.event_type)) {
+                data.product_state = "SOLID"; // Força estado sólido para calagem/gessagem
+            }
         }),
 });
 
@@ -193,6 +197,10 @@ export const updateApplicationSchema = z.object({
             // Se for Calagem/Gessagem, pode exigir o execution_method
             if (["LIMING", "GYPSUM_APPLICATION"].includes(data.event_type!) && !data.execution_method) {
                 ctx.addIssue({ code: "custom", message: "Método de execução é obrigatório para este evento", path: ["execution_method"] });
+            }
+
+            if (["LIMING", "GYPSUM_APPLICATION"].includes(data.event_type)) {
+                data.product_state = "SOLID"; // Força estado sólido para calagem/gessagem
             }
         }),
 });
