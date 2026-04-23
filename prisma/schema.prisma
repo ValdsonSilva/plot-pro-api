@@ -172,7 +172,7 @@ model Application {
   // Metodologia e Meio
   execution_method   ExecutionMethod? // Relevante para Calcário/Gesso
   application_medium ApplicationMedium @default(TERRESTRIAL)
-  product_state      ProductState      @default(LIQUID)
+  product_state      ProductState?
 
   // Pulverização (Opcionais se for Sólido)
   temp_min_c   Int?

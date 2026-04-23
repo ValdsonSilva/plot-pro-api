@@ -46,7 +46,7 @@ export const createApplicationSchema = z.object({
             wind_max_kmh: z.coerce.number().int().min(0),
 
             // Novos campos de controle
-            product_state: z.enum(ProductState),
+            product_state: z.enum(ProductState).optional(),
             application_medium: z.enum(ApplicationMedium).default("TERRESTRIAL"),
             execution_method: z.enum(ExecutionMethod).optional(), // Opcional, usado mais em sólidos
 
@@ -73,6 +73,21 @@ export const createApplicationSchema = z.object({
                 }
                 if (data.humidity_min === undefined) {
                     ctx.addIssue({ code: "custom", message: "Umidade mínima é obrigatória para líquidos", path: ["humidity_min"] });
+                }
+                if (!data.spray_volume_l_per_ha) {
+                    ctx.addIssue({ code: "custom", message: "Vazão L/ha é obrigatória para líquidos", path: ["spray_volume_l_per_ha"] });
+                }
+
+                if (!data.spray_volume_total_l) {
+                    ctx.addIssue({ code: "custom", message: "Volume total de calda é obrigatório para líquidos", path: ["spray_volume_total_l"] });
+                }
+
+                if (!data.work_rate_unit) {
+                    ctx.addIssue({ code: "custom", message: "Unidade de vazão é obrigatória para líquidos", path: ["work_rate_unit"] });
+                }
+
+                if (!data.work_rate_value) {
+                    ctx.addIssue({ code: "custom", message: "Valor de vazão é obrigatório para líquidos", path: ["work_rate_value"] });
                 }
             }
 
@@ -150,7 +165,36 @@ export const updateApplicationSchema = z.object({
         .refine(
             (b) => !(b.wind_min_kmh && b.wind_max_kmh) || b.wind_min_kmh <= b.wind_max_kmh,
             { message: "Vento min deve ser <= Vento max" }
-        ),
+        ).superRefine((data, ctx) => {
+            if (data.product_state === "LIQUID") {
+                if (data.temp_min_c === undefined) {
+                    ctx.addIssue({ code: "custom", message: "Temp. mínima é obrigatória para líquidos", path: ["temp_min_c"] });
+                }
+                if (data.humidity_min === undefined) {
+                    ctx.addIssue({ code: "custom", message: "Umidade mínima é obrigatória para líquidos", path: ["humidity_min"] });
+                }
+                if (!data.spray_volume_l_per_ha) {
+                    ctx.addIssue({ code: "custom", message: "Vazão L/ha é obrigatória para líquidos", path: ["spray_volume_l_per_ha"] });
+                }
+
+                if (!data.spray_volume_total_l) {
+                    ctx.addIssue({ code: "custom", message: "Volume total de calda é obrigatório para líquidos", path: ["spray_volume_total_l"] });
+                }
+
+                if (!data.work_rate_unit) {
+                    ctx.addIssue({ code: "custom", message: "Unidade de vazão é obrigatória para líquidos", path: ["work_rate_unit"] });
+                }
+
+                if (!data.work_rate_value) {
+                    ctx.addIssue({ code: "custom", message: "Valor de vazão é obrigatório para líquidos", path: ["work_rate_value"] });
+                }
+            }
+
+            // Se for Calagem/Gessagem, pode exigir o execution_method
+            if (["LIMING", "GYPSUM_APPLICATION"].includes(data.event_type!) && !data.execution_method) {
+                ctx.addIssue({ code: "custom", message: "Método de execução é obrigatório para este evento", path: ["execution_method"] });
+            }
+        }),
 });
 
 export const cancelApplicationSchema = z.object({
