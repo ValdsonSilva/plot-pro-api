@@ -301,7 +301,7 @@ export type ApplicationGroupByOutputType = {
   wind_max_kmh: number
   execution_method: $Enums.ExecutionMethod | null
   application_medium: $Enums.ApplicationMedium
-  product_state: $Enums.ProductState
+  product_state: $Enums.ProductState | null
   temp_min_c: number | null
   temp_max_c: number | null
   humidity_min: number | null
@@ -344,7 +344,7 @@ export type ApplicationWhereInput = {
   wind_max_kmh?: Prisma.IntFilter<"Application"> | number
   execution_method?: Prisma.EnumExecutionMethodNullableFilter<"Application"> | $Enums.ExecutionMethod | null
   application_medium?: Prisma.EnumApplicationMediumFilter<"Application"> | $Enums.ApplicationMedium
-  product_state?: Prisma.EnumProductStateFilter<"Application"> | $Enums.ProductState
+  product_state?: Prisma.EnumProductStateNullableFilter<"Application"> | $Enums.ProductState | null
   temp_min_c?: Prisma.IntNullableFilter<"Application"> | number | null
   temp_max_c?: Prisma.IntNullableFilter<"Application"> | number | null
   humidity_min?: Prisma.IntNullableFilter<"Application"> | number | null
@@ -365,7 +365,7 @@ export type ApplicationOrderByWithRelationInput = {
   wind_max_kmh?: Prisma.SortOrder
   execution_method?: Prisma.SortOrderInput | Prisma.SortOrder
   application_medium?: Prisma.SortOrder
-  product_state?: Prisma.SortOrder
+  product_state?: Prisma.SortOrderInput | Prisma.SortOrder
   temp_min_c?: Prisma.SortOrderInput | Prisma.SortOrder
   temp_max_c?: Prisma.SortOrderInput | Prisma.SortOrder
   humidity_min?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -389,7 +389,7 @@ export type ApplicationWhereUniqueInput = Prisma.AtLeast<{
   wind_max_kmh?: Prisma.IntFilter<"Application"> | number
   execution_method?: Prisma.EnumExecutionMethodNullableFilter<"Application"> | $Enums.ExecutionMethod | null
   application_medium?: Prisma.EnumApplicationMediumFilter<"Application"> | $Enums.ApplicationMedium
-  product_state?: Prisma.EnumProductStateFilter<"Application"> | $Enums.ProductState
+  product_state?: Prisma.EnumProductStateNullableFilter<"Application"> | $Enums.ProductState | null
   temp_min_c?: Prisma.IntNullableFilter<"Application"> | number | null
   temp_max_c?: Prisma.IntNullableFilter<"Application"> | number | null
   humidity_min?: Prisma.IntNullableFilter<"Application"> | number | null
@@ -410,7 +410,7 @@ export type ApplicationOrderByWithAggregationInput = {
   wind_max_kmh?: Prisma.SortOrder
   execution_method?: Prisma.SortOrderInput | Prisma.SortOrder
   application_medium?: Prisma.SortOrder
-  product_state?: Prisma.SortOrder
+  product_state?: Prisma.SortOrderInput | Prisma.SortOrder
   temp_min_c?: Prisma.SortOrderInput | Prisma.SortOrder
   temp_max_c?: Prisma.SortOrderInput | Prisma.SortOrder
   humidity_min?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -438,7 +438,7 @@ export type ApplicationScalarWhereWithAggregatesInput = {
   wind_max_kmh?: Prisma.IntWithAggregatesFilter<"Application"> | number
   execution_method?: Prisma.EnumExecutionMethodNullableWithAggregatesFilter<"Application"> | $Enums.ExecutionMethod | null
   application_medium?: Prisma.EnumApplicationMediumWithAggregatesFilter<"Application"> | $Enums.ApplicationMedium
-  product_state?: Prisma.EnumProductStateWithAggregatesFilter<"Application"> | $Enums.ProductState
+  product_state?: Prisma.EnumProductStateNullableWithAggregatesFilter<"Application"> | $Enums.ProductState | null
   temp_min_c?: Prisma.IntNullableWithAggregatesFilter<"Application"> | number | null
   temp_max_c?: Prisma.IntNullableWithAggregatesFilter<"Application"> | number | null
   humidity_min?: Prisma.IntNullableWithAggregatesFilter<"Application"> | number | null
@@ -457,7 +457,7 @@ export type ApplicationCreateInput = {
   wind_max_kmh: number
   execution_method?: $Enums.ExecutionMethod | null
   application_medium?: $Enums.ApplicationMedium
-  product_state?: $Enums.ProductState
+  product_state?: $Enums.ProductState | null
   temp_min_c?: number | null
   temp_max_c?: number | null
   humidity_min?: number | null
@@ -478,7 +478,7 @@ export type ApplicationUncheckedCreateInput = {
   wind_max_kmh: number
   execution_method?: $Enums.ExecutionMethod | null
   application_medium?: $Enums.ApplicationMedium
-  product_state?: $Enums.ProductState
+  product_state?: $Enums.ProductState | null
   temp_min_c?: number | null
   temp_max_c?: number | null
   humidity_min?: number | null
@@ -497,7 +497,7 @@ export type ApplicationUpdateInput = {
   wind_max_kmh?: Prisma.IntFieldUpdateOperationsInput | number
   execution_method?: Prisma.NullableEnumExecutionMethodFieldUpdateOperationsInput | $Enums.ExecutionMethod | null
   application_medium?: Prisma.EnumApplicationMediumFieldUpdateOperationsInput | $Enums.ApplicationMedium
-  product_state?: Prisma.EnumProductStateFieldUpdateOperationsInput | $Enums.ProductState
+  product_state?: Prisma.NullableEnumProductStateFieldUpdateOperationsInput | $Enums.ProductState | null
   temp_min_c?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   temp_max_c?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   humidity_min?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -518,7 +518,7 @@ export type ApplicationUncheckedUpdateInput = {
   wind_max_kmh?: Prisma.IntFieldUpdateOperationsInput | number
   execution_method?: Prisma.NullableEnumExecutionMethodFieldUpdateOperationsInput | $Enums.ExecutionMethod | null
   application_medium?: Prisma.EnumApplicationMediumFieldUpdateOperationsInput | $Enums.ApplicationMedium
-  product_state?: Prisma.EnumProductStateFieldUpdateOperationsInput | $Enums.ProductState
+  product_state?: Prisma.NullableEnumProductStateFieldUpdateOperationsInput | $Enums.ProductState | null
   temp_min_c?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   temp_max_c?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   humidity_min?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -538,7 +538,7 @@ export type ApplicationCreateManyInput = {
   wind_max_kmh: number
   execution_method?: $Enums.ExecutionMethod | null
   application_medium?: $Enums.ApplicationMedium
-  product_state?: $Enums.ProductState
+  product_state?: $Enums.ProductState | null
   temp_min_c?: number | null
   temp_max_c?: number | null
   humidity_min?: number | null
@@ -557,7 +557,7 @@ export type ApplicationUpdateManyMutationInput = {
   wind_max_kmh?: Prisma.IntFieldUpdateOperationsInput | number
   execution_method?: Prisma.NullableEnumExecutionMethodFieldUpdateOperationsInput | $Enums.ExecutionMethod | null
   application_medium?: Prisma.EnumApplicationMediumFieldUpdateOperationsInput | $Enums.ApplicationMedium
-  product_state?: Prisma.EnumProductStateFieldUpdateOperationsInput | $Enums.ProductState
+  product_state?: Prisma.NullableEnumProductStateFieldUpdateOperationsInput | $Enums.ProductState | null
   temp_min_c?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   temp_max_c?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   humidity_min?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -577,7 +577,7 @@ export type ApplicationUncheckedUpdateManyInput = {
   wind_max_kmh?: Prisma.IntFieldUpdateOperationsInput | number
   execution_method?: Prisma.NullableEnumExecutionMethodFieldUpdateOperationsInput | $Enums.ExecutionMethod | null
   application_medium?: Prisma.EnumApplicationMediumFieldUpdateOperationsInput | $Enums.ApplicationMedium
-  product_state?: Prisma.EnumProductStateFieldUpdateOperationsInput | $Enums.ProductState
+  product_state?: Prisma.NullableEnumProductStateFieldUpdateOperationsInput | $Enums.ProductState | null
   temp_min_c?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   temp_max_c?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   humidity_min?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -738,8 +738,8 @@ export type EnumApplicationMediumFieldUpdateOperationsInput = {
   set?: $Enums.ApplicationMedium
 }
 
-export type EnumProductStateFieldUpdateOperationsInput = {
-  set?: $Enums.ProductState
+export type NullableEnumProductStateFieldUpdateOperationsInput = {
+  set?: $Enums.ProductState | null
 }
 
 export type ApplicationCreateWithoutField_eventInput = {
@@ -755,7 +755,7 @@ export type ApplicationCreateWithoutField_eventInput = {
   wind_max_kmh: number
   execution_method?: $Enums.ExecutionMethod | null
   application_medium?: $Enums.ApplicationMedium
-  product_state?: $Enums.ProductState
+  product_state?: $Enums.ProductState | null
   temp_min_c?: number | null
   temp_max_c?: number | null
   humidity_min?: number | null
@@ -774,7 +774,7 @@ export type ApplicationUncheckedCreateWithoutField_eventInput = {
   wind_max_kmh: number
   execution_method?: $Enums.ExecutionMethod | null
   application_medium?: $Enums.ApplicationMedium
-  product_state?: $Enums.ProductState
+  product_state?: $Enums.ProductState | null
   temp_min_c?: number | null
   temp_max_c?: number | null
   humidity_min?: number | null
@@ -809,7 +809,7 @@ export type ApplicationUpdateWithoutField_eventInput = {
   wind_max_kmh?: Prisma.IntFieldUpdateOperationsInput | number
   execution_method?: Prisma.NullableEnumExecutionMethodFieldUpdateOperationsInput | $Enums.ExecutionMethod | null
   application_medium?: Prisma.EnumApplicationMediumFieldUpdateOperationsInput | $Enums.ApplicationMedium
-  product_state?: Prisma.EnumProductStateFieldUpdateOperationsInput | $Enums.ProductState
+  product_state?: Prisma.NullableEnumProductStateFieldUpdateOperationsInput | $Enums.ProductState | null
   temp_min_c?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   temp_max_c?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   humidity_min?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -828,7 +828,7 @@ export type ApplicationUncheckedUpdateWithoutField_eventInput = {
   wind_max_kmh?: Prisma.IntFieldUpdateOperationsInput | number
   execution_method?: Prisma.NullableEnumExecutionMethodFieldUpdateOperationsInput | $Enums.ExecutionMethod | null
   application_medium?: Prisma.EnumApplicationMediumFieldUpdateOperationsInput | $Enums.ApplicationMedium
-  product_state?: Prisma.EnumProductStateFieldUpdateOperationsInput | $Enums.ProductState
+  product_state?: Prisma.NullableEnumProductStateFieldUpdateOperationsInput | $Enums.ProductState | null
   temp_min_c?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   temp_max_c?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   humidity_min?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -949,7 +949,7 @@ export type $ApplicationPayload<ExtArgs extends runtime.Types.Extensions.Interna
     wind_max_kmh: number
     execution_method: $Enums.ExecutionMethod | null
     application_medium: $Enums.ApplicationMedium
-    product_state: $Enums.ProductState
+    product_state: $Enums.ProductState | null
     temp_min_c: number | null
     temp_max_c: number | null
     humidity_min: number | null
