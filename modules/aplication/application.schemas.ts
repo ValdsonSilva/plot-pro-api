@@ -67,6 +67,23 @@ export const createApplicationSchema = z.object({
         .refine((b) => b.wind_min_kmh <= b.wind_max_kmh, { message: "Vento min deve ser <= Vento max" })
         // Validação Condicional: Se for LÍQUIDO, exige clima
         .superRefine((data, ctx) => {
+
+            const isSoilEvent = ["LIMING", "GYPSUM_APPLICATION"].includes(data.event_type);
+
+            if (isSoilEvent) {
+                // Em vez de tentar mutar (data.product_state = "SOLID"), 
+                // verificamos se o valor selecionado é consistente.
+                // Se o seu front-end não estiver mudando o valor automaticamente,
+                // validamos aqui para avisar o usuário ou apenas ignoramos as travas de líquido.
+                if (!data.execution_method) {
+                    ctx.addIssue({
+                        code: "custom",
+                        message: "Método de execução é obrigatório para este evento",
+                        path: ["execution_method"]
+                    });
+                }
+            }
+
             if (data.product_state === "LIQUID") {
                 if (data.temp_min_c === undefined) {
                     ctx.addIssue({ code: "custom", message: "Temp. mínima é obrigatória para líquidos", path: ["temp_min_c"] });
@@ -92,13 +109,13 @@ export const createApplicationSchema = z.object({
             }
 
             // Se for Calagem/Gessagem, pode exigir o execution_method
-            if (["LIMING", "GYPSUM_APPLICATION"].includes(data.event_type) && !data.execution_method) {
-                ctx.addIssue({ code: "custom", message: "Método de execução é obrigatório para este evento", path: ["execution_method"] });
-            }
+            // if (["LIMING", "GYPSUM_APPLICATION"].includes(data.event_type) && !data.execution_method) {
+            //     ctx.addIssue({ code: "custom", message: "Método de execução é obrigatório para este evento", path: ["execution_method"] });
+            // }
 
-            if (["LIMING", "GYPSUM_APPLICATION"].includes(data.event_type)) {
-                data.product_state = "SOLID"; // Força estado sólido para calagem/gessagem
-            }
+            // if (["LIMING", "GYPSUM_APPLICATION"].includes(data.event_type)) {
+            //     data.product_state = "SOLID"; // Força estado sólido para calagem/gessagem
+            // }
         }),
 });
 
@@ -141,8 +158,8 @@ export const updateApplicationSchema = z.object({
 
             // Application patch
             application_name: z.string().min(2).optional(),
-            work_rate_value: z.coerce.number().positive().optional(),
-            work_rate_unit: z.string().min(1).optional(),
+            work_rate_value: z.coerce.number().min(0).optional(),
+            work_rate_unit: z.string().optional(),
             preferred_period: z.string().min(1, "Horário de início é obrigatório")
                 .regex(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/, {
                     message: "Formato inválido. Use HH:mm (ex: 08:30)",
@@ -170,7 +187,38 @@ export const updateApplicationSchema = z.object({
             (b) => !(b.wind_min_kmh && b.wind_max_kmh) || b.wind_min_kmh <= b.wind_max_kmh,
             { message: "Vento min deve ser <= Vento max" }
         ).superRefine((data, ctx) => {
-            if (data.product_state === "LIQUID") {
+
+            const isSoilEvent = ["LIMING", "GYPSUM_APPLICATION"].includes(data.event_type!);
+
+            if (isSoilEvent) {
+                if (!data.execution_method) {
+                    ctx.addIssue({
+                        code: "custom",
+                        message: "Método de execução é obrigatório para este evento",
+                        path: ["execution_method"]
+                    });
+                }
+            }
+
+            if (!isSoilEvent && data.product_state === "LIQUID") {
+
+                // Validação manual da vazão (Work Rate)
+                if (!data.work_rate_value || data.work_rate_value <= 0) {
+                    ctx.addIssue({
+                        code: "custom",
+                        message: "Valor de vazão deve ser maior que 0 para líquidos",
+                        path: ["work_rate_value"]
+                    });
+                }
+
+                if (!data.work_rate_unit || data.work_rate_unit.trim().length === 0) {
+                    ctx.addIssue({
+                        code: "custom",
+                        message: "Unidade de vazão é obrigatória para líquidos",
+                        path: ["work_rate_unit"]
+                    });
+                }
+
                 if (data.temp_min_c === undefined) {
                     ctx.addIssue({ code: "custom", message: "Temp. mínima é obrigatória para líquidos", path: ["temp_min_c"] });
                 }
@@ -195,13 +243,13 @@ export const updateApplicationSchema = z.object({
             }
 
             // Se for Calagem/Gessagem, pode exigir o execution_method
-            if (["LIMING", "GYPSUM_APPLICATION"].includes(data.event_type!) && !data.execution_method) {
-                ctx.addIssue({ code: "custom", message: "Método de execução é obrigatório para este evento", path: ["execution_method"] });
-            }
+            // if (["LIMING", "GYPSUM_APPLICATION"].includes(data.event_type!) && !data.execution_method) {
+            //     ctx.addIssue({ code: "custom", message: "Método de execução é obrigatório para este evento", path: ["execution_method"] });
+            // }
 
-            if (["LIMING", "GYPSUM_APPLICATION"].includes(data.event_type)) {
-                data.product_state = "SOLID"; // Força estado sólido para calagem/gessagem
-            }
+            // if (["LIMING", "GYPSUM_APPLICATION"].includes(data.event_type!)) {
+            //     data.product_state = "SOLID"; // Força estado sólido para calagem/gessagem
+            // }
         }),
 });
 

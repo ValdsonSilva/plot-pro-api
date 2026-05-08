@@ -11,7 +11,7 @@ import {
 
 export const applicationRoutes = Router();
 
-applicationRoutes.get("/", validate(listApplicationsSchema), applicationController.list);
+applicationRoutes.get("/", validate(listApplicationsSchema as any), applicationController.list);
 applicationRoutes.get("/:eventId", validate(getApplicationSchema), applicationController.get);
 applicationRoutes.post("/", validate(createApplicationSchema), applicationController.create);
 applicationRoutes.patch("/:eventId", validate(updateApplicationSchema), applicationController.update);

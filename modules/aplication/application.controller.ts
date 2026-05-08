@@ -35,8 +35,13 @@ export const applicationController = {
     },
 
     async update(req: Request, res: Response, next: NextFunction) {
+
+        const { params, body } = (req as any).validated;
+        console.log("Dados do body:", body)
+
         try {
-            const { params, body } = (req as any).validated;
+            // const { params, body } = (req as any).validated;
+            // console.log("Dados do body:", body)
             const updated = await applicationService.update(params.eventId, body);
             res.json(updated);
         } catch (e) {
