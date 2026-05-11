@@ -54,7 +54,7 @@ export const fieldController = {
 
     async deactivate(req: any, res: any, next: any) {
         try {
-            const actor = req.user.userActorId;
+            const actor = req.body?.actorId;
             if (!actor) return res.status(403).json({ message: "userActorId é obrigatório" });
             const { params } = req.validated;
             res.json(await fieldService.deactivate(params.id, actor));

@@ -49,4 +49,7 @@ export const updateFieldSchema = z.object({
 
 export const deactivateFieldSchema = z.object({
     params: z.object({ id: z.string() }),
+    body: z.object({
+        actorId: z.string().min(1, "Informe o id do usuário responsável pela ação")
+    })
 });
