@@ -10,12 +10,12 @@ export const listDocumentsSchema = z.object({
 
 export const getDocumentSchema = z.object({
     params: z.object({
-        id: z.coerce.number().int().positive(),
+        id: z.string().min(1),
     }),
 });
 
 export const deleteDocumentSchema = z.object({
     params: z.object({
-        id: z.coerce.number().int().positive(),
+        id: z.string().min(1),
     }),
 });

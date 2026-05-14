@@ -9,6 +9,13 @@ function httpError(statusCode: number, message: string) {
     return err;
 }
 
+async function assertDocumentExists(documentId?: string | null) {
+    if (!documentId) return;
+
+    const document = await prisma.document.findUnique({ where: { id: documentId } });
+    if (!document) throw httpError(404, "Documento de análise do solo não encontrado");
+}
+
 export const fieldService = {
     async create(input: {
         farm_id: string;
@@ -17,25 +24,24 @@ export const fieldService = {
         area_ha: number;
         geo_boundary?: any;
         is_active?: boolean;
+        soil_analysis_document_id?: string;
     }, authFarmId: string) {
 
         if (input.farm_id !== authFarmId) {
-            const err: any = new Error("Proibido: farm_id diferente do seu escopo");
-            err.statusCode = 403;
-            throw err;
+            throw httpError(403, "Proibido: farm_id diferente do seu escopo");
         }
 
-        // garante que farm existe (melhor mensagem do que FK genérica)
         const farm = await prisma.farm.findUnique({ where: { id: input.farm_id } });
         if (!farm) throw httpError(404, "Farm não encontrada");
+
+        await assertDocumentExists(input.soil_analysis_document_id);
 
         try {
             return await fieldRepo.create(input);
         } catch (e: any) {
             if (e instanceof Prisma.PrismaClientKnownRequestError) {
-                // Unique constraint (farm_id, code)
                 if (e.code === "P2002") throw httpError(409, "Já existe um talhão com esse código nessa fazenda");
-                if (e.code === "P2003") throw httpError(400, "farm_id inválido");
+                if (e.code === "P2003") throw httpError(400, "farm_id ou soil_analysis_document_id inválido");
             }
             throw e;
         }
@@ -58,9 +64,13 @@ export const fieldService = {
         area_ha?: number;
         geo_boundary?: any;
         is_active?: boolean;
+        soil_analysis_document_id?: string | null;
     }) {
-        // garante que existe
         await this.get(id);
+
+        if (patch.soil_analysis_document_id !== undefined) {
+            await assertDocumentExists(patch.soil_analysis_document_id);
+        }
 
         try {
             return await fieldRepo.update(id, {
@@ -69,10 +79,12 @@ export const fieldService = {
                 ...(patch.area_ha !== undefined ? { area_ha: patch.area_ha as any } : {}),
                 ...(patch.geo_boundary !== undefined ? { geo_boundary: patch.geo_boundary } : {}),
                 ...(patch.is_active !== undefined ? { is_active: patch.is_active } : {}),
+                ...(patch.soil_analysis_document_id !== undefined ? { soil_analysis_document_id: patch.soil_analysis_document_id } : {}),
             });
         } catch (e: any) {
             if (e instanceof Prisma.PrismaClientKnownRequestError) {
                 if (e.code === "P2002") throw httpError(409, "Já existe um talhão com esse código nessa fazenda");
+                if (e.code === "P2003") throw httpError(400, "soil_analysis_document_id inválido");
             }
             throw e;
         }

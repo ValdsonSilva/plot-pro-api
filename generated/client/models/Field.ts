@@ -41,6 +41,7 @@ export type FieldMinAggregateOutputType = {
   name: string | null
   area_ha: runtime.Decimal | null
   is_active: boolean | null
+  soil_analysis_document_id: string | null
 }
 
 export type FieldMaxAggregateOutputType = {
@@ -50,6 +51,7 @@ export type FieldMaxAggregateOutputType = {
   name: string | null
   area_ha: runtime.Decimal | null
   is_active: boolean | null
+  soil_analysis_document_id: string | null
 }
 
 export type FieldCountAggregateOutputType = {
@@ -60,6 +62,7 @@ export type FieldCountAggregateOutputType = {
   area_ha: number
   geo_boundary: number
   is_active: number
+  soil_analysis_document_id: number
   _all: number
 }
 
@@ -79,6 +82,7 @@ export type FieldMinAggregateInputType = {
   name?: true
   area_ha?: true
   is_active?: true
+  soil_analysis_document_id?: true
 }
 
 export type FieldMaxAggregateInputType = {
@@ -88,6 +92,7 @@ export type FieldMaxAggregateInputType = {
   name?: true
   area_ha?: true
   is_active?: true
+  soil_analysis_document_id?: true
 }
 
 export type FieldCountAggregateInputType = {
@@ -98,6 +103,7 @@ export type FieldCountAggregateInputType = {
   area_ha?: true
   geo_boundary?: true
   is_active?: true
+  soil_analysis_document_id?: true
   _all?: true
 }
 
@@ -195,6 +201,7 @@ export type FieldGroupByOutputType = {
   area_ha: runtime.Decimal
   geo_boundary: runtime.JsonValue | null
   is_active: boolean
+  soil_analysis_document_id: string | null
   _count: FieldCountAggregateOutputType | null
   _avg: FieldAvgAggregateOutputType | null
   _sum: FieldSumAggregateOutputType | null
@@ -228,7 +235,9 @@ export type FieldWhereInput = {
   area_ha?: Prisma.DecimalFilter<"Field"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   geo_boundary?: Prisma.JsonNullableFilter<"Field">
   is_active?: Prisma.BoolFilter<"Field"> | boolean
+  soil_analysis_document_id?: Prisma.StringNullableFilter<"Field"> | string | null
   farm?: Prisma.XOR<Prisma.FarmScalarRelationFilter, Prisma.FarmWhereInput>
+  soil_analysis_document?: Prisma.XOR<Prisma.DocumentNullableScalarRelationFilter, Prisma.DocumentWhereInput> | null
   field_events?: Prisma.FieldEventListRelationFilter
 }
 
@@ -240,7 +249,9 @@ export type FieldOrderByWithRelationInput = {
   area_ha?: Prisma.SortOrder
   geo_boundary?: Prisma.SortOrderInput | Prisma.SortOrder
   is_active?: Prisma.SortOrder
+  soil_analysis_document_id?: Prisma.SortOrderInput | Prisma.SortOrder
   farm?: Prisma.FarmOrderByWithRelationInput
+  soil_analysis_document?: Prisma.DocumentOrderByWithRelationInput
   field_events?: Prisma.FieldEventOrderByRelationAggregateInput
 }
 
@@ -256,7 +267,9 @@ export type FieldWhereUniqueInput = Prisma.AtLeast<{
   area_ha?: Prisma.DecimalFilter<"Field"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   geo_boundary?: Prisma.JsonNullableFilter<"Field">
   is_active?: Prisma.BoolFilter<"Field"> | boolean
+  soil_analysis_document_id?: Prisma.StringNullableFilter<"Field"> | string | null
   farm?: Prisma.XOR<Prisma.FarmScalarRelationFilter, Prisma.FarmWhereInput>
+  soil_analysis_document?: Prisma.XOR<Prisma.DocumentNullableScalarRelationFilter, Prisma.DocumentWhereInput> | null
   field_events?: Prisma.FieldEventListRelationFilter
 }, "id" | "farm_id_code">
 
@@ -268,6 +281,7 @@ export type FieldOrderByWithAggregationInput = {
   area_ha?: Prisma.SortOrder
   geo_boundary?: Prisma.SortOrderInput | Prisma.SortOrder
   is_active?: Prisma.SortOrder
+  soil_analysis_document_id?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.FieldCountOrderByAggregateInput
   _avg?: Prisma.FieldAvgOrderByAggregateInput
   _max?: Prisma.FieldMaxOrderByAggregateInput
@@ -286,6 +300,7 @@ export type FieldScalarWhereWithAggregatesInput = {
   area_ha?: Prisma.DecimalWithAggregatesFilter<"Field"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   geo_boundary?: Prisma.JsonNullableWithAggregatesFilter<"Field">
   is_active?: Prisma.BoolWithAggregatesFilter<"Field"> | boolean
+  soil_analysis_document_id?: Prisma.StringNullableWithAggregatesFilter<"Field"> | string | null
 }
 
 export type FieldCreateInput = {
@@ -296,6 +311,7 @@ export type FieldCreateInput = {
   geo_boundary?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   is_active?: boolean
   farm: Prisma.FarmCreateNestedOneWithoutFieldsInput
+  soil_analysis_document?: Prisma.DocumentCreateNestedOneWithoutSoil_analysis_fieldsInput
   field_events?: Prisma.FieldEventCreateNestedManyWithoutFieldInput
 }
 
@@ -307,6 +323,7 @@ export type FieldUncheckedCreateInput = {
   area_ha: runtime.Decimal | runtime.DecimalJsLike | number | string
   geo_boundary?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   is_active?: boolean
+  soil_analysis_document_id?: string | null
   field_events?: Prisma.FieldEventUncheckedCreateNestedManyWithoutFieldInput
 }
 
@@ -318,6 +335,7 @@ export type FieldUpdateInput = {
   geo_boundary?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   farm?: Prisma.FarmUpdateOneRequiredWithoutFieldsNestedInput
+  soil_analysis_document?: Prisma.DocumentUpdateOneWithoutSoil_analysis_fieldsNestedInput
   field_events?: Prisma.FieldEventUpdateManyWithoutFieldNestedInput
 }
 
@@ -329,6 +347,7 @@ export type FieldUncheckedUpdateInput = {
   area_ha?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   geo_boundary?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  soil_analysis_document_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   field_events?: Prisma.FieldEventUncheckedUpdateManyWithoutFieldNestedInput
 }
 
@@ -340,6 +359,7 @@ export type FieldCreateManyInput = {
   area_ha: runtime.Decimal | runtime.DecimalJsLike | number | string
   geo_boundary?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   is_active?: boolean
+  soil_analysis_document_id?: string | null
 }
 
 export type FieldUpdateManyMutationInput = {
@@ -359,6 +379,7 @@ export type FieldUncheckedUpdateManyInput = {
   area_ha?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   geo_boundary?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  soil_analysis_document_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type FieldListRelationFilter = {
@@ -384,6 +405,7 @@ export type FieldCountOrderByAggregateInput = {
   area_ha?: Prisma.SortOrder
   geo_boundary?: Prisma.SortOrder
   is_active?: Prisma.SortOrder
+  soil_analysis_document_id?: Prisma.SortOrder
 }
 
 export type FieldAvgOrderByAggregateInput = {
@@ -397,6 +419,7 @@ export type FieldMaxOrderByAggregateInput = {
   name?: Prisma.SortOrder
   area_ha?: Prisma.SortOrder
   is_active?: Prisma.SortOrder
+  soil_analysis_document_id?: Prisma.SortOrder
 }
 
 export type FieldMinOrderByAggregateInput = {
@@ -406,6 +429,7 @@ export type FieldMinOrderByAggregateInput = {
   name?: Prisma.SortOrder
   area_ha?: Prisma.SortOrder
   is_active?: Prisma.SortOrder
+  soil_analysis_document_id?: Prisma.SortOrder
 }
 
 export type FieldSumOrderByAggregateInput = {
@@ -467,6 +491,48 @@ export type DecimalFieldUpdateOperationsInput = {
   divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
+export type FieldCreateNestedManyWithoutSoil_analysis_documentInput = {
+  create?: Prisma.XOR<Prisma.FieldCreateWithoutSoil_analysis_documentInput, Prisma.FieldUncheckedCreateWithoutSoil_analysis_documentInput> | Prisma.FieldCreateWithoutSoil_analysis_documentInput[] | Prisma.FieldUncheckedCreateWithoutSoil_analysis_documentInput[]
+  connectOrCreate?: Prisma.FieldCreateOrConnectWithoutSoil_analysis_documentInput | Prisma.FieldCreateOrConnectWithoutSoil_analysis_documentInput[]
+  createMany?: Prisma.FieldCreateManySoil_analysis_documentInputEnvelope
+  connect?: Prisma.FieldWhereUniqueInput | Prisma.FieldWhereUniqueInput[]
+}
+
+export type FieldUncheckedCreateNestedManyWithoutSoil_analysis_documentInput = {
+  create?: Prisma.XOR<Prisma.FieldCreateWithoutSoil_analysis_documentInput, Prisma.FieldUncheckedCreateWithoutSoil_analysis_documentInput> | Prisma.FieldCreateWithoutSoil_analysis_documentInput[] | Prisma.FieldUncheckedCreateWithoutSoil_analysis_documentInput[]
+  connectOrCreate?: Prisma.FieldCreateOrConnectWithoutSoil_analysis_documentInput | Prisma.FieldCreateOrConnectWithoutSoil_analysis_documentInput[]
+  createMany?: Prisma.FieldCreateManySoil_analysis_documentInputEnvelope
+  connect?: Prisma.FieldWhereUniqueInput | Prisma.FieldWhereUniqueInput[]
+}
+
+export type FieldUpdateManyWithoutSoil_analysis_documentNestedInput = {
+  create?: Prisma.XOR<Prisma.FieldCreateWithoutSoil_analysis_documentInput, Prisma.FieldUncheckedCreateWithoutSoil_analysis_documentInput> | Prisma.FieldCreateWithoutSoil_analysis_documentInput[] | Prisma.FieldUncheckedCreateWithoutSoil_analysis_documentInput[]
+  connectOrCreate?: Prisma.FieldCreateOrConnectWithoutSoil_analysis_documentInput | Prisma.FieldCreateOrConnectWithoutSoil_analysis_documentInput[]
+  upsert?: Prisma.FieldUpsertWithWhereUniqueWithoutSoil_analysis_documentInput | Prisma.FieldUpsertWithWhereUniqueWithoutSoil_analysis_documentInput[]
+  createMany?: Prisma.FieldCreateManySoil_analysis_documentInputEnvelope
+  set?: Prisma.FieldWhereUniqueInput | Prisma.FieldWhereUniqueInput[]
+  disconnect?: Prisma.FieldWhereUniqueInput | Prisma.FieldWhereUniqueInput[]
+  delete?: Prisma.FieldWhereUniqueInput | Prisma.FieldWhereUniqueInput[]
+  connect?: Prisma.FieldWhereUniqueInput | Prisma.FieldWhereUniqueInput[]
+  update?: Prisma.FieldUpdateWithWhereUniqueWithoutSoil_analysis_documentInput | Prisma.FieldUpdateWithWhereUniqueWithoutSoil_analysis_documentInput[]
+  updateMany?: Prisma.FieldUpdateManyWithWhereWithoutSoil_analysis_documentInput | Prisma.FieldUpdateManyWithWhereWithoutSoil_analysis_documentInput[]
+  deleteMany?: Prisma.FieldScalarWhereInput | Prisma.FieldScalarWhereInput[]
+}
+
+export type FieldUncheckedUpdateManyWithoutSoil_analysis_documentNestedInput = {
+  create?: Prisma.XOR<Prisma.FieldCreateWithoutSoil_analysis_documentInput, Prisma.FieldUncheckedCreateWithoutSoil_analysis_documentInput> | Prisma.FieldCreateWithoutSoil_analysis_documentInput[] | Prisma.FieldUncheckedCreateWithoutSoil_analysis_documentInput[]
+  connectOrCreate?: Prisma.FieldCreateOrConnectWithoutSoil_analysis_documentInput | Prisma.FieldCreateOrConnectWithoutSoil_analysis_documentInput[]
+  upsert?: Prisma.FieldUpsertWithWhereUniqueWithoutSoil_analysis_documentInput | Prisma.FieldUpsertWithWhereUniqueWithoutSoil_analysis_documentInput[]
+  createMany?: Prisma.FieldCreateManySoil_analysis_documentInputEnvelope
+  set?: Prisma.FieldWhereUniqueInput | Prisma.FieldWhereUniqueInput[]
+  disconnect?: Prisma.FieldWhereUniqueInput | Prisma.FieldWhereUniqueInput[]
+  delete?: Prisma.FieldWhereUniqueInput | Prisma.FieldWhereUniqueInput[]
+  connect?: Prisma.FieldWhereUniqueInput | Prisma.FieldWhereUniqueInput[]
+  update?: Prisma.FieldUpdateWithWhereUniqueWithoutSoil_analysis_documentInput | Prisma.FieldUpdateWithWhereUniqueWithoutSoil_analysis_documentInput[]
+  updateMany?: Prisma.FieldUpdateManyWithWhereWithoutSoil_analysis_documentInput | Prisma.FieldUpdateManyWithWhereWithoutSoil_analysis_documentInput[]
+  deleteMany?: Prisma.FieldScalarWhereInput | Prisma.FieldScalarWhereInput[]
+}
+
 export type FieldCreateNestedOneWithoutField_eventsInput = {
   create?: Prisma.XOR<Prisma.FieldCreateWithoutField_eventsInput, Prisma.FieldUncheckedCreateWithoutField_eventsInput>
   connectOrCreate?: Prisma.FieldCreateOrConnectWithoutField_eventsInput
@@ -488,6 +554,7 @@ export type FieldCreateWithoutFarmInput = {
   area_ha: runtime.Decimal | runtime.DecimalJsLike | number | string
   geo_boundary?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   is_active?: boolean
+  soil_analysis_document?: Prisma.DocumentCreateNestedOneWithoutSoil_analysis_fieldsInput
   field_events?: Prisma.FieldEventCreateNestedManyWithoutFieldInput
 }
 
@@ -498,6 +565,7 @@ export type FieldUncheckedCreateWithoutFarmInput = {
   area_ha: runtime.Decimal | runtime.DecimalJsLike | number | string
   geo_boundary?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   is_active?: boolean
+  soil_analysis_document_id?: string | null
   field_events?: Prisma.FieldEventUncheckedCreateNestedManyWithoutFieldInput
 }
 
@@ -538,6 +606,55 @@ export type FieldScalarWhereInput = {
   area_ha?: Prisma.DecimalFilter<"Field"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   geo_boundary?: Prisma.JsonNullableFilter<"Field">
   is_active?: Prisma.BoolFilter<"Field"> | boolean
+  soil_analysis_document_id?: Prisma.StringNullableFilter<"Field"> | string | null
+}
+
+export type FieldCreateWithoutSoil_analysis_documentInput = {
+  id?: string
+  code: string
+  name: string
+  area_ha: runtime.Decimal | runtime.DecimalJsLike | number | string
+  geo_boundary?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  is_active?: boolean
+  farm: Prisma.FarmCreateNestedOneWithoutFieldsInput
+  field_events?: Prisma.FieldEventCreateNestedManyWithoutFieldInput
+}
+
+export type FieldUncheckedCreateWithoutSoil_analysis_documentInput = {
+  id?: string
+  farm_id: string
+  code: string
+  name: string
+  area_ha: runtime.Decimal | runtime.DecimalJsLike | number | string
+  geo_boundary?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  is_active?: boolean
+  field_events?: Prisma.FieldEventUncheckedCreateNestedManyWithoutFieldInput
+}
+
+export type FieldCreateOrConnectWithoutSoil_analysis_documentInput = {
+  where: Prisma.FieldWhereUniqueInput
+  create: Prisma.XOR<Prisma.FieldCreateWithoutSoil_analysis_documentInput, Prisma.FieldUncheckedCreateWithoutSoil_analysis_documentInput>
+}
+
+export type FieldCreateManySoil_analysis_documentInputEnvelope = {
+  data: Prisma.FieldCreateManySoil_analysis_documentInput | Prisma.FieldCreateManySoil_analysis_documentInput[]
+  skipDuplicates?: boolean
+}
+
+export type FieldUpsertWithWhereUniqueWithoutSoil_analysis_documentInput = {
+  where: Prisma.FieldWhereUniqueInput
+  update: Prisma.XOR<Prisma.FieldUpdateWithoutSoil_analysis_documentInput, Prisma.FieldUncheckedUpdateWithoutSoil_analysis_documentInput>
+  create: Prisma.XOR<Prisma.FieldCreateWithoutSoil_analysis_documentInput, Prisma.FieldUncheckedCreateWithoutSoil_analysis_documentInput>
+}
+
+export type FieldUpdateWithWhereUniqueWithoutSoil_analysis_documentInput = {
+  where: Prisma.FieldWhereUniqueInput
+  data: Prisma.XOR<Prisma.FieldUpdateWithoutSoil_analysis_documentInput, Prisma.FieldUncheckedUpdateWithoutSoil_analysis_documentInput>
+}
+
+export type FieldUpdateManyWithWhereWithoutSoil_analysis_documentInput = {
+  where: Prisma.FieldScalarWhereInput
+  data: Prisma.XOR<Prisma.FieldUpdateManyMutationInput, Prisma.FieldUncheckedUpdateManyWithoutSoil_analysis_documentInput>
 }
 
 export type FieldCreateWithoutField_eventsInput = {
@@ -548,6 +665,7 @@ export type FieldCreateWithoutField_eventsInput = {
   geo_boundary?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   is_active?: boolean
   farm: Prisma.FarmCreateNestedOneWithoutFieldsInput
+  soil_analysis_document?: Prisma.DocumentCreateNestedOneWithoutSoil_analysis_fieldsInput
 }
 
 export type FieldUncheckedCreateWithoutField_eventsInput = {
@@ -558,6 +676,7 @@ export type FieldUncheckedCreateWithoutField_eventsInput = {
   area_ha: runtime.Decimal | runtime.DecimalJsLike | number | string
   geo_boundary?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   is_active?: boolean
+  soil_analysis_document_id?: string | null
 }
 
 export type FieldCreateOrConnectWithoutField_eventsInput = {
@@ -584,6 +703,7 @@ export type FieldUpdateWithoutField_eventsInput = {
   geo_boundary?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   farm?: Prisma.FarmUpdateOneRequiredWithoutFieldsNestedInput
+  soil_analysis_document?: Prisma.DocumentUpdateOneWithoutSoil_analysis_fieldsNestedInput
 }
 
 export type FieldUncheckedUpdateWithoutField_eventsInput = {
@@ -594,6 +714,7 @@ export type FieldUncheckedUpdateWithoutField_eventsInput = {
   area_ha?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   geo_boundary?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  soil_analysis_document_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type FieldCreateManyFarmInput = {
@@ -603,6 +724,7 @@ export type FieldCreateManyFarmInput = {
   area_ha: runtime.Decimal | runtime.DecimalJsLike | number | string
   geo_boundary?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   is_active?: boolean
+  soil_analysis_document_id?: string | null
 }
 
 export type FieldUpdateWithoutFarmInput = {
@@ -612,6 +734,7 @@ export type FieldUpdateWithoutFarmInput = {
   area_ha?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   geo_boundary?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  soil_analysis_document?: Prisma.DocumentUpdateOneWithoutSoil_analysis_fieldsNestedInput
   field_events?: Prisma.FieldEventUpdateManyWithoutFieldNestedInput
 }
 
@@ -622,11 +745,55 @@ export type FieldUncheckedUpdateWithoutFarmInput = {
   area_ha?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   geo_boundary?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  soil_analysis_document_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   field_events?: Prisma.FieldEventUncheckedUpdateManyWithoutFieldNestedInput
 }
 
 export type FieldUncheckedUpdateManyWithoutFarmInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  area_ha?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  geo_boundary?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  soil_analysis_document_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+}
+
+export type FieldCreateManySoil_analysis_documentInput = {
+  id?: string
+  farm_id: string
+  code: string
+  name: string
+  area_ha: runtime.Decimal | runtime.DecimalJsLike | number | string
+  geo_boundary?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  is_active?: boolean
+}
+
+export type FieldUpdateWithoutSoil_analysis_documentInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  area_ha?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  geo_boundary?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  farm?: Prisma.FarmUpdateOneRequiredWithoutFieldsNestedInput
+  field_events?: Prisma.FieldEventUpdateManyWithoutFieldNestedInput
+}
+
+export type FieldUncheckedUpdateWithoutSoil_analysis_documentInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  farm_id?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  area_ha?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  geo_boundary?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  field_events?: Prisma.FieldEventUncheckedUpdateManyWithoutFieldNestedInput
+}
+
+export type FieldUncheckedUpdateManyWithoutSoil_analysis_documentInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  farm_id?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   area_ha?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -673,7 +840,9 @@ export type FieldSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   area_ha?: boolean
   geo_boundary?: boolean
   is_active?: boolean
+  soil_analysis_document_id?: boolean
   farm?: boolean | Prisma.FarmDefaultArgs<ExtArgs>
+  soil_analysis_document?: boolean | Prisma.Field$soil_analysis_documentArgs<ExtArgs>
   field_events?: boolean | Prisma.Field$field_eventsArgs<ExtArgs>
   _count?: boolean | Prisma.FieldCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["field"]>
@@ -686,7 +855,9 @@ export type FieldSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   area_ha?: boolean
   geo_boundary?: boolean
   is_active?: boolean
+  soil_analysis_document_id?: boolean
   farm?: boolean | Prisma.FarmDefaultArgs<ExtArgs>
+  soil_analysis_document?: boolean | Prisma.Field$soil_analysis_documentArgs<ExtArgs>
 }, ExtArgs["result"]["field"]>
 
 export type FieldSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -697,7 +868,9 @@ export type FieldSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   area_ha?: boolean
   geo_boundary?: boolean
   is_active?: boolean
+  soil_analysis_document_id?: boolean
   farm?: boolean | Prisma.FarmDefaultArgs<ExtArgs>
+  soil_analysis_document?: boolean | Prisma.Field$soil_analysis_documentArgs<ExtArgs>
 }, ExtArgs["result"]["field"]>
 
 export type FieldSelectScalar = {
@@ -708,25 +881,30 @@ export type FieldSelectScalar = {
   area_ha?: boolean
   geo_boundary?: boolean
   is_active?: boolean
+  soil_analysis_document_id?: boolean
 }
 
-export type FieldOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "farm_id" | "code" | "name" | "area_ha" | "geo_boundary" | "is_active", ExtArgs["result"]["field"]>
+export type FieldOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "farm_id" | "code" | "name" | "area_ha" | "geo_boundary" | "is_active" | "soil_analysis_document_id", ExtArgs["result"]["field"]>
 export type FieldInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   farm?: boolean | Prisma.FarmDefaultArgs<ExtArgs>
+  soil_analysis_document?: boolean | Prisma.Field$soil_analysis_documentArgs<ExtArgs>
   field_events?: boolean | Prisma.Field$field_eventsArgs<ExtArgs>
   _count?: boolean | Prisma.FieldCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type FieldIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   farm?: boolean | Prisma.FarmDefaultArgs<ExtArgs>
+  soil_analysis_document?: boolean | Prisma.Field$soil_analysis_documentArgs<ExtArgs>
 }
 export type FieldIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   farm?: boolean | Prisma.FarmDefaultArgs<ExtArgs>
+  soil_analysis_document?: boolean | Prisma.Field$soil_analysis_documentArgs<ExtArgs>
 }
 
 export type $FieldPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Field"
   objects: {
     farm: Prisma.$FarmPayload<ExtArgs>
+    soil_analysis_document: Prisma.$DocumentPayload<ExtArgs> | null
     field_events: Prisma.$FieldEventPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -737,6 +915,7 @@ export type $FieldPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     area_ha: runtime.Decimal
     geo_boundary: runtime.JsonValue | null
     is_active: boolean
+    soil_analysis_document_id: string | null
   }, ExtArgs["result"]["field"]>
   composites: {}
 }
@@ -1132,6 +1311,7 @@ readonly fields: FieldFieldRefs;
 export interface Prisma__FieldClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   farm<T extends Prisma.FarmDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FarmDefaultArgs<ExtArgs>>): Prisma.Prisma__FarmClient<runtime.Types.Result.GetResult<Prisma.$FarmPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  soil_analysis_document<T extends Prisma.Field$soil_analysis_documentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Field$soil_analysis_documentArgs<ExtArgs>>): Prisma.Prisma__DocumentClient<runtime.Types.Result.GetResult<Prisma.$DocumentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   field_events<T extends Prisma.Field$field_eventsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Field$field_eventsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FieldEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1169,6 +1349,7 @@ export interface FieldFieldRefs {
   readonly area_ha: Prisma.FieldRef<"Field", 'Decimal'>
   readonly geo_boundary: Prisma.FieldRef<"Field", 'Json'>
   readonly is_active: Prisma.FieldRef<"Field", 'Boolean'>
+  readonly soil_analysis_document_id: Prisma.FieldRef<"Field", 'String'>
 }
     
 
@@ -1562,6 +1743,25 @@ export type FieldDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
    * Limit how many Fields to delete.
    */
   limit?: number
+}
+
+/**
+ * Field.soil_analysis_document
+ */
+export type Field$soil_analysis_documentArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Document
+   */
+  select?: Prisma.DocumentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Document
+   */
+  omit?: Prisma.DocumentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DocumentInclude<ExtArgs> | null
+  where?: Prisma.DocumentWhereInput
 }
 
 /**

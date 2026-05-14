@@ -82,7 +82,8 @@ export const FarmScalarFieldEnum = {
   id: 'id',
   name: 'name',
   location: 'location',
-  is_active: 'is_active'
+  is_active: 'is_active',
+  farm_map_document_id: 'farm_map_document_id'
 } as const
 
 export type FarmScalarFieldEnum = (typeof FarmScalarFieldEnum)[keyof typeof FarmScalarFieldEnum]
@@ -95,7 +96,8 @@ export const FieldScalarFieldEnum = {
   name: 'name',
   area_ha: 'area_ha',
   geo_boundary: 'geo_boundary',
-  is_active: 'is_active'
+  is_active: 'is_active',
+  soil_analysis_document_id: 'soil_analysis_document_id'
 } as const
 
 export type FieldScalarFieldEnum = (typeof FieldScalarFieldEnum)[keyof typeof FieldScalarFieldEnum]
@@ -119,6 +121,12 @@ export const DocumentScalarFieldEnum = {
   file_name: 'file_name',
   mime_type: 'mime_type',
   storage_path: 'storage_path',
+  storage_provider: 'storage_provider',
+  storage_key: 'storage_key',
+  public_url: 'public_url',
+  secure_url: 'secure_url',
+  resource_type: 'resource_type',
+  file_size_bytes: 'file_size_bytes',
   uploaded_at: 'uploaded_at'
 } as const
 
@@ -134,7 +142,13 @@ export const FieldEventScalarFieldEnum = {
   end_at: 'end_at',
   responsible_user_id: 'responsible_user_id',
   notes: 'notes',
-  source_document_id: 'source_document_id'
+  source_document_id: 'source_document_id',
+  execution_method: 'execution_method',
+  crop: 'crop',
+  variety: 'variety',
+  seed_quantity: 'seed_quantity',
+  seed_quantity_unit: 'seed_quantity_unit',
+  rainfall_mm: 'rainfall_mm'
 } as const
 
 export type FieldEventScalarFieldEnum = (typeof FieldEventScalarFieldEnum)[keyof typeof FieldEventScalarFieldEnum]

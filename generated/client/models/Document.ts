@@ -20,8 +20,18 @@ export type DocumentModel = runtime.Types.Result.DefaultSelection<Prisma.$Docume
 
 export type AggregateDocument = {
   _count: DocumentCountAggregateOutputType | null
+  _avg: DocumentAvgAggregateOutputType | null
+  _sum: DocumentSumAggregateOutputType | null
   _min: DocumentMinAggregateOutputType | null
   _max: DocumentMaxAggregateOutputType | null
+}
+
+export type DocumentAvgAggregateOutputType = {
+  file_size_bytes: number | null
+}
+
+export type DocumentSumAggregateOutputType = {
+  file_size_bytes: number | null
 }
 
 export type DocumentMinAggregateOutputType = {
@@ -29,6 +39,12 @@ export type DocumentMinAggregateOutputType = {
   file_name: string | null
   mime_type: string | null
   storage_path: string | null
+  storage_provider: string | null
+  storage_key: string | null
+  public_url: string | null
+  secure_url: string | null
+  resource_type: string | null
+  file_size_bytes: number | null
   uploaded_at: Date | null
 }
 
@@ -37,6 +53,12 @@ export type DocumentMaxAggregateOutputType = {
   file_name: string | null
   mime_type: string | null
   storage_path: string | null
+  storage_provider: string | null
+  storage_key: string | null
+  public_url: string | null
+  secure_url: string | null
+  resource_type: string | null
+  file_size_bytes: number | null
   uploaded_at: Date | null
 }
 
@@ -45,16 +67,36 @@ export type DocumentCountAggregateOutputType = {
   file_name: number
   mime_type: number
   storage_path: number
+  storage_provider: number
+  storage_key: number
+  public_url: number
+  secure_url: number
+  resource_type: number
+  file_size_bytes: number
   uploaded_at: number
   _all: number
 }
 
+
+export type DocumentAvgAggregateInputType = {
+  file_size_bytes?: true
+}
+
+export type DocumentSumAggregateInputType = {
+  file_size_bytes?: true
+}
 
 export type DocumentMinAggregateInputType = {
   id?: true
   file_name?: true
   mime_type?: true
   storage_path?: true
+  storage_provider?: true
+  storage_key?: true
+  public_url?: true
+  secure_url?: true
+  resource_type?: true
+  file_size_bytes?: true
   uploaded_at?: true
 }
 
@@ -63,6 +105,12 @@ export type DocumentMaxAggregateInputType = {
   file_name?: true
   mime_type?: true
   storage_path?: true
+  storage_provider?: true
+  storage_key?: true
+  public_url?: true
+  secure_url?: true
+  resource_type?: true
+  file_size_bytes?: true
   uploaded_at?: true
 }
 
@@ -71,6 +119,12 @@ export type DocumentCountAggregateInputType = {
   file_name?: true
   mime_type?: true
   storage_path?: true
+  storage_provider?: true
+  storage_key?: true
+  public_url?: true
+  secure_url?: true
+  resource_type?: true
+  file_size_bytes?: true
   uploaded_at?: true
   _all?: true
 }
@@ -113,6 +167,18 @@ export type DocumentAggregateArgs<ExtArgs extends runtime.Types.Extensions.Inter
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: DocumentAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: DocumentSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: DocumentMinAggregateInputType
@@ -143,6 +209,8 @@ export type DocumentGroupByArgs<ExtArgs extends runtime.Types.Extensions.Interna
   take?: number
   skip?: number
   _count?: DocumentCountAggregateInputType | true
+  _avg?: DocumentAvgAggregateInputType
+  _sum?: DocumentSumAggregateInputType
   _min?: DocumentMinAggregateInputType
   _max?: DocumentMaxAggregateInputType
 }
@@ -152,8 +220,16 @@ export type DocumentGroupByOutputType = {
   file_name: string
   mime_type: string
   storage_path: string
+  storage_provider: string
+  storage_key: string | null
+  public_url: string | null
+  secure_url: string | null
+  resource_type: string | null
+  file_size_bytes: number | null
   uploaded_at: Date
   _count: DocumentCountAggregateOutputType | null
+  _avg: DocumentAvgAggregateOutputType | null
+  _sum: DocumentSumAggregateOutputType | null
   _min: DocumentMinAggregateOutputType | null
   _max: DocumentMaxAggregateOutputType | null
 }
@@ -181,8 +257,16 @@ export type DocumentWhereInput = {
   file_name?: Prisma.StringFilter<"Document"> | string
   mime_type?: Prisma.StringFilter<"Document"> | string
   storage_path?: Prisma.StringFilter<"Document"> | string
+  storage_provider?: Prisma.StringFilter<"Document"> | string
+  storage_key?: Prisma.StringNullableFilter<"Document"> | string | null
+  public_url?: Prisma.StringNullableFilter<"Document"> | string | null
+  secure_url?: Prisma.StringNullableFilter<"Document"> | string | null
+  resource_type?: Prisma.StringNullableFilter<"Document"> | string | null
+  file_size_bytes?: Prisma.IntNullableFilter<"Document"> | number | null
   uploaded_at?: Prisma.DateTimeFilter<"Document"> | Date | string
   field_events?: Prisma.FieldEventListRelationFilter
+  soil_analysis_fields?: Prisma.FieldListRelationFilter
+  farm_maps?: Prisma.FarmListRelationFilter
 }
 
 export type DocumentOrderByWithRelationInput = {
@@ -190,8 +274,16 @@ export type DocumentOrderByWithRelationInput = {
   file_name?: Prisma.SortOrder
   mime_type?: Prisma.SortOrder
   storage_path?: Prisma.SortOrder
+  storage_provider?: Prisma.SortOrder
+  storage_key?: Prisma.SortOrderInput | Prisma.SortOrder
+  public_url?: Prisma.SortOrderInput | Prisma.SortOrder
+  secure_url?: Prisma.SortOrderInput | Prisma.SortOrder
+  resource_type?: Prisma.SortOrderInput | Prisma.SortOrder
+  file_size_bytes?: Prisma.SortOrderInput | Prisma.SortOrder
   uploaded_at?: Prisma.SortOrder
   field_events?: Prisma.FieldEventOrderByRelationAggregateInput
+  soil_analysis_fields?: Prisma.FieldOrderByRelationAggregateInput
+  farm_maps?: Prisma.FarmOrderByRelationAggregateInput
 }
 
 export type DocumentWhereUniqueInput = Prisma.AtLeast<{
@@ -202,8 +294,16 @@ export type DocumentWhereUniqueInput = Prisma.AtLeast<{
   file_name?: Prisma.StringFilter<"Document"> | string
   mime_type?: Prisma.StringFilter<"Document"> | string
   storage_path?: Prisma.StringFilter<"Document"> | string
+  storage_provider?: Prisma.StringFilter<"Document"> | string
+  storage_key?: Prisma.StringNullableFilter<"Document"> | string | null
+  public_url?: Prisma.StringNullableFilter<"Document"> | string | null
+  secure_url?: Prisma.StringNullableFilter<"Document"> | string | null
+  resource_type?: Prisma.StringNullableFilter<"Document"> | string | null
+  file_size_bytes?: Prisma.IntNullableFilter<"Document"> | number | null
   uploaded_at?: Prisma.DateTimeFilter<"Document"> | Date | string
   field_events?: Prisma.FieldEventListRelationFilter
+  soil_analysis_fields?: Prisma.FieldListRelationFilter
+  farm_maps?: Prisma.FarmListRelationFilter
 }, "id">
 
 export type DocumentOrderByWithAggregationInput = {
@@ -211,10 +311,18 @@ export type DocumentOrderByWithAggregationInput = {
   file_name?: Prisma.SortOrder
   mime_type?: Prisma.SortOrder
   storage_path?: Prisma.SortOrder
+  storage_provider?: Prisma.SortOrder
+  storage_key?: Prisma.SortOrderInput | Prisma.SortOrder
+  public_url?: Prisma.SortOrderInput | Prisma.SortOrder
+  secure_url?: Prisma.SortOrderInput | Prisma.SortOrder
+  resource_type?: Prisma.SortOrderInput | Prisma.SortOrder
+  file_size_bytes?: Prisma.SortOrderInput | Prisma.SortOrder
   uploaded_at?: Prisma.SortOrder
   _count?: Prisma.DocumentCountOrderByAggregateInput
+  _avg?: Prisma.DocumentAvgOrderByAggregateInput
   _max?: Prisma.DocumentMaxOrderByAggregateInput
   _min?: Prisma.DocumentMinOrderByAggregateInput
+  _sum?: Prisma.DocumentSumOrderByAggregateInput
 }
 
 export type DocumentScalarWhereWithAggregatesInput = {
@@ -225,6 +333,12 @@ export type DocumentScalarWhereWithAggregatesInput = {
   file_name?: Prisma.StringWithAggregatesFilter<"Document"> | string
   mime_type?: Prisma.StringWithAggregatesFilter<"Document"> | string
   storage_path?: Prisma.StringWithAggregatesFilter<"Document"> | string
+  storage_provider?: Prisma.StringWithAggregatesFilter<"Document"> | string
+  storage_key?: Prisma.StringNullableWithAggregatesFilter<"Document"> | string | null
+  public_url?: Prisma.StringNullableWithAggregatesFilter<"Document"> | string | null
+  secure_url?: Prisma.StringNullableWithAggregatesFilter<"Document"> | string | null
+  resource_type?: Prisma.StringNullableWithAggregatesFilter<"Document"> | string | null
+  file_size_bytes?: Prisma.IntNullableWithAggregatesFilter<"Document"> | number | null
   uploaded_at?: Prisma.DateTimeWithAggregatesFilter<"Document"> | Date | string
 }
 
@@ -233,8 +347,16 @@ export type DocumentCreateInput = {
   file_name: string
   mime_type: string
   storage_path: string
+  storage_provider?: string
+  storage_key?: string | null
+  public_url?: string | null
+  secure_url?: string | null
+  resource_type?: string | null
+  file_size_bytes?: number | null
   uploaded_at?: Date | string
   field_events?: Prisma.FieldEventCreateNestedManyWithoutSource_documentInput
+  soil_analysis_fields?: Prisma.FieldCreateNestedManyWithoutSoil_analysis_documentInput
+  farm_maps?: Prisma.FarmCreateNestedManyWithoutFarm_map_documentInput
 }
 
 export type DocumentUncheckedCreateInput = {
@@ -242,8 +364,16 @@ export type DocumentUncheckedCreateInput = {
   file_name: string
   mime_type: string
   storage_path: string
+  storage_provider?: string
+  storage_key?: string | null
+  public_url?: string | null
+  secure_url?: string | null
+  resource_type?: string | null
+  file_size_bytes?: number | null
   uploaded_at?: Date | string
   field_events?: Prisma.FieldEventUncheckedCreateNestedManyWithoutSource_documentInput
+  soil_analysis_fields?: Prisma.FieldUncheckedCreateNestedManyWithoutSoil_analysis_documentInput
+  farm_maps?: Prisma.FarmUncheckedCreateNestedManyWithoutFarm_map_documentInput
 }
 
 export type DocumentUpdateInput = {
@@ -251,8 +381,16 @@ export type DocumentUpdateInput = {
   file_name?: Prisma.StringFieldUpdateOperationsInput | string
   mime_type?: Prisma.StringFieldUpdateOperationsInput | string
   storage_path?: Prisma.StringFieldUpdateOperationsInput | string
+  storage_provider?: Prisma.StringFieldUpdateOperationsInput | string
+  storage_key?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  public_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secure_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resource_type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  file_size_bytes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   uploaded_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   field_events?: Prisma.FieldEventUpdateManyWithoutSource_documentNestedInput
+  soil_analysis_fields?: Prisma.FieldUpdateManyWithoutSoil_analysis_documentNestedInput
+  farm_maps?: Prisma.FarmUpdateManyWithoutFarm_map_documentNestedInput
 }
 
 export type DocumentUncheckedUpdateInput = {
@@ -260,8 +398,16 @@ export type DocumentUncheckedUpdateInput = {
   file_name?: Prisma.StringFieldUpdateOperationsInput | string
   mime_type?: Prisma.StringFieldUpdateOperationsInput | string
   storage_path?: Prisma.StringFieldUpdateOperationsInput | string
+  storage_provider?: Prisma.StringFieldUpdateOperationsInput | string
+  storage_key?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  public_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secure_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resource_type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  file_size_bytes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   uploaded_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   field_events?: Prisma.FieldEventUncheckedUpdateManyWithoutSource_documentNestedInput
+  soil_analysis_fields?: Prisma.FieldUncheckedUpdateManyWithoutSoil_analysis_documentNestedInput
+  farm_maps?: Prisma.FarmUncheckedUpdateManyWithoutFarm_map_documentNestedInput
 }
 
 export type DocumentCreateManyInput = {
@@ -269,6 +415,12 @@ export type DocumentCreateManyInput = {
   file_name: string
   mime_type: string
   storage_path: string
+  storage_provider?: string
+  storage_key?: string | null
+  public_url?: string | null
+  secure_url?: string | null
+  resource_type?: string | null
+  file_size_bytes?: number | null
   uploaded_at?: Date | string
 }
 
@@ -277,6 +429,12 @@ export type DocumentUpdateManyMutationInput = {
   file_name?: Prisma.StringFieldUpdateOperationsInput | string
   mime_type?: Prisma.StringFieldUpdateOperationsInput | string
   storage_path?: Prisma.StringFieldUpdateOperationsInput | string
+  storage_provider?: Prisma.StringFieldUpdateOperationsInput | string
+  storage_key?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  public_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secure_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resource_type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  file_size_bytes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   uploaded_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -285,7 +443,18 @@ export type DocumentUncheckedUpdateManyInput = {
   file_name?: Prisma.StringFieldUpdateOperationsInput | string
   mime_type?: Prisma.StringFieldUpdateOperationsInput | string
   storage_path?: Prisma.StringFieldUpdateOperationsInput | string
+  storage_provider?: Prisma.StringFieldUpdateOperationsInput | string
+  storage_key?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  public_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secure_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resource_type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  file_size_bytes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   uploaded_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type DocumentNullableScalarRelationFilter = {
+  is?: Prisma.DocumentWhereInput | null
+  isNot?: Prisma.DocumentWhereInput | null
 }
 
 export type DocumentCountOrderByAggregateInput = {
@@ -293,7 +462,17 @@ export type DocumentCountOrderByAggregateInput = {
   file_name?: Prisma.SortOrder
   mime_type?: Prisma.SortOrder
   storage_path?: Prisma.SortOrder
+  storage_provider?: Prisma.SortOrder
+  storage_key?: Prisma.SortOrder
+  public_url?: Prisma.SortOrder
+  secure_url?: Prisma.SortOrder
+  resource_type?: Prisma.SortOrder
+  file_size_bytes?: Prisma.SortOrder
   uploaded_at?: Prisma.SortOrder
+}
+
+export type DocumentAvgOrderByAggregateInput = {
+  file_size_bytes?: Prisma.SortOrder
 }
 
 export type DocumentMaxOrderByAggregateInput = {
@@ -301,6 +480,12 @@ export type DocumentMaxOrderByAggregateInput = {
   file_name?: Prisma.SortOrder
   mime_type?: Prisma.SortOrder
   storage_path?: Prisma.SortOrder
+  storage_provider?: Prisma.SortOrder
+  storage_key?: Prisma.SortOrder
+  public_url?: Prisma.SortOrder
+  secure_url?: Prisma.SortOrder
+  resource_type?: Prisma.SortOrder
+  file_size_bytes?: Prisma.SortOrder
   uploaded_at?: Prisma.SortOrder
 }
 
@@ -309,12 +494,57 @@ export type DocumentMinOrderByAggregateInput = {
   file_name?: Prisma.SortOrder
   mime_type?: Prisma.SortOrder
   storage_path?: Prisma.SortOrder
+  storage_provider?: Prisma.SortOrder
+  storage_key?: Prisma.SortOrder
+  public_url?: Prisma.SortOrder
+  secure_url?: Prisma.SortOrder
+  resource_type?: Prisma.SortOrder
+  file_size_bytes?: Prisma.SortOrder
   uploaded_at?: Prisma.SortOrder
 }
 
-export type DocumentNullableScalarRelationFilter = {
-  is?: Prisma.DocumentWhereInput | null
-  isNot?: Prisma.DocumentWhereInput | null
+export type DocumentSumOrderByAggregateInput = {
+  file_size_bytes?: Prisma.SortOrder
+}
+
+export type DocumentCreateNestedOneWithoutFarm_mapsInput = {
+  create?: Prisma.XOR<Prisma.DocumentCreateWithoutFarm_mapsInput, Prisma.DocumentUncheckedCreateWithoutFarm_mapsInput>
+  connectOrCreate?: Prisma.DocumentCreateOrConnectWithoutFarm_mapsInput
+  connect?: Prisma.DocumentWhereUniqueInput
+}
+
+export type DocumentUpdateOneWithoutFarm_mapsNestedInput = {
+  create?: Prisma.XOR<Prisma.DocumentCreateWithoutFarm_mapsInput, Prisma.DocumentUncheckedCreateWithoutFarm_mapsInput>
+  connectOrCreate?: Prisma.DocumentCreateOrConnectWithoutFarm_mapsInput
+  upsert?: Prisma.DocumentUpsertWithoutFarm_mapsInput
+  disconnect?: Prisma.DocumentWhereInput | boolean
+  delete?: Prisma.DocumentWhereInput | boolean
+  connect?: Prisma.DocumentWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.DocumentUpdateToOneWithWhereWithoutFarm_mapsInput, Prisma.DocumentUpdateWithoutFarm_mapsInput>, Prisma.DocumentUncheckedUpdateWithoutFarm_mapsInput>
+}
+
+export type DocumentCreateNestedOneWithoutSoil_analysis_fieldsInput = {
+  create?: Prisma.XOR<Prisma.DocumentCreateWithoutSoil_analysis_fieldsInput, Prisma.DocumentUncheckedCreateWithoutSoil_analysis_fieldsInput>
+  connectOrCreate?: Prisma.DocumentCreateOrConnectWithoutSoil_analysis_fieldsInput
+  connect?: Prisma.DocumentWhereUniqueInput
+}
+
+export type DocumentUpdateOneWithoutSoil_analysis_fieldsNestedInput = {
+  create?: Prisma.XOR<Prisma.DocumentCreateWithoutSoil_analysis_fieldsInput, Prisma.DocumentUncheckedCreateWithoutSoil_analysis_fieldsInput>
+  connectOrCreate?: Prisma.DocumentCreateOrConnectWithoutSoil_analysis_fieldsInput
+  upsert?: Prisma.DocumentUpsertWithoutSoil_analysis_fieldsInput
+  disconnect?: Prisma.DocumentWhereInput | boolean
+  delete?: Prisma.DocumentWhereInput | boolean
+  connect?: Prisma.DocumentWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.DocumentUpdateToOneWithWhereWithoutSoil_analysis_fieldsInput, Prisma.DocumentUpdateWithoutSoil_analysis_fieldsInput>, Prisma.DocumentUncheckedUpdateWithoutSoil_analysis_fieldsInput>
+}
+
+export type NullableIntFieldUpdateOperationsInput = {
+  set?: number | null
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
 }
 
 export type DateTimeFieldUpdateOperationsInput = {
@@ -337,12 +567,180 @@ export type DocumentUpdateOneWithoutField_eventsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.DocumentUpdateToOneWithWhereWithoutField_eventsInput, Prisma.DocumentUpdateWithoutField_eventsInput>, Prisma.DocumentUncheckedUpdateWithoutField_eventsInput>
 }
 
+export type DocumentCreateWithoutFarm_mapsInput = {
+  id?: string
+  file_name: string
+  mime_type: string
+  storage_path: string
+  storage_provider?: string
+  storage_key?: string | null
+  public_url?: string | null
+  secure_url?: string | null
+  resource_type?: string | null
+  file_size_bytes?: number | null
+  uploaded_at?: Date | string
+  field_events?: Prisma.FieldEventCreateNestedManyWithoutSource_documentInput
+  soil_analysis_fields?: Prisma.FieldCreateNestedManyWithoutSoil_analysis_documentInput
+}
+
+export type DocumentUncheckedCreateWithoutFarm_mapsInput = {
+  id?: string
+  file_name: string
+  mime_type: string
+  storage_path: string
+  storage_provider?: string
+  storage_key?: string | null
+  public_url?: string | null
+  secure_url?: string | null
+  resource_type?: string | null
+  file_size_bytes?: number | null
+  uploaded_at?: Date | string
+  field_events?: Prisma.FieldEventUncheckedCreateNestedManyWithoutSource_documentInput
+  soil_analysis_fields?: Prisma.FieldUncheckedCreateNestedManyWithoutSoil_analysis_documentInput
+}
+
+export type DocumentCreateOrConnectWithoutFarm_mapsInput = {
+  where: Prisma.DocumentWhereUniqueInput
+  create: Prisma.XOR<Prisma.DocumentCreateWithoutFarm_mapsInput, Prisma.DocumentUncheckedCreateWithoutFarm_mapsInput>
+}
+
+export type DocumentUpsertWithoutFarm_mapsInput = {
+  update: Prisma.XOR<Prisma.DocumentUpdateWithoutFarm_mapsInput, Prisma.DocumentUncheckedUpdateWithoutFarm_mapsInput>
+  create: Prisma.XOR<Prisma.DocumentCreateWithoutFarm_mapsInput, Prisma.DocumentUncheckedCreateWithoutFarm_mapsInput>
+  where?: Prisma.DocumentWhereInput
+}
+
+export type DocumentUpdateToOneWithWhereWithoutFarm_mapsInput = {
+  where?: Prisma.DocumentWhereInput
+  data: Prisma.XOR<Prisma.DocumentUpdateWithoutFarm_mapsInput, Prisma.DocumentUncheckedUpdateWithoutFarm_mapsInput>
+}
+
+export type DocumentUpdateWithoutFarm_mapsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  file_name?: Prisma.StringFieldUpdateOperationsInput | string
+  mime_type?: Prisma.StringFieldUpdateOperationsInput | string
+  storage_path?: Prisma.StringFieldUpdateOperationsInput | string
+  storage_provider?: Prisma.StringFieldUpdateOperationsInput | string
+  storage_key?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  public_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secure_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resource_type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  file_size_bytes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  uploaded_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  field_events?: Prisma.FieldEventUpdateManyWithoutSource_documentNestedInput
+  soil_analysis_fields?: Prisma.FieldUpdateManyWithoutSoil_analysis_documentNestedInput
+}
+
+export type DocumentUncheckedUpdateWithoutFarm_mapsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  file_name?: Prisma.StringFieldUpdateOperationsInput | string
+  mime_type?: Prisma.StringFieldUpdateOperationsInput | string
+  storage_path?: Prisma.StringFieldUpdateOperationsInput | string
+  storage_provider?: Prisma.StringFieldUpdateOperationsInput | string
+  storage_key?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  public_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secure_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resource_type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  file_size_bytes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  uploaded_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  field_events?: Prisma.FieldEventUncheckedUpdateManyWithoutSource_documentNestedInput
+  soil_analysis_fields?: Prisma.FieldUncheckedUpdateManyWithoutSoil_analysis_documentNestedInput
+}
+
+export type DocumentCreateWithoutSoil_analysis_fieldsInput = {
+  id?: string
+  file_name: string
+  mime_type: string
+  storage_path: string
+  storage_provider?: string
+  storage_key?: string | null
+  public_url?: string | null
+  secure_url?: string | null
+  resource_type?: string | null
+  file_size_bytes?: number | null
+  uploaded_at?: Date | string
+  field_events?: Prisma.FieldEventCreateNestedManyWithoutSource_documentInput
+  farm_maps?: Prisma.FarmCreateNestedManyWithoutFarm_map_documentInput
+}
+
+export type DocumentUncheckedCreateWithoutSoil_analysis_fieldsInput = {
+  id?: string
+  file_name: string
+  mime_type: string
+  storage_path: string
+  storage_provider?: string
+  storage_key?: string | null
+  public_url?: string | null
+  secure_url?: string | null
+  resource_type?: string | null
+  file_size_bytes?: number | null
+  uploaded_at?: Date | string
+  field_events?: Prisma.FieldEventUncheckedCreateNestedManyWithoutSource_documentInput
+  farm_maps?: Prisma.FarmUncheckedCreateNestedManyWithoutFarm_map_documentInput
+}
+
+export type DocumentCreateOrConnectWithoutSoil_analysis_fieldsInput = {
+  where: Prisma.DocumentWhereUniqueInput
+  create: Prisma.XOR<Prisma.DocumentCreateWithoutSoil_analysis_fieldsInput, Prisma.DocumentUncheckedCreateWithoutSoil_analysis_fieldsInput>
+}
+
+export type DocumentUpsertWithoutSoil_analysis_fieldsInput = {
+  update: Prisma.XOR<Prisma.DocumentUpdateWithoutSoil_analysis_fieldsInput, Prisma.DocumentUncheckedUpdateWithoutSoil_analysis_fieldsInput>
+  create: Prisma.XOR<Prisma.DocumentCreateWithoutSoil_analysis_fieldsInput, Prisma.DocumentUncheckedCreateWithoutSoil_analysis_fieldsInput>
+  where?: Prisma.DocumentWhereInput
+}
+
+export type DocumentUpdateToOneWithWhereWithoutSoil_analysis_fieldsInput = {
+  where?: Prisma.DocumentWhereInput
+  data: Prisma.XOR<Prisma.DocumentUpdateWithoutSoil_analysis_fieldsInput, Prisma.DocumentUncheckedUpdateWithoutSoil_analysis_fieldsInput>
+}
+
+export type DocumentUpdateWithoutSoil_analysis_fieldsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  file_name?: Prisma.StringFieldUpdateOperationsInput | string
+  mime_type?: Prisma.StringFieldUpdateOperationsInput | string
+  storage_path?: Prisma.StringFieldUpdateOperationsInput | string
+  storage_provider?: Prisma.StringFieldUpdateOperationsInput | string
+  storage_key?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  public_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secure_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resource_type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  file_size_bytes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  uploaded_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  field_events?: Prisma.FieldEventUpdateManyWithoutSource_documentNestedInput
+  farm_maps?: Prisma.FarmUpdateManyWithoutFarm_map_documentNestedInput
+}
+
+export type DocumentUncheckedUpdateWithoutSoil_analysis_fieldsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  file_name?: Prisma.StringFieldUpdateOperationsInput | string
+  mime_type?: Prisma.StringFieldUpdateOperationsInput | string
+  storage_path?: Prisma.StringFieldUpdateOperationsInput | string
+  storage_provider?: Prisma.StringFieldUpdateOperationsInput | string
+  storage_key?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  public_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secure_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resource_type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  file_size_bytes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  uploaded_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  field_events?: Prisma.FieldEventUncheckedUpdateManyWithoutSource_documentNestedInput
+  farm_maps?: Prisma.FarmUncheckedUpdateManyWithoutFarm_map_documentNestedInput
+}
+
 export type DocumentCreateWithoutField_eventsInput = {
   id?: string
   file_name: string
   mime_type: string
   storage_path: string
+  storage_provider?: string
+  storage_key?: string | null
+  public_url?: string | null
+  secure_url?: string | null
+  resource_type?: string | null
+  file_size_bytes?: number | null
   uploaded_at?: Date | string
+  soil_analysis_fields?: Prisma.FieldCreateNestedManyWithoutSoil_analysis_documentInput
+  farm_maps?: Prisma.FarmCreateNestedManyWithoutFarm_map_documentInput
 }
 
 export type DocumentUncheckedCreateWithoutField_eventsInput = {
@@ -350,7 +748,15 @@ export type DocumentUncheckedCreateWithoutField_eventsInput = {
   file_name: string
   mime_type: string
   storage_path: string
+  storage_provider?: string
+  storage_key?: string | null
+  public_url?: string | null
+  secure_url?: string | null
+  resource_type?: string | null
+  file_size_bytes?: number | null
   uploaded_at?: Date | string
+  soil_analysis_fields?: Prisma.FieldUncheckedCreateNestedManyWithoutSoil_analysis_documentInput
+  farm_maps?: Prisma.FarmUncheckedCreateNestedManyWithoutFarm_map_documentInput
 }
 
 export type DocumentCreateOrConnectWithoutField_eventsInput = {
@@ -374,7 +780,15 @@ export type DocumentUpdateWithoutField_eventsInput = {
   file_name?: Prisma.StringFieldUpdateOperationsInput | string
   mime_type?: Prisma.StringFieldUpdateOperationsInput | string
   storage_path?: Prisma.StringFieldUpdateOperationsInput | string
+  storage_provider?: Prisma.StringFieldUpdateOperationsInput | string
+  storage_key?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  public_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secure_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resource_type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  file_size_bytes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   uploaded_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  soil_analysis_fields?: Prisma.FieldUpdateManyWithoutSoil_analysis_documentNestedInput
+  farm_maps?: Prisma.FarmUpdateManyWithoutFarm_map_documentNestedInput
 }
 
 export type DocumentUncheckedUpdateWithoutField_eventsInput = {
@@ -382,7 +796,15 @@ export type DocumentUncheckedUpdateWithoutField_eventsInput = {
   file_name?: Prisma.StringFieldUpdateOperationsInput | string
   mime_type?: Prisma.StringFieldUpdateOperationsInput | string
   storage_path?: Prisma.StringFieldUpdateOperationsInput | string
+  storage_provider?: Prisma.StringFieldUpdateOperationsInput | string
+  storage_key?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  public_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secure_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resource_type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  file_size_bytes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   uploaded_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  soil_analysis_fields?: Prisma.FieldUncheckedUpdateManyWithoutSoil_analysis_documentNestedInput
+  farm_maps?: Prisma.FarmUncheckedUpdateManyWithoutFarm_map_documentNestedInput
 }
 
 
@@ -392,10 +814,14 @@ export type DocumentUncheckedUpdateWithoutField_eventsInput = {
 
 export type DocumentCountOutputType = {
   field_events: number
+  soil_analysis_fields: number
+  farm_maps: number
 }
 
 export type DocumentCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   field_events?: boolean | DocumentCountOutputTypeCountField_eventsArgs
+  soil_analysis_fields?: boolean | DocumentCountOutputTypeCountSoil_analysis_fieldsArgs
+  farm_maps?: boolean | DocumentCountOutputTypeCountFarm_mapsArgs
 }
 
 /**
@@ -415,14 +841,36 @@ export type DocumentCountOutputTypeCountField_eventsArgs<ExtArgs extends runtime
   where?: Prisma.FieldEventWhereInput
 }
 
+/**
+ * DocumentCountOutputType without action
+ */
+export type DocumentCountOutputTypeCountSoil_analysis_fieldsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FieldWhereInput
+}
+
+/**
+ * DocumentCountOutputType without action
+ */
+export type DocumentCountOutputTypeCountFarm_mapsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FarmWhereInput
+}
+
 
 export type DocumentSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   file_name?: boolean
   mime_type?: boolean
   storage_path?: boolean
+  storage_provider?: boolean
+  storage_key?: boolean
+  public_url?: boolean
+  secure_url?: boolean
+  resource_type?: boolean
+  file_size_bytes?: boolean
   uploaded_at?: boolean
   field_events?: boolean | Prisma.Document$field_eventsArgs<ExtArgs>
+  soil_analysis_fields?: boolean | Prisma.Document$soil_analysis_fieldsArgs<ExtArgs>
+  farm_maps?: boolean | Prisma.Document$farm_mapsArgs<ExtArgs>
   _count?: boolean | Prisma.DocumentCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["document"]>
 
@@ -431,6 +879,12 @@ export type DocumentSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   file_name?: boolean
   mime_type?: boolean
   storage_path?: boolean
+  storage_provider?: boolean
+  storage_key?: boolean
+  public_url?: boolean
+  secure_url?: boolean
+  resource_type?: boolean
+  file_size_bytes?: boolean
   uploaded_at?: boolean
 }, ExtArgs["result"]["document"]>
 
@@ -439,6 +893,12 @@ export type DocumentSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   file_name?: boolean
   mime_type?: boolean
   storage_path?: boolean
+  storage_provider?: boolean
+  storage_key?: boolean
+  public_url?: boolean
+  secure_url?: boolean
+  resource_type?: boolean
+  file_size_bytes?: boolean
   uploaded_at?: boolean
 }, ExtArgs["result"]["document"]>
 
@@ -447,12 +907,20 @@ export type DocumentSelectScalar = {
   file_name?: boolean
   mime_type?: boolean
   storage_path?: boolean
+  storage_provider?: boolean
+  storage_key?: boolean
+  public_url?: boolean
+  secure_url?: boolean
+  resource_type?: boolean
+  file_size_bytes?: boolean
   uploaded_at?: boolean
 }
 
-export type DocumentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "file_name" | "mime_type" | "storage_path" | "uploaded_at", ExtArgs["result"]["document"]>
+export type DocumentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "file_name" | "mime_type" | "storage_path" | "storage_provider" | "storage_key" | "public_url" | "secure_url" | "resource_type" | "file_size_bytes" | "uploaded_at", ExtArgs["result"]["document"]>
 export type DocumentInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   field_events?: boolean | Prisma.Document$field_eventsArgs<ExtArgs>
+  soil_analysis_fields?: boolean | Prisma.Document$soil_analysis_fieldsArgs<ExtArgs>
+  farm_maps?: boolean | Prisma.Document$farm_mapsArgs<ExtArgs>
   _count?: boolean | Prisma.DocumentCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type DocumentIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -462,12 +930,20 @@ export type $DocumentPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
   name: "Document"
   objects: {
     field_events: Prisma.$FieldEventPayload<ExtArgs>[]
+    soil_analysis_fields: Prisma.$FieldPayload<ExtArgs>[]
+    farm_maps: Prisma.$FarmPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     file_name: string
     mime_type: string
     storage_path: string
+    storage_provider: string
+    storage_key: string | null
+    public_url: string | null
+    secure_url: string | null
+    resource_type: string | null
+    file_size_bytes: number | null
     uploaded_at: Date
   }, ExtArgs["result"]["document"]>
   composites: {}
@@ -864,6 +1340,8 @@ readonly fields: DocumentFieldRefs;
 export interface Prisma__DocumentClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   field_events<T extends Prisma.Document$field_eventsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Document$field_eventsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FieldEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  soil_analysis_fields<T extends Prisma.Document$soil_analysis_fieldsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Document$soil_analysis_fieldsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FieldPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  farm_maps<T extends Prisma.Document$farm_mapsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Document$farm_mapsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FarmPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -897,6 +1375,12 @@ export interface DocumentFieldRefs {
   readonly file_name: Prisma.FieldRef<"Document", 'String'>
   readonly mime_type: Prisma.FieldRef<"Document", 'String'>
   readonly storage_path: Prisma.FieldRef<"Document", 'String'>
+  readonly storage_provider: Prisma.FieldRef<"Document", 'String'>
+  readonly storage_key: Prisma.FieldRef<"Document", 'String'>
+  readonly public_url: Prisma.FieldRef<"Document", 'String'>
+  readonly secure_url: Prisma.FieldRef<"Document", 'String'>
+  readonly resource_type: Prisma.FieldRef<"Document", 'String'>
+  readonly file_size_bytes: Prisma.FieldRef<"Document", 'Int'>
   readonly uploaded_at: Prisma.FieldRef<"Document", 'DateTime'>
 }
     
@@ -1307,6 +1791,54 @@ export type Document$field_eventsArgs<ExtArgs extends runtime.Types.Extensions.I
   take?: number
   skip?: number
   distinct?: Prisma.FieldEventScalarFieldEnum | Prisma.FieldEventScalarFieldEnum[]
+}
+
+/**
+ * Document.soil_analysis_fields
+ */
+export type Document$soil_analysis_fieldsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Field
+   */
+  select?: Prisma.FieldSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Field
+   */
+  omit?: Prisma.FieldOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FieldInclude<ExtArgs> | null
+  where?: Prisma.FieldWhereInput
+  orderBy?: Prisma.FieldOrderByWithRelationInput | Prisma.FieldOrderByWithRelationInput[]
+  cursor?: Prisma.FieldWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FieldScalarFieldEnum | Prisma.FieldScalarFieldEnum[]
+}
+
+/**
+ * Document.farm_maps
+ */
+export type Document$farm_mapsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Farm
+   */
+  select?: Prisma.FarmSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Farm
+   */
+  omit?: Prisma.FarmOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FarmInclude<ExtArgs> | null
+  where?: Prisma.FarmWhereInput
+  orderBy?: Prisma.FarmOrderByWithRelationInput | Prisma.FarmOrderByWithRelationInput[]
+  cursor?: Prisma.FarmWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FarmScalarFieldEnum | Prisma.FarmScalarFieldEnum[]
 }
 
 /**

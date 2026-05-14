@@ -706,32 +706,12 @@ export type ApplicationUncheckedUpdateOneWithoutField_eventNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ApplicationUpdateToOneWithWhereWithoutField_eventInput, Prisma.ApplicationUpdateWithoutField_eventInput>, Prisma.ApplicationUncheckedUpdateWithoutField_eventInput>
 }
 
-export type NullableDecimalFieldUpdateOperationsInput = {
-  set?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  increment?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  decrement?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  multiply?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
-}
-
-export type NullableIntFieldUpdateOperationsInput = {
-  set?: number | null
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
 export type IntFieldUpdateOperationsInput = {
   set?: number
   increment?: number
   decrement?: number
   multiply?: number
   divide?: number
-}
-
-export type NullableEnumExecutionMethodFieldUpdateOperationsInput = {
-  set?: $Enums.ExecutionMethod | null
 }
 
 export type EnumApplicationMediumFieldUpdateOperationsInput = {

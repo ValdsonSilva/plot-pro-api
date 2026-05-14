@@ -27,7 +27,7 @@ export const authService = {
         return {
             access_token: token,
             user: { id: user.id, name: user.name, email: user.email, role: user.role, farm_id: user.farm_id },
-            farm: { id: user.farms.id, name: user.farms.name },
+            farm: { id: user.farms.id, name: user.farms.name, farm_map_document_id: user.farms.farm_map_document_id },
         };
     },
 

@@ -99,3 +99,11 @@ export const ProductState = {
 } as const
 
 export type ProductState = (typeof ProductState)[keyof typeof ProductState]
+
+
+export const SeedQuantityUnit = {
+  SEED_M: 'SEED_M',
+  KG_HA: 'KG_HA'
+} as const
+
+export type SeedQuantityUnit = (typeof SeedQuantityUnit)[keyof typeof SeedQuantityUnit]

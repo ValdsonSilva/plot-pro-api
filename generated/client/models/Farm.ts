@@ -29,6 +29,7 @@ export type FarmMinAggregateOutputType = {
   name: string | null
   location: string | null
   is_active: boolean | null
+  farm_map_document_id: string | null
 }
 
 export type FarmMaxAggregateOutputType = {
@@ -36,6 +37,7 @@ export type FarmMaxAggregateOutputType = {
   name: string | null
   location: string | null
   is_active: boolean | null
+  farm_map_document_id: string | null
 }
 
 export type FarmCountAggregateOutputType = {
@@ -43,6 +45,7 @@ export type FarmCountAggregateOutputType = {
   name: number
   location: number
   is_active: number
+  farm_map_document_id: number
   _all: number
 }
 
@@ -52,6 +55,7 @@ export type FarmMinAggregateInputType = {
   name?: true
   location?: true
   is_active?: true
+  farm_map_document_id?: true
 }
 
 export type FarmMaxAggregateInputType = {
@@ -59,6 +63,7 @@ export type FarmMaxAggregateInputType = {
   name?: true
   location?: true
   is_active?: true
+  farm_map_document_id?: true
 }
 
 export type FarmCountAggregateInputType = {
@@ -66,6 +71,7 @@ export type FarmCountAggregateInputType = {
   name?: true
   location?: true
   is_active?: true
+  farm_map_document_id?: true
   _all?: true
 }
 
@@ -146,6 +152,7 @@ export type FarmGroupByOutputType = {
   name: string
   location: string | null
   is_active: boolean
+  farm_map_document_id: string | null
   _count: FarmCountAggregateOutputType | null
   _min: FarmMinAggregateOutputType | null
   _max: FarmMaxAggregateOutputType | null
@@ -174,6 +181,8 @@ export type FarmWhereInput = {
   name?: Prisma.StringFilter<"Farm"> | string
   location?: Prisma.StringNullableFilter<"Farm"> | string | null
   is_active?: Prisma.BoolFilter<"Farm"> | boolean
+  farm_map_document_id?: Prisma.StringNullableFilter<"Farm"> | string | null
+  farm_map_document?: Prisma.XOR<Prisma.DocumentNullableScalarRelationFilter, Prisma.DocumentWhereInput> | null
   fields?: Prisma.FieldListRelationFilter
   users?: Prisma.UserListRelationFilter
 }
@@ -183,6 +192,8 @@ export type FarmOrderByWithRelationInput = {
   name?: Prisma.SortOrder
   location?: Prisma.SortOrderInput | Prisma.SortOrder
   is_active?: Prisma.SortOrder
+  farm_map_document_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  farm_map_document?: Prisma.DocumentOrderByWithRelationInput
   fields?: Prisma.FieldOrderByRelationAggregateInput
   users?: Prisma.UserOrderByRelationAggregateInput
 }
@@ -195,6 +206,8 @@ export type FarmWhereUniqueInput = Prisma.AtLeast<{
   name?: Prisma.StringFilter<"Farm"> | string
   location?: Prisma.StringNullableFilter<"Farm"> | string | null
   is_active?: Prisma.BoolFilter<"Farm"> | boolean
+  farm_map_document_id?: Prisma.StringNullableFilter<"Farm"> | string | null
+  farm_map_document?: Prisma.XOR<Prisma.DocumentNullableScalarRelationFilter, Prisma.DocumentWhereInput> | null
   fields?: Prisma.FieldListRelationFilter
   users?: Prisma.UserListRelationFilter
 }, "id">
@@ -204,6 +217,7 @@ export type FarmOrderByWithAggregationInput = {
   name?: Prisma.SortOrder
   location?: Prisma.SortOrderInput | Prisma.SortOrder
   is_active?: Prisma.SortOrder
+  farm_map_document_id?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.FarmCountOrderByAggregateInput
   _max?: Prisma.FarmMaxOrderByAggregateInput
   _min?: Prisma.FarmMinOrderByAggregateInput
@@ -217,6 +231,7 @@ export type FarmScalarWhereWithAggregatesInput = {
   name?: Prisma.StringWithAggregatesFilter<"Farm"> | string
   location?: Prisma.StringNullableWithAggregatesFilter<"Farm"> | string | null
   is_active?: Prisma.BoolWithAggregatesFilter<"Farm"> | boolean
+  farm_map_document_id?: Prisma.StringNullableWithAggregatesFilter<"Farm"> | string | null
 }
 
 export type FarmCreateInput = {
@@ -224,6 +239,7 @@ export type FarmCreateInput = {
   name: string
   location?: string | null
   is_active?: boolean
+  farm_map_document?: Prisma.DocumentCreateNestedOneWithoutFarm_mapsInput
   fields?: Prisma.FieldCreateNestedManyWithoutFarmInput
   users?: Prisma.UserCreateNestedManyWithoutFarmsInput
 }
@@ -233,6 +249,7 @@ export type FarmUncheckedCreateInput = {
   name: string
   location?: string | null
   is_active?: boolean
+  farm_map_document_id?: string | null
   fields?: Prisma.FieldUncheckedCreateNestedManyWithoutFarmInput
   users?: Prisma.UserUncheckedCreateNestedManyWithoutFarmsInput
 }
@@ -242,6 +259,7 @@ export type FarmUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  farm_map_document?: Prisma.DocumentUpdateOneWithoutFarm_mapsNestedInput
   fields?: Prisma.FieldUpdateManyWithoutFarmNestedInput
   users?: Prisma.UserUpdateManyWithoutFarmsNestedInput
 }
@@ -251,6 +269,7 @@ export type FarmUncheckedUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  farm_map_document_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fields?: Prisma.FieldUncheckedUpdateManyWithoutFarmNestedInput
   users?: Prisma.UserUncheckedUpdateManyWithoutFarmsNestedInput
 }
@@ -260,6 +279,7 @@ export type FarmCreateManyInput = {
   name: string
   location?: string | null
   is_active?: boolean
+  farm_map_document_id?: string | null
 }
 
 export type FarmUpdateManyMutationInput = {
@@ -274,6 +294,7 @@ export type FarmUncheckedUpdateManyInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  farm_map_document_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type FarmCountOrderByAggregateInput = {
@@ -281,6 +302,7 @@ export type FarmCountOrderByAggregateInput = {
   name?: Prisma.SortOrder
   location?: Prisma.SortOrder
   is_active?: Prisma.SortOrder
+  farm_map_document_id?: Prisma.SortOrder
 }
 
 export type FarmMaxOrderByAggregateInput = {
@@ -288,6 +310,7 @@ export type FarmMaxOrderByAggregateInput = {
   name?: Prisma.SortOrder
   location?: Prisma.SortOrder
   is_active?: Prisma.SortOrder
+  farm_map_document_id?: Prisma.SortOrder
 }
 
 export type FarmMinOrderByAggregateInput = {
@@ -295,11 +318,22 @@ export type FarmMinOrderByAggregateInput = {
   name?: Prisma.SortOrder
   location?: Prisma.SortOrder
   is_active?: Prisma.SortOrder
+  farm_map_document_id?: Prisma.SortOrder
 }
 
 export type FarmScalarRelationFilter = {
   is?: Prisma.FarmWhereInput
   isNot?: Prisma.FarmWhereInput
+}
+
+export type FarmListRelationFilter = {
+  every?: Prisma.FarmWhereInput
+  some?: Prisma.FarmWhereInput
+  none?: Prisma.FarmWhereInput
+}
+
+export type FarmOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
 }
 
 export type StringFieldUpdateOperationsInput = {
@@ -342,11 +376,54 @@ export type FarmUpdateOneRequiredWithoutUsersNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.FarmUpdateToOneWithWhereWithoutUsersInput, Prisma.FarmUpdateWithoutUsersInput>, Prisma.FarmUncheckedUpdateWithoutUsersInput>
 }
 
+export type FarmCreateNestedManyWithoutFarm_map_documentInput = {
+  create?: Prisma.XOR<Prisma.FarmCreateWithoutFarm_map_documentInput, Prisma.FarmUncheckedCreateWithoutFarm_map_documentInput> | Prisma.FarmCreateWithoutFarm_map_documentInput[] | Prisma.FarmUncheckedCreateWithoutFarm_map_documentInput[]
+  connectOrCreate?: Prisma.FarmCreateOrConnectWithoutFarm_map_documentInput | Prisma.FarmCreateOrConnectWithoutFarm_map_documentInput[]
+  createMany?: Prisma.FarmCreateManyFarm_map_documentInputEnvelope
+  connect?: Prisma.FarmWhereUniqueInput | Prisma.FarmWhereUniqueInput[]
+}
+
+export type FarmUncheckedCreateNestedManyWithoutFarm_map_documentInput = {
+  create?: Prisma.XOR<Prisma.FarmCreateWithoutFarm_map_documentInput, Prisma.FarmUncheckedCreateWithoutFarm_map_documentInput> | Prisma.FarmCreateWithoutFarm_map_documentInput[] | Prisma.FarmUncheckedCreateWithoutFarm_map_documentInput[]
+  connectOrCreate?: Prisma.FarmCreateOrConnectWithoutFarm_map_documentInput | Prisma.FarmCreateOrConnectWithoutFarm_map_documentInput[]
+  createMany?: Prisma.FarmCreateManyFarm_map_documentInputEnvelope
+  connect?: Prisma.FarmWhereUniqueInput | Prisma.FarmWhereUniqueInput[]
+}
+
+export type FarmUpdateManyWithoutFarm_map_documentNestedInput = {
+  create?: Prisma.XOR<Prisma.FarmCreateWithoutFarm_map_documentInput, Prisma.FarmUncheckedCreateWithoutFarm_map_documentInput> | Prisma.FarmCreateWithoutFarm_map_documentInput[] | Prisma.FarmUncheckedCreateWithoutFarm_map_documentInput[]
+  connectOrCreate?: Prisma.FarmCreateOrConnectWithoutFarm_map_documentInput | Prisma.FarmCreateOrConnectWithoutFarm_map_documentInput[]
+  upsert?: Prisma.FarmUpsertWithWhereUniqueWithoutFarm_map_documentInput | Prisma.FarmUpsertWithWhereUniqueWithoutFarm_map_documentInput[]
+  createMany?: Prisma.FarmCreateManyFarm_map_documentInputEnvelope
+  set?: Prisma.FarmWhereUniqueInput | Prisma.FarmWhereUniqueInput[]
+  disconnect?: Prisma.FarmWhereUniqueInput | Prisma.FarmWhereUniqueInput[]
+  delete?: Prisma.FarmWhereUniqueInput | Prisma.FarmWhereUniqueInput[]
+  connect?: Prisma.FarmWhereUniqueInput | Prisma.FarmWhereUniqueInput[]
+  update?: Prisma.FarmUpdateWithWhereUniqueWithoutFarm_map_documentInput | Prisma.FarmUpdateWithWhereUniqueWithoutFarm_map_documentInput[]
+  updateMany?: Prisma.FarmUpdateManyWithWhereWithoutFarm_map_documentInput | Prisma.FarmUpdateManyWithWhereWithoutFarm_map_documentInput[]
+  deleteMany?: Prisma.FarmScalarWhereInput | Prisma.FarmScalarWhereInput[]
+}
+
+export type FarmUncheckedUpdateManyWithoutFarm_map_documentNestedInput = {
+  create?: Prisma.XOR<Prisma.FarmCreateWithoutFarm_map_documentInput, Prisma.FarmUncheckedCreateWithoutFarm_map_documentInput> | Prisma.FarmCreateWithoutFarm_map_documentInput[] | Prisma.FarmUncheckedCreateWithoutFarm_map_documentInput[]
+  connectOrCreate?: Prisma.FarmCreateOrConnectWithoutFarm_map_documentInput | Prisma.FarmCreateOrConnectWithoutFarm_map_documentInput[]
+  upsert?: Prisma.FarmUpsertWithWhereUniqueWithoutFarm_map_documentInput | Prisma.FarmUpsertWithWhereUniqueWithoutFarm_map_documentInput[]
+  createMany?: Prisma.FarmCreateManyFarm_map_documentInputEnvelope
+  set?: Prisma.FarmWhereUniqueInput | Prisma.FarmWhereUniqueInput[]
+  disconnect?: Prisma.FarmWhereUniqueInput | Prisma.FarmWhereUniqueInput[]
+  delete?: Prisma.FarmWhereUniqueInput | Prisma.FarmWhereUniqueInput[]
+  connect?: Prisma.FarmWhereUniqueInput | Prisma.FarmWhereUniqueInput[]
+  update?: Prisma.FarmUpdateWithWhereUniqueWithoutFarm_map_documentInput | Prisma.FarmUpdateWithWhereUniqueWithoutFarm_map_documentInput[]
+  updateMany?: Prisma.FarmUpdateManyWithWhereWithoutFarm_map_documentInput | Prisma.FarmUpdateManyWithWhereWithoutFarm_map_documentInput[]
+  deleteMany?: Prisma.FarmScalarWhereInput | Prisma.FarmScalarWhereInput[]
+}
+
 export type FarmCreateWithoutFieldsInput = {
   id?: string
   name: string
   location?: string | null
   is_active?: boolean
+  farm_map_document?: Prisma.DocumentCreateNestedOneWithoutFarm_mapsInput
   users?: Prisma.UserCreateNestedManyWithoutFarmsInput
 }
 
@@ -355,6 +432,7 @@ export type FarmUncheckedCreateWithoutFieldsInput = {
   name: string
   location?: string | null
   is_active?: boolean
+  farm_map_document_id?: string | null
   users?: Prisma.UserUncheckedCreateNestedManyWithoutFarmsInput
 }
 
@@ -379,6 +457,7 @@ export type FarmUpdateWithoutFieldsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  farm_map_document?: Prisma.DocumentUpdateOneWithoutFarm_mapsNestedInput
   users?: Prisma.UserUpdateManyWithoutFarmsNestedInput
 }
 
@@ -387,6 +466,7 @@ export type FarmUncheckedUpdateWithoutFieldsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  farm_map_document_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   users?: Prisma.UserUncheckedUpdateManyWithoutFarmsNestedInput
 }
 
@@ -395,6 +475,7 @@ export type FarmCreateWithoutUsersInput = {
   name: string
   location?: string | null
   is_active?: boolean
+  farm_map_document?: Prisma.DocumentCreateNestedOneWithoutFarm_mapsInput
   fields?: Prisma.FieldCreateNestedManyWithoutFarmInput
 }
 
@@ -403,6 +484,7 @@ export type FarmUncheckedCreateWithoutUsersInput = {
   name: string
   location?: string | null
   is_active?: boolean
+  farm_map_document_id?: string | null
   fields?: Prisma.FieldUncheckedCreateNestedManyWithoutFarmInput
 }
 
@@ -427,6 +509,7 @@ export type FarmUpdateWithoutUsersInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  farm_map_document?: Prisma.DocumentUpdateOneWithoutFarm_mapsNestedInput
   fields?: Prisma.FieldUpdateManyWithoutFarmNestedInput
 }
 
@@ -435,7 +518,95 @@ export type FarmUncheckedUpdateWithoutUsersInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  farm_map_document_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fields?: Prisma.FieldUncheckedUpdateManyWithoutFarmNestedInput
+}
+
+export type FarmCreateWithoutFarm_map_documentInput = {
+  id?: string
+  name: string
+  location?: string | null
+  is_active?: boolean
+  fields?: Prisma.FieldCreateNestedManyWithoutFarmInput
+  users?: Prisma.UserCreateNestedManyWithoutFarmsInput
+}
+
+export type FarmUncheckedCreateWithoutFarm_map_documentInput = {
+  id?: string
+  name: string
+  location?: string | null
+  is_active?: boolean
+  fields?: Prisma.FieldUncheckedCreateNestedManyWithoutFarmInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutFarmsInput
+}
+
+export type FarmCreateOrConnectWithoutFarm_map_documentInput = {
+  where: Prisma.FarmWhereUniqueInput
+  create: Prisma.XOR<Prisma.FarmCreateWithoutFarm_map_documentInput, Prisma.FarmUncheckedCreateWithoutFarm_map_documentInput>
+}
+
+export type FarmCreateManyFarm_map_documentInputEnvelope = {
+  data: Prisma.FarmCreateManyFarm_map_documentInput | Prisma.FarmCreateManyFarm_map_documentInput[]
+  skipDuplicates?: boolean
+}
+
+export type FarmUpsertWithWhereUniqueWithoutFarm_map_documentInput = {
+  where: Prisma.FarmWhereUniqueInput
+  update: Prisma.XOR<Prisma.FarmUpdateWithoutFarm_map_documentInput, Prisma.FarmUncheckedUpdateWithoutFarm_map_documentInput>
+  create: Prisma.XOR<Prisma.FarmCreateWithoutFarm_map_documentInput, Prisma.FarmUncheckedCreateWithoutFarm_map_documentInput>
+}
+
+export type FarmUpdateWithWhereUniqueWithoutFarm_map_documentInput = {
+  where: Prisma.FarmWhereUniqueInput
+  data: Prisma.XOR<Prisma.FarmUpdateWithoutFarm_map_documentInput, Prisma.FarmUncheckedUpdateWithoutFarm_map_documentInput>
+}
+
+export type FarmUpdateManyWithWhereWithoutFarm_map_documentInput = {
+  where: Prisma.FarmScalarWhereInput
+  data: Prisma.XOR<Prisma.FarmUpdateManyMutationInput, Prisma.FarmUncheckedUpdateManyWithoutFarm_map_documentInput>
+}
+
+export type FarmScalarWhereInput = {
+  AND?: Prisma.FarmScalarWhereInput | Prisma.FarmScalarWhereInput[]
+  OR?: Prisma.FarmScalarWhereInput[]
+  NOT?: Prisma.FarmScalarWhereInput | Prisma.FarmScalarWhereInput[]
+  id?: Prisma.StringFilter<"Farm"> | string
+  name?: Prisma.StringFilter<"Farm"> | string
+  location?: Prisma.StringNullableFilter<"Farm"> | string | null
+  is_active?: Prisma.BoolFilter<"Farm"> | boolean
+  farm_map_document_id?: Prisma.StringNullableFilter<"Farm"> | string | null
+}
+
+export type FarmCreateManyFarm_map_documentInput = {
+  id?: string
+  name: string
+  location?: string | null
+  is_active?: boolean
+}
+
+export type FarmUpdateWithoutFarm_map_documentInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fields?: Prisma.FieldUpdateManyWithoutFarmNestedInput
+  users?: Prisma.UserUpdateManyWithoutFarmsNestedInput
+}
+
+export type FarmUncheckedUpdateWithoutFarm_map_documentInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fields?: Prisma.FieldUncheckedUpdateManyWithoutFarmNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutFarmsNestedInput
+}
+
+export type FarmUncheckedUpdateManyWithoutFarm_map_documentInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 
@@ -483,6 +654,8 @@ export type FarmSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   name?: boolean
   location?: boolean
   is_active?: boolean
+  farm_map_document_id?: boolean
+  farm_map_document?: boolean | Prisma.Farm$farm_map_documentArgs<ExtArgs>
   fields?: boolean | Prisma.Farm$fieldsArgs<ExtArgs>
   users?: boolean | Prisma.Farm$usersArgs<ExtArgs>
   _count?: boolean | Prisma.FarmCountOutputTypeDefaultArgs<ExtArgs>
@@ -493,6 +666,8 @@ export type FarmSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   name?: boolean
   location?: boolean
   is_active?: boolean
+  farm_map_document_id?: boolean
+  farm_map_document?: boolean | Prisma.Farm$farm_map_documentArgs<ExtArgs>
 }, ExtArgs["result"]["farm"]>
 
 export type FarmSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -500,6 +675,8 @@ export type FarmSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   name?: boolean
   location?: boolean
   is_active?: boolean
+  farm_map_document_id?: boolean
+  farm_map_document?: boolean | Prisma.Farm$farm_map_documentArgs<ExtArgs>
 }, ExtArgs["result"]["farm"]>
 
 export type FarmSelectScalar = {
@@ -507,20 +684,27 @@ export type FarmSelectScalar = {
   name?: boolean
   location?: boolean
   is_active?: boolean
+  farm_map_document_id?: boolean
 }
 
-export type FarmOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "location" | "is_active", ExtArgs["result"]["farm"]>
+export type FarmOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "location" | "is_active" | "farm_map_document_id", ExtArgs["result"]["farm"]>
 export type FarmInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  farm_map_document?: boolean | Prisma.Farm$farm_map_documentArgs<ExtArgs>
   fields?: boolean | Prisma.Farm$fieldsArgs<ExtArgs>
   users?: boolean | Prisma.Farm$usersArgs<ExtArgs>
   _count?: boolean | Prisma.FarmCountOutputTypeDefaultArgs<ExtArgs>
 }
-export type FarmIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
-export type FarmIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type FarmIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  farm_map_document?: boolean | Prisma.Farm$farm_map_documentArgs<ExtArgs>
+}
+export type FarmIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  farm_map_document?: boolean | Prisma.Farm$farm_map_documentArgs<ExtArgs>
+}
 
 export type $FarmPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Farm"
   objects: {
+    farm_map_document: Prisma.$DocumentPayload<ExtArgs> | null
     fields: Prisma.$FieldPayload<ExtArgs>[]
     users: Prisma.$UserPayload<ExtArgs>[]
   }
@@ -529,6 +713,7 @@ export type $FarmPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     name: string
     location: string | null
     is_active: boolean
+    farm_map_document_id: string | null
   }, ExtArgs["result"]["farm"]>
   composites: {}
 }
@@ -923,6 +1108,7 @@ readonly fields: FarmFieldRefs;
  */
 export interface Prisma__FarmClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  farm_map_document<T extends Prisma.Farm$farm_map_documentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Farm$farm_map_documentArgs<ExtArgs>>): Prisma.Prisma__DocumentClient<runtime.Types.Result.GetResult<Prisma.$DocumentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   fields<T extends Prisma.Farm$fieldsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Farm$fieldsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FieldPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   users<T extends Prisma.Farm$usersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Farm$usersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
@@ -958,6 +1144,7 @@ export interface FarmFieldRefs {
   readonly name: Prisma.FieldRef<"Farm", 'String'>
   readonly location: Prisma.FieldRef<"Farm", 'String'>
   readonly is_active: Prisma.FieldRef<"Farm", 'Boolean'>
+  readonly farm_map_document_id: Prisma.FieldRef<"Farm", 'String'>
 }
     
 
@@ -1207,6 +1394,10 @@ export type FarmCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions
    */
   data: Prisma.FarmCreateManyInput | Prisma.FarmCreateManyInput[]
   skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FarmIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1277,6 +1468,10 @@ export type FarmUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions
    * Limit how many Farms to update.
    */
   limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FarmIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1343,6 +1538,25 @@ export type FarmDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * Limit how many Farms to delete.
    */
   limit?: number
+}
+
+/**
+ * Farm.farm_map_document
+ */
+export type Farm$farm_map_documentArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Document
+   */
+  select?: Prisma.DocumentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Document
+   */
+  omit?: Prisma.DocumentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DocumentInclude<ExtArgs> | null
+  where?: Prisma.DocumentWhereInput
 }
 
 /**

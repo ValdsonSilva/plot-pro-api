@@ -16,6 +16,7 @@ export const fieldRepo = {
         area_ha: number;
         geo_boundary?: any;
         is_active?: boolean;
+        soil_analysis_document_id?: string;
     }) {
         return prisma.field.create({
             data: {
@@ -25,6 +26,11 @@ export const fieldRepo = {
                 area_ha: data.area_ha as any,
                 geo_boundary: data.geo_boundary,
                 is_active: data.is_active ?? true,
+                soil_analysis_document_id: data.soil_analysis_document_id,
+            },
+            include: {
+                farm: true,
+                soil_analysis_document: true,
             },
         });
     },
@@ -32,7 +38,11 @@ export const fieldRepo = {
     findById(id: string) {
         return prisma.field.findUnique({
             where: { id },
-            include: { farm: true, field_events: true },
+            include: {
+                farm: true,
+                soil_analysis_document: true,
+                field_events: true,
+            },
         });
     },
 
@@ -52,7 +62,11 @@ export const fieldRepo = {
                     }
                     : {}),
             },
-            include: { farm: true, field_events: true },
+            include: {
+                farm: true,
+                soil_analysis_document: true,
+                field_events: true,
+            },
             orderBy: [{ id: "desc" }],
             skip,
             take,
@@ -63,7 +77,10 @@ export const fieldRepo = {
         return prisma.field.update({
             where: { id },
             data,
-            include: { farm: true },
+            include: {
+                farm: true,
+                soil_analysis_document: true,
+            },
         });
     },
 };

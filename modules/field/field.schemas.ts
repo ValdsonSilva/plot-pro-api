@@ -24,9 +24,10 @@ export const createFieldSchema = z.object({
         farm_id: z.string(),
         code: z.string().trim().min(1).max(50),
         name: z.string().trim().min(2).max(120),
-        area_ha: z.coerce.number().positive(), // Prisma Decimal ok
-        geo_boundary: z.any().optional(), // Json (GeoJSON etc)
+        area_ha: z.coerce.number().positive(),
+        geo_boundary: z.any().optional(),
         is_active: z.boolean().optional(),
+        soil_analysis_document_id: z.string().optional(),
     }),
 });
 
@@ -41,6 +42,7 @@ export const updateFieldSchema = z.object({
             area_ha: z.coerce.number().positive().optional(),
             geo_boundary: z.any().nullable().optional(),
             is_active: z.boolean().optional(),
+            soil_analysis_document_id: z.string().nullable().optional(),
         })
         .refine((b) => Object.keys(b).length > 0, {
             message: "Envie ao menos um campo para atualizar",

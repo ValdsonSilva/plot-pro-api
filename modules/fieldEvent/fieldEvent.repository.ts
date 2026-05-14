@@ -25,6 +25,12 @@ export const fieldEventRepo = {
         responsible_user_id: string;
         notes?: string;
         source_document_id?: string;
+        execution_method?: "DISTRIBUTING" | "INCORPORATION";
+        crop?: string;
+        variety?: string;
+        seed_quantity?: number;
+        seed_quantity_unit?: "SEED_M" | "KG_HA";
+        rainfall_mm?: number;
     }) {
         return prisma.fieldEvent.create({
             data: {
@@ -36,10 +42,17 @@ export const fieldEventRepo = {
                 responsible_user_id: data.responsible_user_id,
                 notes: data.notes,
                 source_document_id: data.source_document_id,
+                execution_method: data.execution_method,
+                crop: data.crop,
+                variety: data.variety,
+                seed_quantity: data.seed_quantity as any,
+                seed_quantity_unit: data.seed_quantity_unit,
+                rainfall_mm: data.rainfall_mm as any,
             },
             include: {
-                field: { include: { farm: true } },
+                field: { include: { farm: true, soil_analysis_document: true } },
                 responsible_user: true,
+                source_document: true,
             },
         });
     },
@@ -48,7 +61,7 @@ export const fieldEventRepo = {
         return prisma.fieldEvent.findUnique({
             where: { id },
             include: {
-                field: { include: { farm: true } },
+                field: { include: { farm: true, soil_analysis_document: true } },
                 responsible_user: true,
                 source_document: true,
                 application: true,
@@ -86,12 +99,12 @@ export const fieldEventRepo = {
                     : {}),
             },
             include: {
-                field: { include: { farm: true } },
+                field: { include: { farm: true, soil_analysis_document: true } },
                 responsible_user: true,
+                source_document: true,
                 ...(includeApplication
                     ? { application: true }
                     : {}),
-
             },
             orderBy: [{ start_at: "desc" }, { id: "desc" }],
             skip,
@@ -99,14 +112,16 @@ export const fieldEventRepo = {
         });
     },
 
-    update(id: string, data: FieldEvent) {
+    update(id: string, data: Partial<FieldEvent> | any) {
         return prisma.fieldEvent.update({
             where: { id },
             data,
             include: {
-                field: { include: { farm: true } },
+                field: { include: { farm: true, soil_analysis_document: true } },
                 responsible_user: true,
                 source_document: true,
+                application: true,
+                application_items: { include: { product: true } },
             },
         });
     },

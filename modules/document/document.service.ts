@@ -1,8 +1,9 @@
 import fs from "fs/promises";
 import path from "path";
-import { documentRepo } from "./document.repository";
-import { auditLogService } from "../auditlog/auditLog.service";
 import { Prisma } from "../../generated/client/client";
+import { auditLogService } from "../auditlog/auditLog.service";
+import { cloudinaryService } from "../cloudinary/cloudinary.service";
+import { documentRepo } from "./document.repository";
 
 function httpError(statusCode: number, message: string) {
     const err: any = new Error(message);
@@ -10,14 +11,46 @@ function httpError(statusCode: number, message: string) {
     return err;
 }
 
+function isImageMimeType(mimeType: string) {
+    return mimeType.startsWith("image/");
+}
+
+function getCloudinaryResourceType(mimeType: string) {
+    if (isImageMimeType(mimeType)) return "image";
+    return "raw";
+}
+
 export const documentService = {
-    async createFromUpload(file: Express.Multer.File | undefined, actorUserId: string) {
-        if (!file) throw httpError(400, "Arquivo é obrigatório (campo multipart: file)");
+    async createFromUpload(
+        file: Express.Multer.File | undefined,
+        actorUserId: string,
+        options?: {
+            folder?: string;
+        }
+    ) {
+        if (!file) {
+            throw httpError(400, "Arquivo é obrigatório (campo multipart: file)");
+        }
+
+        const resourceType = getCloudinaryResourceType(file.mimetype);
+
+        const uploaded = await cloudinaryService.uploadBuffer({
+            buffer: file.buffer,
+            originalName: file.originalname,
+            folder: options?.folder ?? "plotpro/documents",
+            resourceType,
+        });
 
         const created = await documentRepo.create({
             file_name: file.originalname,
             mime_type: file.mimetype,
-            storage_path: file.path, // caminho absoluto no disco
+            storage_path: uploaded.secure_url,
+            storage_provider: "CLOUDINARY",
+            storage_key: uploaded.public_id,
+            public_url: uploaded.url,
+            secure_url: uploaded.secure_url,
+            resource_type: uploaded.resource_type,
+            file_size_bytes: uploaded.bytes,
         });
 
         await auditLogService.log({
@@ -37,17 +70,37 @@ export const documentService = {
 
     async get(id: string) {
         const row = await documentRepo.findById(id);
-        if (!row) throw httpError(404, "Documento não encontrado");
+
+        if (!row) {
+            throw httpError(404, "Documento não encontrado");
+        }
+
         return row;
     },
 
-    async getDownloadPath(id: string) {
+    async getDownloadData(id: string) {
         const doc = await this.get(id);
-        // garante que está dentro do storage/uploads
+
+        if (doc.storage_provider === "CLOUDINARY" && doc.secure_url) {
+            return {
+                doc,
+                url: doc.secure_url,
+                resolved: null,
+            };
+        }
+
         const uploadsRoot = path.resolve(process.cwd(), "storage", "uploads");
         const resolved = path.resolve(doc.storage_path);
-        if (!resolved.startsWith(uploadsRoot)) throw httpError(400, "Caminho inválido de arquivo");
-        return { doc, resolved };
+
+        if (!resolved.startsWith(uploadsRoot)) {
+            throw httpError(400, "Caminho inválido de arquivo");
+        }
+
+        return {
+            doc,
+            url: null,
+            resolved,
+        };
     },
 
     async delete(id: string, actorUserId: string) {
@@ -56,11 +109,21 @@ export const documentService = {
         try {
             const deleted = await documentRepo.delete(id);
 
-            // tenta deletar o arquivo físico
-            try {
-                await fs.unlink(before.storage_path);
-            } catch {
-                // se já não existir, segue
+            if (before.storage_provider === "CLOUDINARY" && before.storage_key) {
+                try {
+                    await cloudinaryService.deleteFile(
+                        before.storage_key,
+                        before.resource_type ?? "raw"
+                    );
+                } catch {
+                    // Não bloqueia a exclusão do registro caso a remoção no Cloudinary falhe.
+                }
+            } else {
+                try {
+                    await fs.unlink(before.storage_path);
+                } catch {
+                    // Se o arquivo local não existir, segue.
+                }
             }
 
             await auditLogService.log({
@@ -74,8 +137,9 @@ export const documentService = {
             return deleted;
         } catch (e: any) {
             if (e instanceof Prisma.PrismaClientKnownRequestError && e.code === "P2003") {
-                throw httpError(409, "Documento está vinculado a eventos e não pode ser excluído");
+                throw httpError(409, "Documento está vinculado a eventos, talhões ou fazendas e não pode ser excluído");
             }
+
             throw e;
         }
     },

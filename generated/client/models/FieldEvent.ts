@@ -20,8 +20,20 @@ export type FieldEventModel = runtime.Types.Result.DefaultSelection<Prisma.$Fiel
 
 export type AggregateFieldEvent = {
   _count: FieldEventCountAggregateOutputType | null
+  _avg: FieldEventAvgAggregateOutputType | null
+  _sum: FieldEventSumAggregateOutputType | null
   _min: FieldEventMinAggregateOutputType | null
   _max: FieldEventMaxAggregateOutputType | null
+}
+
+export type FieldEventAvgAggregateOutputType = {
+  seed_quantity: runtime.Decimal | null
+  rainfall_mm: runtime.Decimal | null
+}
+
+export type FieldEventSumAggregateOutputType = {
+  seed_quantity: runtime.Decimal | null
+  rainfall_mm: runtime.Decimal | null
 }
 
 export type FieldEventMinAggregateOutputType = {
@@ -34,6 +46,12 @@ export type FieldEventMinAggregateOutputType = {
   responsible_user_id: string | null
   notes: string | null
   source_document_id: string | null
+  execution_method: $Enums.ExecutionMethod | null
+  crop: string | null
+  variety: string | null
+  seed_quantity: runtime.Decimal | null
+  seed_quantity_unit: $Enums.SeedQuantityUnit | null
+  rainfall_mm: runtime.Decimal | null
 }
 
 export type FieldEventMaxAggregateOutputType = {
@@ -46,6 +64,12 @@ export type FieldEventMaxAggregateOutputType = {
   responsible_user_id: string | null
   notes: string | null
   source_document_id: string | null
+  execution_method: $Enums.ExecutionMethod | null
+  crop: string | null
+  variety: string | null
+  seed_quantity: runtime.Decimal | null
+  seed_quantity_unit: $Enums.SeedQuantityUnit | null
+  rainfall_mm: runtime.Decimal | null
 }
 
 export type FieldEventCountAggregateOutputType = {
@@ -58,9 +82,25 @@ export type FieldEventCountAggregateOutputType = {
   responsible_user_id: number
   notes: number
   source_document_id: number
+  execution_method: number
+  crop: number
+  variety: number
+  seed_quantity: number
+  seed_quantity_unit: number
+  rainfall_mm: number
   _all: number
 }
 
+
+export type FieldEventAvgAggregateInputType = {
+  seed_quantity?: true
+  rainfall_mm?: true
+}
+
+export type FieldEventSumAggregateInputType = {
+  seed_quantity?: true
+  rainfall_mm?: true
+}
 
 export type FieldEventMinAggregateInputType = {
   id?: true
@@ -72,6 +112,12 @@ export type FieldEventMinAggregateInputType = {
   responsible_user_id?: true
   notes?: true
   source_document_id?: true
+  execution_method?: true
+  crop?: true
+  variety?: true
+  seed_quantity?: true
+  seed_quantity_unit?: true
+  rainfall_mm?: true
 }
 
 export type FieldEventMaxAggregateInputType = {
@@ -84,6 +130,12 @@ export type FieldEventMaxAggregateInputType = {
   responsible_user_id?: true
   notes?: true
   source_document_id?: true
+  execution_method?: true
+  crop?: true
+  variety?: true
+  seed_quantity?: true
+  seed_quantity_unit?: true
+  rainfall_mm?: true
 }
 
 export type FieldEventCountAggregateInputType = {
@@ -96,6 +148,12 @@ export type FieldEventCountAggregateInputType = {
   responsible_user_id?: true
   notes?: true
   source_document_id?: true
+  execution_method?: true
+  crop?: true
+  variety?: true
+  seed_quantity?: true
+  seed_quantity_unit?: true
+  rainfall_mm?: true
   _all?: true
 }
 
@@ -137,6 +195,18 @@ export type FieldEventAggregateArgs<ExtArgs extends runtime.Types.Extensions.Int
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: FieldEventAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: FieldEventSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: FieldEventMinAggregateInputType
@@ -167,6 +237,8 @@ export type FieldEventGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inter
   take?: number
   skip?: number
   _count?: FieldEventCountAggregateInputType | true
+  _avg?: FieldEventAvgAggregateInputType
+  _sum?: FieldEventSumAggregateInputType
   _min?: FieldEventMinAggregateInputType
   _max?: FieldEventMaxAggregateInputType
 }
@@ -181,7 +253,15 @@ export type FieldEventGroupByOutputType = {
   responsible_user_id: string
   notes: string | null
   source_document_id: string | null
+  execution_method: $Enums.ExecutionMethod | null
+  crop: string | null
+  variety: string | null
+  seed_quantity: runtime.Decimal | null
+  seed_quantity_unit: $Enums.SeedQuantityUnit | null
+  rainfall_mm: runtime.Decimal | null
   _count: FieldEventCountAggregateOutputType | null
+  _avg: FieldEventAvgAggregateOutputType | null
+  _sum: FieldEventSumAggregateOutputType | null
   _min: FieldEventMinAggregateOutputType | null
   _max: FieldEventMaxAggregateOutputType | null
 }
@@ -214,6 +294,12 @@ export type FieldEventWhereInput = {
   responsible_user_id?: Prisma.StringFilter<"FieldEvent"> | string
   notes?: Prisma.StringNullableFilter<"FieldEvent"> | string | null
   source_document_id?: Prisma.StringNullableFilter<"FieldEvent"> | string | null
+  execution_method?: Prisma.EnumExecutionMethodNullableFilter<"FieldEvent"> | $Enums.ExecutionMethod | null
+  crop?: Prisma.StringNullableFilter<"FieldEvent"> | string | null
+  variety?: Prisma.StringNullableFilter<"FieldEvent"> | string | null
+  seed_quantity?: Prisma.DecimalNullableFilter<"FieldEvent"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  seed_quantity_unit?: Prisma.EnumSeedQuantityUnitNullableFilter<"FieldEvent"> | $Enums.SeedQuantityUnit | null
+  rainfall_mm?: Prisma.DecimalNullableFilter<"FieldEvent"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   field?: Prisma.XOR<Prisma.FieldScalarRelationFilter, Prisma.FieldWhereInput>
   responsible_user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   source_document?: Prisma.XOR<Prisma.DocumentNullableScalarRelationFilter, Prisma.DocumentWhereInput> | null
@@ -231,6 +317,12 @@ export type FieldEventOrderByWithRelationInput = {
   responsible_user_id?: Prisma.SortOrder
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
   source_document_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  execution_method?: Prisma.SortOrderInput | Prisma.SortOrder
+  crop?: Prisma.SortOrderInput | Prisma.SortOrder
+  variety?: Prisma.SortOrderInput | Prisma.SortOrder
+  seed_quantity?: Prisma.SortOrderInput | Prisma.SortOrder
+  seed_quantity_unit?: Prisma.SortOrderInput | Prisma.SortOrder
+  rainfall_mm?: Prisma.SortOrderInput | Prisma.SortOrder
   field?: Prisma.FieldOrderByWithRelationInput
   responsible_user?: Prisma.UserOrderByWithRelationInput
   source_document?: Prisma.DocumentOrderByWithRelationInput
@@ -251,6 +343,12 @@ export type FieldEventWhereUniqueInput = Prisma.AtLeast<{
   responsible_user_id?: Prisma.StringFilter<"FieldEvent"> | string
   notes?: Prisma.StringNullableFilter<"FieldEvent"> | string | null
   source_document_id?: Prisma.StringNullableFilter<"FieldEvent"> | string | null
+  execution_method?: Prisma.EnumExecutionMethodNullableFilter<"FieldEvent"> | $Enums.ExecutionMethod | null
+  crop?: Prisma.StringNullableFilter<"FieldEvent"> | string | null
+  variety?: Prisma.StringNullableFilter<"FieldEvent"> | string | null
+  seed_quantity?: Prisma.DecimalNullableFilter<"FieldEvent"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  seed_quantity_unit?: Prisma.EnumSeedQuantityUnitNullableFilter<"FieldEvent"> | $Enums.SeedQuantityUnit | null
+  rainfall_mm?: Prisma.DecimalNullableFilter<"FieldEvent"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   field?: Prisma.XOR<Prisma.FieldScalarRelationFilter, Prisma.FieldWhereInput>
   responsible_user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   source_document?: Prisma.XOR<Prisma.DocumentNullableScalarRelationFilter, Prisma.DocumentWhereInput> | null
@@ -268,9 +366,17 @@ export type FieldEventOrderByWithAggregationInput = {
   responsible_user_id?: Prisma.SortOrder
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
   source_document_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  execution_method?: Prisma.SortOrderInput | Prisma.SortOrder
+  crop?: Prisma.SortOrderInput | Prisma.SortOrder
+  variety?: Prisma.SortOrderInput | Prisma.SortOrder
+  seed_quantity?: Prisma.SortOrderInput | Prisma.SortOrder
+  seed_quantity_unit?: Prisma.SortOrderInput | Prisma.SortOrder
+  rainfall_mm?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.FieldEventCountOrderByAggregateInput
+  _avg?: Prisma.FieldEventAvgOrderByAggregateInput
   _max?: Prisma.FieldEventMaxOrderByAggregateInput
   _min?: Prisma.FieldEventMinOrderByAggregateInput
+  _sum?: Prisma.FieldEventSumOrderByAggregateInput
 }
 
 export type FieldEventScalarWhereWithAggregatesInput = {
@@ -286,6 +392,12 @@ export type FieldEventScalarWhereWithAggregatesInput = {
   responsible_user_id?: Prisma.StringWithAggregatesFilter<"FieldEvent"> | string
   notes?: Prisma.StringNullableWithAggregatesFilter<"FieldEvent"> | string | null
   source_document_id?: Prisma.StringNullableWithAggregatesFilter<"FieldEvent"> | string | null
+  execution_method?: Prisma.EnumExecutionMethodNullableWithAggregatesFilter<"FieldEvent"> | $Enums.ExecutionMethod | null
+  crop?: Prisma.StringNullableWithAggregatesFilter<"FieldEvent"> | string | null
+  variety?: Prisma.StringNullableWithAggregatesFilter<"FieldEvent"> | string | null
+  seed_quantity?: Prisma.DecimalNullableWithAggregatesFilter<"FieldEvent"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  seed_quantity_unit?: Prisma.EnumSeedQuantityUnitNullableWithAggregatesFilter<"FieldEvent"> | $Enums.SeedQuantityUnit | null
+  rainfall_mm?: Prisma.DecimalNullableWithAggregatesFilter<"FieldEvent"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type FieldEventCreateInput = {
@@ -295,6 +407,12 @@ export type FieldEventCreateInput = {
   start_at: Date | string
   end_at: Date | string
   notes?: string | null
+  execution_method?: $Enums.ExecutionMethod | null
+  crop?: string | null
+  variety?: string | null
+  seed_quantity?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  seed_quantity_unit?: $Enums.SeedQuantityUnit | null
+  rainfall_mm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   field: Prisma.FieldCreateNestedOneWithoutField_eventsInput
   responsible_user: Prisma.UserCreateNestedOneWithoutResponsible_eventsInput
   source_document?: Prisma.DocumentCreateNestedOneWithoutField_eventsInput
@@ -312,6 +430,12 @@ export type FieldEventUncheckedCreateInput = {
   responsible_user_id: string
   notes?: string | null
   source_document_id?: string | null
+  execution_method?: $Enums.ExecutionMethod | null
+  crop?: string | null
+  variety?: string | null
+  seed_quantity?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  seed_quantity_unit?: $Enums.SeedQuantityUnit | null
+  rainfall_mm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   application?: Prisma.ApplicationUncheckedCreateNestedOneWithoutField_eventInput
   application_items?: Prisma.ApplicationItemUncheckedCreateNestedManyWithoutField_eventInput
 }
@@ -323,6 +447,12 @@ export type FieldEventUpdateInput = {
   start_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   end_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  execution_method?: Prisma.NullableEnumExecutionMethodFieldUpdateOperationsInput | $Enums.ExecutionMethod | null
+  crop?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  variety?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  seed_quantity?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  seed_quantity_unit?: Prisma.NullableEnumSeedQuantityUnitFieldUpdateOperationsInput | $Enums.SeedQuantityUnit | null
+  rainfall_mm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   field?: Prisma.FieldUpdateOneRequiredWithoutField_eventsNestedInput
   responsible_user?: Prisma.UserUpdateOneRequiredWithoutResponsible_eventsNestedInput
   source_document?: Prisma.DocumentUpdateOneWithoutField_eventsNestedInput
@@ -340,6 +470,12 @@ export type FieldEventUncheckedUpdateInput = {
   responsible_user_id?: Prisma.StringFieldUpdateOperationsInput | string
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source_document_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  execution_method?: Prisma.NullableEnumExecutionMethodFieldUpdateOperationsInput | $Enums.ExecutionMethod | null
+  crop?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  variety?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  seed_quantity?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  seed_quantity_unit?: Prisma.NullableEnumSeedQuantityUnitFieldUpdateOperationsInput | $Enums.SeedQuantityUnit | null
+  rainfall_mm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   application?: Prisma.ApplicationUncheckedUpdateOneWithoutField_eventNestedInput
   application_items?: Prisma.ApplicationItemUncheckedUpdateManyWithoutField_eventNestedInput
 }
@@ -354,6 +490,12 @@ export type FieldEventCreateManyInput = {
   responsible_user_id: string
   notes?: string | null
   source_document_id?: string | null
+  execution_method?: $Enums.ExecutionMethod | null
+  crop?: string | null
+  variety?: string | null
+  seed_quantity?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  seed_quantity_unit?: $Enums.SeedQuantityUnit | null
+  rainfall_mm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type FieldEventUpdateManyMutationInput = {
@@ -363,6 +505,12 @@ export type FieldEventUpdateManyMutationInput = {
   start_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   end_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  execution_method?: Prisma.NullableEnumExecutionMethodFieldUpdateOperationsInput | $Enums.ExecutionMethod | null
+  crop?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  variety?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  seed_quantity?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  seed_quantity_unit?: Prisma.NullableEnumSeedQuantityUnitFieldUpdateOperationsInput | $Enums.SeedQuantityUnit | null
+  rainfall_mm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type FieldEventUncheckedUpdateManyInput = {
@@ -375,6 +523,12 @@ export type FieldEventUncheckedUpdateManyInput = {
   responsible_user_id?: Prisma.StringFieldUpdateOperationsInput | string
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source_document_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  execution_method?: Prisma.NullableEnumExecutionMethodFieldUpdateOperationsInput | $Enums.ExecutionMethod | null
+  crop?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  variety?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  seed_quantity?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  seed_quantity_unit?: Prisma.NullableEnumSeedQuantityUnitFieldUpdateOperationsInput | $Enums.SeedQuantityUnit | null
+  rainfall_mm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type FieldEventListRelationFilter = {
@@ -397,6 +551,17 @@ export type FieldEventCountOrderByAggregateInput = {
   responsible_user_id?: Prisma.SortOrder
   notes?: Prisma.SortOrder
   source_document_id?: Prisma.SortOrder
+  execution_method?: Prisma.SortOrder
+  crop?: Prisma.SortOrder
+  variety?: Prisma.SortOrder
+  seed_quantity?: Prisma.SortOrder
+  seed_quantity_unit?: Prisma.SortOrder
+  rainfall_mm?: Prisma.SortOrder
+}
+
+export type FieldEventAvgOrderByAggregateInput = {
+  seed_quantity?: Prisma.SortOrder
+  rainfall_mm?: Prisma.SortOrder
 }
 
 export type FieldEventMaxOrderByAggregateInput = {
@@ -409,6 +574,12 @@ export type FieldEventMaxOrderByAggregateInput = {
   responsible_user_id?: Prisma.SortOrder
   notes?: Prisma.SortOrder
   source_document_id?: Prisma.SortOrder
+  execution_method?: Prisma.SortOrder
+  crop?: Prisma.SortOrder
+  variety?: Prisma.SortOrder
+  seed_quantity?: Prisma.SortOrder
+  seed_quantity_unit?: Prisma.SortOrder
+  rainfall_mm?: Prisma.SortOrder
 }
 
 export type FieldEventMinOrderByAggregateInput = {
@@ -421,6 +592,17 @@ export type FieldEventMinOrderByAggregateInput = {
   responsible_user_id?: Prisma.SortOrder
   notes?: Prisma.SortOrder
   source_document_id?: Prisma.SortOrder
+  execution_method?: Prisma.SortOrder
+  crop?: Prisma.SortOrder
+  variety?: Prisma.SortOrder
+  seed_quantity?: Prisma.SortOrder
+  seed_quantity_unit?: Prisma.SortOrder
+  rainfall_mm?: Prisma.SortOrder
+}
+
+export type FieldEventSumOrderByAggregateInput = {
+  seed_quantity?: Prisma.SortOrder
+  rainfall_mm?: Prisma.SortOrder
 }
 
 export type FieldEventScalarRelationFilter = {
@@ -562,6 +744,22 @@ export type EnumEventStatusFieldUpdateOperationsInput = {
   set?: $Enums.EventStatus
 }
 
+export type NullableEnumExecutionMethodFieldUpdateOperationsInput = {
+  set?: $Enums.ExecutionMethod | null
+}
+
+export type NullableDecimalFieldUpdateOperationsInput = {
+  set?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  increment?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  decrement?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  multiply?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
+}
+
+export type NullableEnumSeedQuantityUnitFieldUpdateOperationsInput = {
+  set?: $Enums.SeedQuantityUnit | null
+}
+
 export type FieldEventCreateNestedOneWithoutApplicationInput = {
   create?: Prisma.XOR<Prisma.FieldEventCreateWithoutApplicationInput, Prisma.FieldEventUncheckedCreateWithoutApplicationInput>
   connectOrCreate?: Prisma.FieldEventCreateOrConnectWithoutApplicationInput
@@ -597,6 +795,12 @@ export type FieldEventCreateWithoutFieldInput = {
   start_at: Date | string
   end_at: Date | string
   notes?: string | null
+  execution_method?: $Enums.ExecutionMethod | null
+  crop?: string | null
+  variety?: string | null
+  seed_quantity?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  seed_quantity_unit?: $Enums.SeedQuantityUnit | null
+  rainfall_mm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   responsible_user: Prisma.UserCreateNestedOneWithoutResponsible_eventsInput
   source_document?: Prisma.DocumentCreateNestedOneWithoutField_eventsInput
   application?: Prisma.ApplicationCreateNestedOneWithoutField_eventInput
@@ -612,6 +816,12 @@ export type FieldEventUncheckedCreateWithoutFieldInput = {
   responsible_user_id: string
   notes?: string | null
   source_document_id?: string | null
+  execution_method?: $Enums.ExecutionMethod | null
+  crop?: string | null
+  variety?: string | null
+  seed_quantity?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  seed_quantity_unit?: $Enums.SeedQuantityUnit | null
+  rainfall_mm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   application?: Prisma.ApplicationUncheckedCreateNestedOneWithoutField_eventInput
   application_items?: Prisma.ApplicationItemUncheckedCreateNestedManyWithoutField_eventInput
 }
@@ -655,6 +865,12 @@ export type FieldEventScalarWhereInput = {
   responsible_user_id?: Prisma.StringFilter<"FieldEvent"> | string
   notes?: Prisma.StringNullableFilter<"FieldEvent"> | string | null
   source_document_id?: Prisma.StringNullableFilter<"FieldEvent"> | string | null
+  execution_method?: Prisma.EnumExecutionMethodNullableFilter<"FieldEvent"> | $Enums.ExecutionMethod | null
+  crop?: Prisma.StringNullableFilter<"FieldEvent"> | string | null
+  variety?: Prisma.StringNullableFilter<"FieldEvent"> | string | null
+  seed_quantity?: Prisma.DecimalNullableFilter<"FieldEvent"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  seed_quantity_unit?: Prisma.EnumSeedQuantityUnitNullableFilter<"FieldEvent"> | $Enums.SeedQuantityUnit | null
+  rainfall_mm?: Prisma.DecimalNullableFilter<"FieldEvent"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type FieldEventCreateWithoutResponsible_userInput = {
@@ -664,6 +880,12 @@ export type FieldEventCreateWithoutResponsible_userInput = {
   start_at: Date | string
   end_at: Date | string
   notes?: string | null
+  execution_method?: $Enums.ExecutionMethod | null
+  crop?: string | null
+  variety?: string | null
+  seed_quantity?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  seed_quantity_unit?: $Enums.SeedQuantityUnit | null
+  rainfall_mm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   field: Prisma.FieldCreateNestedOneWithoutField_eventsInput
   source_document?: Prisma.DocumentCreateNestedOneWithoutField_eventsInput
   application?: Prisma.ApplicationCreateNestedOneWithoutField_eventInput
@@ -679,6 +901,12 @@ export type FieldEventUncheckedCreateWithoutResponsible_userInput = {
   end_at: Date | string
   notes?: string | null
   source_document_id?: string | null
+  execution_method?: $Enums.ExecutionMethod | null
+  crop?: string | null
+  variety?: string | null
+  seed_quantity?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  seed_quantity_unit?: $Enums.SeedQuantityUnit | null
+  rainfall_mm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   application?: Prisma.ApplicationUncheckedCreateNestedOneWithoutField_eventInput
   application_items?: Prisma.ApplicationItemUncheckedCreateNestedManyWithoutField_eventInput
 }
@@ -716,6 +944,12 @@ export type FieldEventCreateWithoutSource_documentInput = {
   start_at: Date | string
   end_at: Date | string
   notes?: string | null
+  execution_method?: $Enums.ExecutionMethod | null
+  crop?: string | null
+  variety?: string | null
+  seed_quantity?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  seed_quantity_unit?: $Enums.SeedQuantityUnit | null
+  rainfall_mm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   field: Prisma.FieldCreateNestedOneWithoutField_eventsInput
   responsible_user: Prisma.UserCreateNestedOneWithoutResponsible_eventsInput
   application?: Prisma.ApplicationCreateNestedOneWithoutField_eventInput
@@ -731,6 +965,12 @@ export type FieldEventUncheckedCreateWithoutSource_documentInput = {
   end_at: Date | string
   responsible_user_id: string
   notes?: string | null
+  execution_method?: $Enums.ExecutionMethod | null
+  crop?: string | null
+  variety?: string | null
+  seed_quantity?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  seed_quantity_unit?: $Enums.SeedQuantityUnit | null
+  rainfall_mm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   application?: Prisma.ApplicationUncheckedCreateNestedOneWithoutField_eventInput
   application_items?: Prisma.ApplicationItemUncheckedCreateNestedManyWithoutField_eventInput
 }
@@ -768,6 +1008,12 @@ export type FieldEventCreateWithoutApplicationInput = {
   start_at: Date | string
   end_at: Date | string
   notes?: string | null
+  execution_method?: $Enums.ExecutionMethod | null
+  crop?: string | null
+  variety?: string | null
+  seed_quantity?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  seed_quantity_unit?: $Enums.SeedQuantityUnit | null
+  rainfall_mm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   field: Prisma.FieldCreateNestedOneWithoutField_eventsInput
   responsible_user: Prisma.UserCreateNestedOneWithoutResponsible_eventsInput
   source_document?: Prisma.DocumentCreateNestedOneWithoutField_eventsInput
@@ -784,6 +1030,12 @@ export type FieldEventUncheckedCreateWithoutApplicationInput = {
   responsible_user_id: string
   notes?: string | null
   source_document_id?: string | null
+  execution_method?: $Enums.ExecutionMethod | null
+  crop?: string | null
+  variety?: string | null
+  seed_quantity?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  seed_quantity_unit?: $Enums.SeedQuantityUnit | null
+  rainfall_mm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   application_items?: Prisma.ApplicationItemUncheckedCreateNestedManyWithoutField_eventInput
 }
 
@@ -810,6 +1062,12 @@ export type FieldEventUpdateWithoutApplicationInput = {
   start_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   end_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  execution_method?: Prisma.NullableEnumExecutionMethodFieldUpdateOperationsInput | $Enums.ExecutionMethod | null
+  crop?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  variety?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  seed_quantity?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  seed_quantity_unit?: Prisma.NullableEnumSeedQuantityUnitFieldUpdateOperationsInput | $Enums.SeedQuantityUnit | null
+  rainfall_mm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   field?: Prisma.FieldUpdateOneRequiredWithoutField_eventsNestedInput
   responsible_user?: Prisma.UserUpdateOneRequiredWithoutResponsible_eventsNestedInput
   source_document?: Prisma.DocumentUpdateOneWithoutField_eventsNestedInput
@@ -826,6 +1084,12 @@ export type FieldEventUncheckedUpdateWithoutApplicationInput = {
   responsible_user_id?: Prisma.StringFieldUpdateOperationsInput | string
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source_document_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  execution_method?: Prisma.NullableEnumExecutionMethodFieldUpdateOperationsInput | $Enums.ExecutionMethod | null
+  crop?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  variety?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  seed_quantity?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  seed_quantity_unit?: Prisma.NullableEnumSeedQuantityUnitFieldUpdateOperationsInput | $Enums.SeedQuantityUnit | null
+  rainfall_mm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   application_items?: Prisma.ApplicationItemUncheckedUpdateManyWithoutField_eventNestedInput
 }
 
@@ -836,6 +1100,12 @@ export type FieldEventCreateWithoutApplication_itemsInput = {
   start_at: Date | string
   end_at: Date | string
   notes?: string | null
+  execution_method?: $Enums.ExecutionMethod | null
+  crop?: string | null
+  variety?: string | null
+  seed_quantity?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  seed_quantity_unit?: $Enums.SeedQuantityUnit | null
+  rainfall_mm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   field: Prisma.FieldCreateNestedOneWithoutField_eventsInput
   responsible_user: Prisma.UserCreateNestedOneWithoutResponsible_eventsInput
   source_document?: Prisma.DocumentCreateNestedOneWithoutField_eventsInput
@@ -852,6 +1122,12 @@ export type FieldEventUncheckedCreateWithoutApplication_itemsInput = {
   responsible_user_id: string
   notes?: string | null
   source_document_id?: string | null
+  execution_method?: $Enums.ExecutionMethod | null
+  crop?: string | null
+  variety?: string | null
+  seed_quantity?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  seed_quantity_unit?: $Enums.SeedQuantityUnit | null
+  rainfall_mm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   application?: Prisma.ApplicationUncheckedCreateNestedOneWithoutField_eventInput
 }
 
@@ -878,6 +1154,12 @@ export type FieldEventUpdateWithoutApplication_itemsInput = {
   start_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   end_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  execution_method?: Prisma.NullableEnumExecutionMethodFieldUpdateOperationsInput | $Enums.ExecutionMethod | null
+  crop?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  variety?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  seed_quantity?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  seed_quantity_unit?: Prisma.NullableEnumSeedQuantityUnitFieldUpdateOperationsInput | $Enums.SeedQuantityUnit | null
+  rainfall_mm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   field?: Prisma.FieldUpdateOneRequiredWithoutField_eventsNestedInput
   responsible_user?: Prisma.UserUpdateOneRequiredWithoutResponsible_eventsNestedInput
   source_document?: Prisma.DocumentUpdateOneWithoutField_eventsNestedInput
@@ -894,6 +1176,12 @@ export type FieldEventUncheckedUpdateWithoutApplication_itemsInput = {
   responsible_user_id?: Prisma.StringFieldUpdateOperationsInput | string
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source_document_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  execution_method?: Prisma.NullableEnumExecutionMethodFieldUpdateOperationsInput | $Enums.ExecutionMethod | null
+  crop?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  variety?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  seed_quantity?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  seed_quantity_unit?: Prisma.NullableEnumSeedQuantityUnitFieldUpdateOperationsInput | $Enums.SeedQuantityUnit | null
+  rainfall_mm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   application?: Prisma.ApplicationUncheckedUpdateOneWithoutField_eventNestedInput
 }
 
@@ -906,6 +1194,12 @@ export type FieldEventCreateManyFieldInput = {
   responsible_user_id: string
   notes?: string | null
   source_document_id?: string | null
+  execution_method?: $Enums.ExecutionMethod | null
+  crop?: string | null
+  variety?: string | null
+  seed_quantity?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  seed_quantity_unit?: $Enums.SeedQuantityUnit | null
+  rainfall_mm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type FieldEventUpdateWithoutFieldInput = {
@@ -915,6 +1209,12 @@ export type FieldEventUpdateWithoutFieldInput = {
   start_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   end_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  execution_method?: Prisma.NullableEnumExecutionMethodFieldUpdateOperationsInput | $Enums.ExecutionMethod | null
+  crop?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  variety?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  seed_quantity?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  seed_quantity_unit?: Prisma.NullableEnumSeedQuantityUnitFieldUpdateOperationsInput | $Enums.SeedQuantityUnit | null
+  rainfall_mm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   responsible_user?: Prisma.UserUpdateOneRequiredWithoutResponsible_eventsNestedInput
   source_document?: Prisma.DocumentUpdateOneWithoutField_eventsNestedInput
   application?: Prisma.ApplicationUpdateOneWithoutField_eventNestedInput
@@ -930,6 +1230,12 @@ export type FieldEventUncheckedUpdateWithoutFieldInput = {
   responsible_user_id?: Prisma.StringFieldUpdateOperationsInput | string
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source_document_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  execution_method?: Prisma.NullableEnumExecutionMethodFieldUpdateOperationsInput | $Enums.ExecutionMethod | null
+  crop?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  variety?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  seed_quantity?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  seed_quantity_unit?: Prisma.NullableEnumSeedQuantityUnitFieldUpdateOperationsInput | $Enums.SeedQuantityUnit | null
+  rainfall_mm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   application?: Prisma.ApplicationUncheckedUpdateOneWithoutField_eventNestedInput
   application_items?: Prisma.ApplicationItemUncheckedUpdateManyWithoutField_eventNestedInput
 }
@@ -943,6 +1249,12 @@ export type FieldEventUncheckedUpdateManyWithoutFieldInput = {
   responsible_user_id?: Prisma.StringFieldUpdateOperationsInput | string
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source_document_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  execution_method?: Prisma.NullableEnumExecutionMethodFieldUpdateOperationsInput | $Enums.ExecutionMethod | null
+  crop?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  variety?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  seed_quantity?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  seed_quantity_unit?: Prisma.NullableEnumSeedQuantityUnitFieldUpdateOperationsInput | $Enums.SeedQuantityUnit | null
+  rainfall_mm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type FieldEventCreateManyResponsible_userInput = {
@@ -954,6 +1266,12 @@ export type FieldEventCreateManyResponsible_userInput = {
   end_at: Date | string
   notes?: string | null
   source_document_id?: string | null
+  execution_method?: $Enums.ExecutionMethod | null
+  crop?: string | null
+  variety?: string | null
+  seed_quantity?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  seed_quantity_unit?: $Enums.SeedQuantityUnit | null
+  rainfall_mm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type FieldEventUpdateWithoutResponsible_userInput = {
@@ -963,6 +1281,12 @@ export type FieldEventUpdateWithoutResponsible_userInput = {
   start_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   end_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  execution_method?: Prisma.NullableEnumExecutionMethodFieldUpdateOperationsInput | $Enums.ExecutionMethod | null
+  crop?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  variety?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  seed_quantity?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  seed_quantity_unit?: Prisma.NullableEnumSeedQuantityUnitFieldUpdateOperationsInput | $Enums.SeedQuantityUnit | null
+  rainfall_mm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   field?: Prisma.FieldUpdateOneRequiredWithoutField_eventsNestedInput
   source_document?: Prisma.DocumentUpdateOneWithoutField_eventsNestedInput
   application?: Prisma.ApplicationUpdateOneWithoutField_eventNestedInput
@@ -978,6 +1302,12 @@ export type FieldEventUncheckedUpdateWithoutResponsible_userInput = {
   end_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source_document_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  execution_method?: Prisma.NullableEnumExecutionMethodFieldUpdateOperationsInput | $Enums.ExecutionMethod | null
+  crop?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  variety?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  seed_quantity?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  seed_quantity_unit?: Prisma.NullableEnumSeedQuantityUnitFieldUpdateOperationsInput | $Enums.SeedQuantityUnit | null
+  rainfall_mm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   application?: Prisma.ApplicationUncheckedUpdateOneWithoutField_eventNestedInput
   application_items?: Prisma.ApplicationItemUncheckedUpdateManyWithoutField_eventNestedInput
 }
@@ -991,6 +1321,12 @@ export type FieldEventUncheckedUpdateManyWithoutResponsible_userInput = {
   end_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source_document_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  execution_method?: Prisma.NullableEnumExecutionMethodFieldUpdateOperationsInput | $Enums.ExecutionMethod | null
+  crop?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  variety?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  seed_quantity?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  seed_quantity_unit?: Prisma.NullableEnumSeedQuantityUnitFieldUpdateOperationsInput | $Enums.SeedQuantityUnit | null
+  rainfall_mm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type FieldEventCreateManySource_documentInput = {
@@ -1002,6 +1338,12 @@ export type FieldEventCreateManySource_documentInput = {
   end_at: Date | string
   responsible_user_id: string
   notes?: string | null
+  execution_method?: $Enums.ExecutionMethod | null
+  crop?: string | null
+  variety?: string | null
+  seed_quantity?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  seed_quantity_unit?: $Enums.SeedQuantityUnit | null
+  rainfall_mm?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type FieldEventUpdateWithoutSource_documentInput = {
@@ -1011,6 +1353,12 @@ export type FieldEventUpdateWithoutSource_documentInput = {
   start_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   end_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  execution_method?: Prisma.NullableEnumExecutionMethodFieldUpdateOperationsInput | $Enums.ExecutionMethod | null
+  crop?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  variety?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  seed_quantity?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  seed_quantity_unit?: Prisma.NullableEnumSeedQuantityUnitFieldUpdateOperationsInput | $Enums.SeedQuantityUnit | null
+  rainfall_mm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   field?: Prisma.FieldUpdateOneRequiredWithoutField_eventsNestedInput
   responsible_user?: Prisma.UserUpdateOneRequiredWithoutResponsible_eventsNestedInput
   application?: Prisma.ApplicationUpdateOneWithoutField_eventNestedInput
@@ -1026,6 +1374,12 @@ export type FieldEventUncheckedUpdateWithoutSource_documentInput = {
   end_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   responsible_user_id?: Prisma.StringFieldUpdateOperationsInput | string
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  execution_method?: Prisma.NullableEnumExecutionMethodFieldUpdateOperationsInput | $Enums.ExecutionMethod | null
+  crop?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  variety?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  seed_quantity?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  seed_quantity_unit?: Prisma.NullableEnumSeedQuantityUnitFieldUpdateOperationsInput | $Enums.SeedQuantityUnit | null
+  rainfall_mm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   application?: Prisma.ApplicationUncheckedUpdateOneWithoutField_eventNestedInput
   application_items?: Prisma.ApplicationItemUncheckedUpdateManyWithoutField_eventNestedInput
 }
@@ -1039,6 +1393,12 @@ export type FieldEventUncheckedUpdateManyWithoutSource_documentInput = {
   end_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   responsible_user_id?: Prisma.StringFieldUpdateOperationsInput | string
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  execution_method?: Prisma.NullableEnumExecutionMethodFieldUpdateOperationsInput | $Enums.ExecutionMethod | null
+  crop?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  variety?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  seed_quantity?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  seed_quantity_unit?: Prisma.NullableEnumSeedQuantityUnitFieldUpdateOperationsInput | $Enums.SeedQuantityUnit | null
+  rainfall_mm?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 
@@ -1082,6 +1442,12 @@ export type FieldEventSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   responsible_user_id?: boolean
   notes?: boolean
   source_document_id?: boolean
+  execution_method?: boolean
+  crop?: boolean
+  variety?: boolean
+  seed_quantity?: boolean
+  seed_quantity_unit?: boolean
+  rainfall_mm?: boolean
   field?: boolean | Prisma.FieldDefaultArgs<ExtArgs>
   responsible_user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   source_document?: boolean | Prisma.FieldEvent$source_documentArgs<ExtArgs>
@@ -1100,6 +1466,12 @@ export type FieldEventSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   responsible_user_id?: boolean
   notes?: boolean
   source_document_id?: boolean
+  execution_method?: boolean
+  crop?: boolean
+  variety?: boolean
+  seed_quantity?: boolean
+  seed_quantity_unit?: boolean
+  rainfall_mm?: boolean
   field?: boolean | Prisma.FieldDefaultArgs<ExtArgs>
   responsible_user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   source_document?: boolean | Prisma.FieldEvent$source_documentArgs<ExtArgs>
@@ -1115,6 +1487,12 @@ export type FieldEventSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   responsible_user_id?: boolean
   notes?: boolean
   source_document_id?: boolean
+  execution_method?: boolean
+  crop?: boolean
+  variety?: boolean
+  seed_quantity?: boolean
+  seed_quantity_unit?: boolean
+  rainfall_mm?: boolean
   field?: boolean | Prisma.FieldDefaultArgs<ExtArgs>
   responsible_user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   source_document?: boolean | Prisma.FieldEvent$source_documentArgs<ExtArgs>
@@ -1130,9 +1508,15 @@ export type FieldEventSelectScalar = {
   responsible_user_id?: boolean
   notes?: boolean
   source_document_id?: boolean
+  execution_method?: boolean
+  crop?: boolean
+  variety?: boolean
+  seed_quantity?: boolean
+  seed_quantity_unit?: boolean
+  rainfall_mm?: boolean
 }
 
-export type FieldEventOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "field_id" | "event_type" | "status" | "start_at" | "end_at" | "responsible_user_id" | "notes" | "source_document_id", ExtArgs["result"]["fieldEvent"]>
+export type FieldEventOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "field_id" | "event_type" | "status" | "start_at" | "end_at" | "responsible_user_id" | "notes" | "source_document_id" | "execution_method" | "crop" | "variety" | "seed_quantity" | "seed_quantity_unit" | "rainfall_mm", ExtArgs["result"]["fieldEvent"]>
 export type FieldEventInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   field?: boolean | Prisma.FieldDefaultArgs<ExtArgs>
   responsible_user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -1171,6 +1555,12 @@ export type $FieldEventPayload<ExtArgs extends runtime.Types.Extensions.Internal
     responsible_user_id: string
     notes: string | null
     source_document_id: string | null
+    execution_method: $Enums.ExecutionMethod | null
+    crop: string | null
+    variety: string | null
+    seed_quantity: runtime.Decimal | null
+    seed_quantity_unit: $Enums.SeedQuantityUnit | null
+    rainfall_mm: runtime.Decimal | null
   }, ExtArgs["result"]["fieldEvent"]>
   composites: {}
 }
@@ -1608,6 +1998,12 @@ export interface FieldEventFieldRefs {
   readonly responsible_user_id: Prisma.FieldRef<"FieldEvent", 'String'>
   readonly notes: Prisma.FieldRef<"FieldEvent", 'String'>
   readonly source_document_id: Prisma.FieldRef<"FieldEvent", 'String'>
+  readonly execution_method: Prisma.FieldRef<"FieldEvent", 'ExecutionMethod'>
+  readonly crop: Prisma.FieldRef<"FieldEvent", 'String'>
+  readonly variety: Prisma.FieldRef<"FieldEvent", 'String'>
+  readonly seed_quantity: Prisma.FieldRef<"FieldEvent", 'Decimal'>
+  readonly seed_quantity_unit: Prisma.FieldRef<"FieldEvent", 'SeedQuantityUnit'>
+  readonly rainfall_mm: Prisma.FieldRef<"FieldEvent", 'Decimal'>
 }
     
 
