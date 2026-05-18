@@ -1,6 +1,6 @@
 import type { Request, Response, NextFunction } from "express";
-import { getActorUserId } from "../../infra/http/actor";
 import { documentService } from "./document.service";
+import { getActorUserId } from "../../infra/http/actor";
 
 export const documentController = {
   async upload(req: Request, res: Response, next: NextFunction) {
@@ -8,7 +8,7 @@ export const documentController = {
       const actor = getActorUserId(req);
 
       if (!actor) {
-        return res.status(401).json({ message: "Usuário autenticado não encontrado" });
+        return res.status(400).json({ message: "userId é obrigatório" });
       }
 
       const created = await documentService.createFromUpload((req as any).file, actor);
@@ -42,17 +42,22 @@ export const documentController = {
   async download(req: Request, res: Response, next: NextFunction) {
     try {
       const { params } = (req as any).validated;
-      const { doc, url, resolved } = await documentService.getDownloadData(params.id);
+      const { doc, resolved } = await documentService.getDownloadPath(params.id);
 
-      if (url) {
-        return res.redirect(url);
-      }
+      res.download(resolved, doc.file_name);
+    } catch (e) {
+      next(e);
+    }
+  },
 
-      if (!resolved) {
-        return res.status(404).json({ message: "Arquivo não encontrado" });
-      }
+  async raw(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { params } = (req as any).validated;
+      const { content } = await documentService.getRawContent(params.id);
 
-      return res.download(resolved, doc.file_name);
+      res.setHeader("Content-Type", "application/vnd.google-earth.kml+xml; charset=utf-8");
+
+      return res.status(200).send(content);
     } catch (e) {
       next(e);
     }
@@ -63,7 +68,7 @@ export const documentController = {
       const actor = getActorUserId(req);
 
       if (!actor) {
-        return res.status(401).json({ message: "Usuário autenticado não encontrado" });
+        return res.status(400).json({ message: "userId é obrigatório" });
       }
 
       const { params } = (req as any).validated;

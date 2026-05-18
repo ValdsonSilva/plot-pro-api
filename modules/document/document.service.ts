@@ -11,6 +11,14 @@ function httpError(statusCode: number, message: string) {
     return err;
 }
 
+function isRemoteUrl(value: string) {
+    return value.startsWith("http://") || value.startsWith("https://");
+}
+
+function getDocumentUrl(doc: any) {
+    return doc.secure_url || doc.storage_path;
+}
+
 function isImageMimeType(mimeType: string) {
     return mimeType.startsWith("image/");
 }
@@ -18,6 +26,20 @@ function isImageMimeType(mimeType: string) {
 function getCloudinaryResourceType(mimeType: string) {
     if (isImageMimeType(mimeType)) return "image";
     return "raw";
+}
+
+function isKmlDocument(doc: any) {
+    const fileName = String(doc.file_name || "").toLowerCase();
+    const mimeType = String(doc.mime_type || "").toLowerCase();
+
+    return (
+        fileName.endsWith(".kml") ||
+        mimeType.includes("kml") ||
+        mimeType === "application/vnd.google-earth.kml+xml" ||
+        mimeType === "application/octet-stream" ||
+        mimeType === "text/xml" ||
+        mimeType === "application/xml"
+    );
 }
 
 export const documentService = {
@@ -30,6 +52,10 @@ export const documentService = {
     ) {
         if (!file) {
             throw httpError(400, "Arquivo é obrigatório (campo multipart: file)");
+        }
+
+        if (!file.buffer) {
+            throw httpError(400, "Arquivo inválido: buffer não encontrado no upload");
         }
 
         const resourceType = getCloudinaryResourceType(file.mimetype);
@@ -81,10 +107,10 @@ export const documentService = {
     async getDownloadData(id: string) {
         const doc = await this.get(id);
 
-        if (doc.storage_provider === "CLOUDINARY" && doc.secure_url) {
+        if (doc.secure_url || isRemoteUrl(doc.storage_path)) {
             return {
                 doc,
-                url: doc.secure_url,
+                url: doc.secure_url || doc.storage_path,
                 resolved: null,
             };
         }
@@ -100,6 +126,48 @@ export const documentService = {
             doc,
             url: null,
             resolved,
+        };
+    },
+
+    async getRawContent(id: string) {
+        const doc = await this.get(id);
+
+        if (!isKmlDocument(doc)) {
+            throw httpError(400, "A rota raw está disponível apenas para arquivos KML/XML");
+        }
+
+        const source = getDocumentUrl(doc);
+
+        if (!source) {
+            throw httpError(404, "Arquivo do documento não encontrado");
+        }
+
+        if (isRemoteUrl(source)) {
+            const response = await fetch(source);
+
+            if (!response.ok) {
+                throw httpError(
+                    response.status,
+                    `Erro ao baixar arquivo remoto: ${response.statusText}`
+                );
+            }
+
+            return {
+                doc,
+                content: await response.text(),
+            };
+        }
+
+        const uploadsRoot = path.resolve(process.cwd(), "storage", "uploads");
+        const resolved = path.resolve(source);
+
+        if (!resolved.startsWith(uploadsRoot)) {
+            throw httpError(400, "Caminho inválido de arquivo");
+        }
+
+        return {
+            doc,
+            content: await fs.readFile(resolved, "utf-8"),
         };
     },
 
@@ -137,7 +205,10 @@ export const documentService = {
             return deleted;
         } catch (e: any) {
             if (e instanceof Prisma.PrismaClientKnownRequestError && e.code === "P2003") {
-                throw httpError(409, "Documento está vinculado a eventos, talhões ou fazendas e não pode ser excluído");
+                throw httpError(
+                    409,
+                    "Documento está vinculado a eventos, talhões ou fazendas e não pode ser excluído"
+                );
             }
 
             throw e;

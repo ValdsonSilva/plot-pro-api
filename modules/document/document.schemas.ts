@@ -14,6 +14,12 @@ export const getDocumentSchema = z.object({
     }),
 });
 
+export const getRawDocumentSchema = z.object({
+    params: z.object({
+        id: z.string().min(1),
+    }),
+});
+
 export const deleteDocumentSchema = z.object({
     params: z.object({
         id: z.string().min(1),
